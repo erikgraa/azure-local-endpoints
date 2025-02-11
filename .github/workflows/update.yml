@@ -1,0 +1,28 @@
+name: Update Azure Local Endpoints
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'releases/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate JSON files for Azure Local Endpoints
+        shell: pwsh
+        run: . ./update.ps1
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: erikgraa
+          author_email: erikgraa@live.com
+          message: "Auto updating required endpoints for Azure Local"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
