@@ -1,0 +1,50 @@
+[
+  {
+    "region": "eastus",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-eastus.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-eastus-compressed.json"
+  },
+  {
+    "region": "westeurope",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-westeurope.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-westeurope-compressed.json"
+  },
+  {
+    "region": "australiaeast",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-australiaeast.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-australiaeast-compressed.json"
+  },
+  {
+    "region": "canadacentral",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-canadacentral.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-canadacentral-compressed.json"
+  },
+  {
+    "region": "indiacentral",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-indiacentral.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-indiacentral-compressed.json"
+  },
+  {
+    "region": "southeastasia",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-southeastasia.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-southeastasia-compressed.json"
+  },
+  {
+    "region": "japaneast",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-japaneast.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-japaneast-compressed.json"
+  },
+  {
+    "region": "southcentralus",
+    "version": "23h2",
+    "uri": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-southcentralus.json",
+    "uriCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/23h2/azure-local-endpoints-southcentralus-compressed.json"
+  }
+]
