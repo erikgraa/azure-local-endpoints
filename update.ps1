@@ -33,6 +33,8 @@ $readme = @()
 
 $readme += '> ## Azure Local Endpoints'
 
+$readme += ('[![Update Azure Local Endpoints](https://github.com/{0}/actions/workflows/update.yml/badge.svg)](https://github.com/{0}/actions/workflows/update.yml)' -f $env:GITHUB_REPOSITORY)
+
 $readme += '### Documentation'
 
 $readme += 'This repository parses the list of required firewall endpoints/URLs for Azure Local and creates two JSON files per region (one readable and one compressed).'
