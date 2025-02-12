@@ -1,4 +1,5 @@
 > ## Azure Local Endpoints
+[![Update Azure Local Endpoints](https://github.com/erikgraa/azure-local-endpoints/actions/workflows/update.yml/badge.svg)](https://github.com/erikgraa/azure-local-endpoints/actions/workflows/update.yml)
 ### Documentation
 This repository parses the list of required firewall endpoints/URLs for Azure Local and creates two JSON files per region (one readable and one compressed).
 Documentation is available at https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements
