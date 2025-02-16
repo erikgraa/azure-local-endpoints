@@ -111,11 +111,17 @@ function Export-AzureLocalEndpoints {
 
     $json.Add('endpoints', $endpoints)
 
+    $regionPath = ('{0}\{1}' -f $jsonPath, $regionLowerCase)
+
+    if (-not(Test-Path -Path $regionPath)) {
+      $null = New-Item -Path $regionPath -ItemType Directory
+    }
+
     $fileName = ('azure-local-endpoints-{0}' -f $regionLowerCase) 
     $fileNameCompressed = ('{0}-compressed' -f $fileName) 
 
-    $filePath = ('json\{0}.json' -f $fileName)
-    $filePathCompressed = ('json\{0}.json' -f $fileNameCompressed)
+    $filePath = ('json\{0}\{1}.json' -f $regionLowerCase, $fileName)
+    $filePathCompressed = ('json\{0}\{1}.json' -f $regionLowerCase, $fileNameCompressed)
 
     $gitHubUri = ('https://raw.githubusercontent.com/{0}/refs/heads/main/{1}' -f $env:GITHUB_REPOSITORY, $filePath.Replace('\','/'))
     $gitHubUriCompressed = ('https://raw.githubusercontent.com/{0}/refs/heads/main/{1}' -f $env:GITHUB_REPOSITORY, $filePathCompressed.Replace('\','/'))
