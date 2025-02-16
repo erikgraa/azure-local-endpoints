@@ -9,13 +9,13 @@ The URL of the `azure-local-endpoints.json` file in this repository can be used 
 + Automation
 + Compliance
 ### Regions
-|Region|Updated by Microsoft
-| :--- | --- |
-eastus|2025-01-23
-westeurope|2025-01-23
-australiaeast|2025-01-23
-canadacentral|2025-01-23
-indiacentral|2025-01-23
-southeastasia|2025-01-23
-japaneast|2025-01-23
-southcentralus|2025-01-23
+|Region|Updated by Microsoft|Endpoint count
+| :--- | --- | --- |
+eastus|2025-01-23|101
+westeurope|2025-01-23|106
+australiaeast|2025-01-23|106
+canadacentral|2025-01-23|106
+indiacentral|2025-01-23|105
+southeastasia|2025-01-23|105
+japaneast|2025-01-23|106
+southcentralus|2025-01-23|106
