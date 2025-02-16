@@ -119,7 +119,7 @@ function Export-AzureLocalEndpoints {
       $endpoints += New-Object -TypeName PSCustomObject -Property $hash
     }
 
-    $json.Add('endPoints', $endpoints)
+    $json.Add('endpoints', $endpoints)
 
     $fileName = ('azure-local-endpoints-{0}' -f $regionLowerCase) 
     $fileNameCompressed = ('{0}-compressed' -f $fileName) 
