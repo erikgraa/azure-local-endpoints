@@ -1,8 +1,8 @@
 {
   "region": "southcentralus",
   "version": "23h2",
-  "updated": "January 23rd, 2025",
-  "uri": "https://github.com/Azure/AzureStack-Tools/blob/master/HCI/SouthCentralUSEndpoints/southcentralus-hci-endpoints.md",
+  "updated": "2025-01-23",
+  "url": "https://github.com/Azure/AzureStack-Tools/blob/master/HCI/SouthCentralUSEndpoints/southcentralus-hci-endpoints.md",
   "endPoints": [
     {
       "id": "1",
@@ -14,7 +14,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "2",
@@ -26,7 +27,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "3",
@@ -38,7 +40,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "4",
@@ -50,7 +53,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "5",
@@ -62,7 +66,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "6",
@@ -74,7 +79,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "7",
@@ -86,7 +92,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "8",
@@ -98,7 +105,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "9",
@@ -110,7 +118,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "10",
@@ -122,7 +131,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "11",
@@ -134,7 +144,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "12",
@@ -149,7 +160,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "13",
@@ -161,7 +173,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "14",
@@ -173,7 +186,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "15",
@@ -182,7 +196,8 @@
       "port": "443",
       "notes": "Required for initial validation.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment"
+      "requiredFor": "Deployment",
+      "wildcard": false
     },
     {
       "id": "16",
@@ -194,7 +209,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "17",
@@ -206,7 +222,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "18",
@@ -218,7 +235,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "19",
@@ -230,7 +248,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "20",
@@ -242,7 +261,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "21",
@@ -254,7 +274,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "22",
@@ -266,7 +287,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "23",
@@ -278,7 +300,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "24",
@@ -290,7 +313,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "25",
@@ -302,7 +326,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "26",
@@ -314,7 +339,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "27",
@@ -326,7 +352,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "28",
@@ -338,7 +365,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "29",
@@ -350,7 +378,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "30",
@@ -362,7 +391,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "31",
@@ -371,7 +401,8 @@
       "port": "443",
       "notes": "Used for ARB data plane operations in East Us.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment"
+      "requiredFor": "Deployment",
+      "wildcard": false
     },
     {
       "id": "32",
@@ -383,7 +414,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "33",
@@ -395,7 +427,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "34",
@@ -407,7 +440,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "35",
@@ -419,7 +453,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "36",
@@ -431,7 +466,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "37",
@@ -443,7 +479,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "38",
@@ -455,7 +492,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "39",
@@ -467,7 +505,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "40",
@@ -479,7 +518,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "41",
@@ -491,7 +531,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "42",
@@ -500,7 +541,8 @@
       "port": "443",
       "notes": "For Windows Admin Center management after deployment.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Post deployment"
+      "requiredFor": "Post deployment",
+      "wildcard": true
     },
     {
       "id": "43",
@@ -512,7 +554,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "44",
@@ -524,7 +567,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "45",
@@ -536,7 +580,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "46",
@@ -548,7 +593,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "47",
@@ -560,7 +606,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "48",
@@ -569,7 +616,8 @@
       "port": "443",
       "notes": "Required to fetch and update ARM tokens for logging into East Us Azure.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment"
+      "requiredFor": "Deployment",
+      "wildcard": false
     },
     {
       "id": "49",
@@ -581,7 +629,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "50",
@@ -593,7 +642,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "51",
@@ -605,7 +655,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "52",
@@ -617,7 +668,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "53",
@@ -629,7 +681,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "54",
@@ -641,7 +694,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "55",
@@ -653,7 +707,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "56",
@@ -665,7 +720,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "57",
@@ -677,7 +733,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "58",
@@ -689,7 +746,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "59",
@@ -701,7 +759,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "60",
@@ -713,7 +772,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "61",
@@ -725,7 +785,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "62",
@@ -737,7 +798,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "63",
@@ -749,7 +811,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "64",
@@ -761,7 +824,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "65",
@@ -773,7 +837,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "66",
@@ -785,7 +850,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "67",
@@ -797,7 +863,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "68",
@@ -809,7 +876,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "69",
@@ -821,7 +889,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "70",
@@ -830,7 +899,8 @@
       "port": "443",
       "notes": "Used for metrics and monitoring telemetry traffic.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment"
+      "requiredFor": "Deployment",
+      "wildcard": false
     },
     {
       "id": "71",
@@ -842,7 +912,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "72",
@@ -854,7 +925,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "73",
@@ -866,7 +938,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "74",
@@ -878,7 +951,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "75",
@@ -890,7 +964,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "76",
@@ -902,7 +977,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "77",
@@ -914,7 +990,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "78",
@@ -926,7 +1003,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "79",
@@ -938,7 +1016,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "80",
@@ -953,7 +1032,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "81",
@@ -965,7 +1045,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "82",
@@ -980,7 +1061,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "83",
@@ -992,7 +1074,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "84",
@@ -1004,7 +1087,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "85",
@@ -1016,7 +1100,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "86",
@@ -1031,7 +1116,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "87",
@@ -1046,7 +1132,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "88",
@@ -1058,7 +1145,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "89",
@@ -1073,7 +1161,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "90",
@@ -1085,7 +1174,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "91",
@@ -1097,7 +1187,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "92",
@@ -1109,7 +1200,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "93",
@@ -1121,7 +1213,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "94",
@@ -1133,7 +1226,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": true
     },
     {
       "id": "95",
@@ -1142,7 +1236,8 @@
       "port": "8084",
       "notes": "Required for initial validation.",
       "arcGatewaySupport": "No",
-      "requiredFor": "Post Deployment"
+      "requiredFor": "Post Deployment",
+      "wildcard": false
     },
     {
       "id": "96",
@@ -1151,7 +1246,8 @@
       "port": "8084",
       "notes": "Required for AKS extensions in South Central US after initial deployment.",
       "arcGatewaySupport": "No",
-      "requiredFor": "Post Deployment"
+      "requiredFor": "Post Deployment",
+      "wildcard": false
     },
     {
       "id": "97",
@@ -1163,7 +1259,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "98",
@@ -1175,7 +1272,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "99",
@@ -1187,7 +1285,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "100",
@@ -1199,7 +1298,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "101",
@@ -1211,7 +1311,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "102",
@@ -1223,7 +1324,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "103",
@@ -1235,7 +1337,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "104",
@@ -1244,7 +1347,8 @@
       "port": "80",
       "notes": "Bootstrap Windows outbound connectivity validation",
       "arcGatewaySupport": "No",
-      "requiredFor": "Deployment"
+      "requiredFor": "Deployment",
+      "wildcard": false
     },
     {
       "id": "105",
@@ -1256,7 +1360,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     },
     {
       "id": "106",
@@ -1268,7 +1373,8 @@
       "requiredFor": [
         "Deployment",
         "Post deployment"
-      ]
+      ],
+      "wildcard": false
     }
   ]
 }

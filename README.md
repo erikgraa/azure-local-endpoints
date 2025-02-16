@@ -11,11 +11,11 @@ The URL of the `azure-local-endpoints.json` file in this repository can be used 
 ### Regions
 |Region|Updated by Microsoft
 | :--- | --- |
-eastus|January 23rd, 2025
-westeurope|January 23rd, 2025
-australiaeast|January 23rd, 2025
-canadacentral|January 23rd, 2025
-indiacentral|January 23rd, 2025
-southeastasia|January 23rd, 2025
-japaneast|January 23rd, 2025
-southcentralus|January 23rd, 2025
+eastus|2025-01-23
+westeurope|2025-01-23
+australiaeast|2025-01-23
+canadacentral|2025-01-23
+indiacentral|2025-01-23
+southeastasia|2025-01-23
+japaneast|2025-01-23
+southcentralus|2025-01-23
