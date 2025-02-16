@@ -20,15 +20,6 @@ function Export-AzureLocalEndpoints {
     $null = New-Item -Path $jsonPath -ItemType Directory
   }
 
-  $azureLocalVersion = (Select-String -InputObject $regions -Pattern 'Required firewall URLs for Azure Local, version (\w+) deployments').Matches.Groups[-1].Value.Trim()
-  $azureLocalVersionLowerCase = (Select-String -InputObject $regions -Pattern 'Required firewall URLs for Azure Local, version (\w+) deployments').Matches.Groups[-1].Value.Trim().ToLower()
-
-  $azureLocalVersionPath = ('{0}\{1}' -f $jsonPath, $azureLocalVersionLowerCase)
-
-  if (-not(Test-Path -Path $azureLocalVersionPath)) {
-    $null = New-Item -Path $azureLocalVersionPath -ItemType Directory
-  }
-
   $everGreenFileName = 'azure-local-endpoints.json'
 
   $everGreenJson = @()
@@ -83,7 +74,6 @@ function Export-AzureLocalEndpoints {
 
     $json = [Ordered]@{
       'region' = $regionLowerCase
-      'version' = $azureLocalVersionLowerCase
       'updated' = $updatedDate
       'url' = $_region.Value
     }
@@ -124,8 +114,8 @@ function Export-AzureLocalEndpoints {
     $fileName = ('azure-local-endpoints-{0}' -f $regionLowerCase) 
     $fileNameCompressed = ('{0}-compressed' -f $fileName) 
 
-    $filePath = ('json\{0}\{1}.json' -f $azureLocalVersionLowerCase, $fileName)
-    $filePathCompressed = ('json\{0}\{1}.json' -f $azureLocalVersionLowerCase, $fileNameCompressed)
+    $filePath = ('json\{0}.json' -f $fileName)
+    $filePathCompressed = ('json\{0}.json' -f $fileNameCompressed)
 
     $gitHubUri = ('https://raw.githubusercontent.com/{0}/refs/heads/main/{1}' -f $env:GITHUB_REPOSITORY, $filePath.Replace('\','/'))
     $gitHubUriCompressed = ('https://raw.githubusercontent.com/{0}/refs/heads/main/{1}' -f $env:GITHUB_REPOSITORY, $filePathCompressed.Replace('\','/'))
@@ -135,7 +125,7 @@ function Export-AzureLocalEndpoints {
 
     $everGreenHash = [Ordered]@{
       'region' = $regionLowerCase
-      'version' = $azureLocalVersionLowerCase
+      'updated' = $updatedDate
       'url' = $gitHubUri
       'urlCompressed' = $gitHubUriCompressed
     }
