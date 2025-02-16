@@ -3,7 +3,7 @@
   "version": "23h2",
   "updated": "2025-01-23",
   "url": "https://github.com/Azure/AzureStack-Tools/blob/master/HCI/SouthCentralUSEndpoints/southcentralus-hci-endpoints.md",
-  "endPoints": [
+  "endpoints": [
     {
       "id": "1",
       "azureLocalComponent": "Azure Local AKS infra",
