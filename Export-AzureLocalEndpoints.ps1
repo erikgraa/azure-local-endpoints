@@ -65,6 +65,18 @@ function Export-AzureLocalEndpoints {
 
     $updatedDate = (Select-String -InputObject $html -Pattern 'This list last update is from (\w+\s\d{1,2}\w+,\s\d{4,4})').Matches.Groups[-1].Value
 
+    try {
+      $updatedDateNormalized = Select-String -InputObject $updatedDate -Pattern '(\w+)\s(\d{1,2})\w+,\s(\d{4,4})' 
+
+      $month = ((New-Object System.Globalization.CultureInfo("en-US")).DateTimeFormat.MonthNames.IndexOf($updatedDateNormalized.Matches.Groups[-3].Value)+1).ToString()
+      $month = $month.PadLeft(2, "0")
+      $day = $updatedDateNormalized.Matches.Groups[-2].Value
+      $year = $updatedDateNormalized.Matches.Groups[-1].Value
+
+      $updatedDate = ('{0}-{1}-{2}' -f $year, $month, $day)
+    }
+    catch { }
+
     $regionLowerCase = $_region.Key.ToLower()
 
     $table = ($html | Select-String -AllMatches -Pattern '(?ms)<tr>\n<td>\d+<\/td>\n<td>.+?<\/td>\n<td>.*?<\/td>\n<td>.*?<\/td>\n<td>.*?<\/td>\n<td>.*?<\/td>\n<\/tr>').Matches.Groups
