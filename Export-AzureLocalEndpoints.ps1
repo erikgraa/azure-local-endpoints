@@ -48,8 +48,8 @@ function Export-AzureLocalEndpoints {
 
   $readme += '### Regions'
 
-  $readme += '|Region|Updated by Microsoft'
-  $readme += '| :--- | --- |'
+  $readme += '|Region|Updated by Microsoft|Endpoint count'
+  $readme += '| :--- | --- | --- |'
 
   foreach ($_region in $regionHash.GetEnumerator()) {
     $html = Invoke-RestMethod -Uri $_region.Value
@@ -132,13 +132,14 @@ function Export-AzureLocalEndpoints {
     $everGreenHash = [Ordered]@{
       'region' = $regionLowerCase
       'updated' = $updatedDate
+      'count' = $endpoints.Count
       'url' = $gitHubUri
       'urlCompressed' = $gitHubUriCompressed
     }
 
     $everGreenJson += New-Object -TypeName PSCustomObject -Property $everGreenHash
 
-    $readme += ('{0}|{1}' -f $regionLowerCase, $updatedDate)
+    $readme += ('{0}|{1}|{2}' -f $regionLowerCase, $updatedDate, $endpoints.Count)
   }
 
   $readme | Out-File -FilePath 'README.md' -Encoding utf8
