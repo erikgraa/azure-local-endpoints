@@ -150,10 +150,7 @@
       "id": "12",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.dl.delivery.mp.microsoft.com",
-      "port": [
-        "80",
-        "443"
-      ],
+      "port": "443",
       "notes": "Used for AKS Arc VHD image download and update.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
       "requiredFor": [
@@ -546,9 +543,9 @@
     {
       "id": "43",
       "azureLocalComponent": "Azure Local Arc gateway",
-      "endpointUrl": "yourarcgatewayendpointid.gw.arc.azure.net",
+      "endpointUrl": "yourarcgatewayendpointid.gw.arc.azure.com",
       "port": "443",
-      "notes": "Manage cluster from Azure portal.",
+      "notes": "Required when using Arc gateway for Azure Local.",
       "arcGatewaySupport": "No. Arc registration required",
       "requiredFor": [
         "Deployment",
@@ -1032,12 +1029,9 @@
       "id": "81",
       "azureLocalComponent": "Microsoft official web site",
       "endpointUrl": "http://www.microsoft.com",
-      "port": [
-        "80",
-        "443"
-      ],
+      "port": "443",
       "notes": "Microsoft web site.",
-      "arcGatewaySupport": "No",
+      "arcGatewaySupport": "Yes. 2411 or later new deployment",
       "requiredFor": [
         "Deployment",
         "Post deployment"

@@ -18,4 +18,4 @@ canadacentral|2025-01-23|106
 indiacentral|2025-01-23|105
 southeastasia|2025-01-23|105
 japaneast|2025-01-23|106
-southcentralus|2025-01-23|106
+southcentralus|2025-01-23|105
