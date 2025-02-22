@@ -154,13 +154,15 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown = @()
 
     $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
+    $readmeMarkdown += ''    
 
-    $readmeMarkdown += ('[![Update Azure Local Endpoints](https://github.com/{0}/actions/workflows/update.yml/badge.svg)](https://github.com/{0}/actions/workflows/update.yml)  ' -f $env:GITHUB_REPOSITORY)
-
-    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from documentation and creates two JSON files per region (one readable and one compressed).'
-    $readmeMarkdown += ('Firewall documentation from Microsoft is available at {0}' -f $uri)
+    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation and creates two JSON files per region (one readable and one compressed).'
+    $readmeMarkdown += ''    
 
     $readmeMarkdown += '## Repository 🌳'
+    $readmeMarkdown += ''    
+    $readmeMarkdown += "The repository structure is as follows (with multiple regions' endpoints):"
+    $readmeMarkdown += ''    
     $readmeMarkdown += @'
 ```
 │   LICENSE
@@ -177,9 +179,9 @@ function Export-AzureLocalEndpoints {
 │   │   azure-local-endpoints.json 🍏
 │   │
 │   │
-│   └───region
-│           azure-local-endpoints-region-compressed.json
-│           azure-local-endpoints-region.json
+│   └───<region>
+│           azure-local-endpoints-<region>-compressed.json
+│           azure-local-endpoints-<region>.json
 │
 └───scripts
         Export-AzureLocalEndpoints.ps1
@@ -187,11 +189,13 @@ function Export-AzureLocalEndpoints {
 '@
 
     $readmeMarkdown += '## 🚀 Features'
+    $readmeMarkdown += ''
 
-    $readmeMarkdown += '- Parses the list of Azure Local endpoints from public documentation and converts them to JSON for each region.'
+    $readmeMarkdown += '- Parses the list of Azure Local endpoints from Microsoft documentation and converts them to JSON for each region.'
     $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file in this repository can be used as an evergreen link to JSON-formatted files for the various Azure Local required firewall endpoints/URLs.' -f $DestinationPathName, $FileName)
 
     $readmeMarkdown += '## 📄 Howto'
+    $readmeMarkdown += ''    
 
     $readmeMarkdown += '### 1️⃣ Run in GitHub'
     
@@ -201,7 +205,7 @@ function Export-AzureLocalEndpoints {
 
     $readmeMarkdown += 'Clone the repository and run the script. Updated list of endpoints codified as JSON will be available in the `json` folder.'
 
-    $readmeMarkdown += '```sh
+    $readmeMarkdown += '```powershell
 git clone https://github.com/erikgraa/azure-local-endpoints.git
 cd azure-local-endpoints
 ```'
@@ -217,6 +221,7 @@ Export-AzureLocalEndpoints
     $readmeMarkdown += ('[![Example](/assets/json.png)](https://github.com/{0}/tree/main/json) ' -f $env:GITHUB_REPOSITORY)    
 
     $readmeMarkdown += '## Regions and endpoints'
+    $readmeMarkdown += ''    
 
     $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|'
     $readmeMarkdown += '| :--- | --- | --- |'
@@ -224,6 +229,7 @@ Export-AzureLocalEndpoints
     $readmeMarkdown += $regionTableInfo
 
     $readmeMarkdown += '## Contributions 👏'
+    $readmeMarkdown += ''    
     $readmeMarkdown += 'Any contributions are welcome and appreciated!'    
 
     $readmeMarkdown | Out-File -FilePath 'README.md' -Encoding utf8
