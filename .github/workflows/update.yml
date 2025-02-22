@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'develop'
       - 'releases/**'
   schedule:
     - cron: "0 6 * * *"
@@ -18,13 +19,14 @@ jobs:
 
       - name: Generate JSON files for Azure Local Endpoints
         shell: pwsh
-        run: . ./Export-AzureLocalEndpoints.ps1
+        run: |
+          Import-Module ('{0}\scripts\Export-AzureLocalEndpoints.ps1' -f $env:GITHUB_WORKSPACE) 
+          $fileName = ($env:GITHUB_REPOSITORY -split '/')[-1]
+          Export-AzureLocalEndpoints -FileName $fileName -IncludeDocumentation
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
         with:
-          author_name: erikgraa
-          author_email: erikgraa@live.com
           message: "Auto updating required endpoints for Azure Local"
           add: "."
         env:
