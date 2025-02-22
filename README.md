@@ -2,7 +2,7 @@
 
 This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation and creates two JSON files per region (one readable and one compressed).
 
-## Repository 🌳
+## 🌳 Repository
 
 The repository structure is as follows (with multiple regions' endpoints):
 
@@ -49,7 +49,7 @@ Export-AzureLocalEndpoints
 ### 3️⃣ Use cases and making sense of the output
 The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.
 [![Example](/assets/json.png)](https://github.com/erikgraa/azure-local-endpoints/tree/main/json) 
-## Regions and endpoints
+## 🗺️ Regions and endpoints
 
 |Region|Updated by Microsoft|Endpoint count|
 | :--- | --- | --- |
@@ -61,6 +61,6 @@ The JSON-formatted lists of endpoints can be used for automation, documentation 
 |southeastasia|2025-01-23|105|
 |japaneast|2025-01-23|106|
 |southcentralus|2025-01-23|105|
-## Contributions 👏
+## 👏 Contributions
 
 Any contributions are welcome and appreciated!
