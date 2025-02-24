@@ -93,7 +93,7 @@ function Export-AzureLocalEndpoints {
       $hash.add('azureLocalComponent', $_entry.Matches.Groups[2].Value)
       $hash.add('endpointUrl', $endpointUri.Trim())
       $hash.add('port', ($_entry.Matches.Groups[4].Value.Split(',').Trim()))
-      $hash.add('notes', $_entry.Matches.Groups[5].Value)
+      $hash.add('notes', $_entry.Matches.Groups[5].Value.Replace('&amp;', '&'))
       $hash.add('arcGatewaySupport', $_entry.Matches.Groups[6].Value)
       $hash.add('requiredFor', ($_entry.Matches.Groups[7].Value -replace '&amp;','&').Split('8').Split('&').Trim())
       $hash.add('wildcard', $wildcard)
@@ -145,7 +145,7 @@ function Export-AzureLocalEndpoints {
 
     $outputJson += New-Object -TypeName PSCustomObject -Property $_regionHash
 
-    $regionTableInfo += ('|{0}|{1}|{2}|' -f $regionLowerCase, $updatedDate, $endpoints.Count)
+    $regionTableInfo += ('|{0}|{1}|{2}|{3}|' -f $regionLowerCase, $updatedDate, $endpoints.Count, ($endpoints | Where-Object { $_.arcGatewaySupport -match 'Yes' }).Count)
   }
 
   $outputJson | ConvertTo-Json -Depth 5 | Out-File -FilePath $filePath -Encoding utf8  
@@ -164,7 +164,7 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += "The repository structure is as follows (with multiple regions' endpoints):"
     $readmeMarkdown += ''    
     $readmeMarkdown += @'
-```
+```plaintext
 │   LICENSE
 │   README.md
 │
@@ -223,8 +223,8 @@ Export-AzureLocalEndpoints
     $readmeMarkdown += '## 🗺️ Regions and endpoints'
     $readmeMarkdown += ''    
 
-    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|'
-    $readmeMarkdown += '| :--- | --- | --- |'
+    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|'
+    $readmeMarkdown += '| :--- | --- | --- | --- |'
 
     $readmeMarkdown += $regionTableInfo
 
