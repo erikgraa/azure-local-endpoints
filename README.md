@@ -6,7 +6,7 @@ This PowerShell script enumerates the list of required firewall endpoints/URLs f
 
 The repository structure is as follows (with multiple regions' endpoints):
 
-```
+```plaintext
 │   LICENSE
 │   README.md
 │
@@ -51,16 +51,16 @@ The JSON-formatted lists of endpoints can be used for automation, documentation 
 [![Example](/assets/json.png)](https://github.com/erikgraa/azure-local-endpoints/tree/main/json) 
 ## 🗺️ Regions and endpoints
 
-|Region|Updated by Microsoft|Endpoint count|
-| :--- | --- | --- |
-|eastus|2025-01-23|101|
-|westeurope|2025-01-23|106|
-|australiaeast|2025-01-23|106|
-|canadacentral|2025-01-23|106|
-|indiacentral|2025-01-23|105|
-|southeastasia|2025-01-23|105|
-|japaneast|2025-01-23|106|
-|southcentralus|2025-01-23|105|
+|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|
+| :--- | --- | --- | --- |
+|eastus|2025-01-23|101|65|
+|westeurope|2025-01-23|106|69|
+|australiaeast|2025-01-23|106|69|
+|canadacentral|2025-01-23|106|69|
+|indiacentral|2025-01-23|105|67|
+|southeastasia|2025-01-23|105|68|
+|japaneast|2025-01-23|106|67|
+|southcentralus|2025-01-23|105|67|
 ## 👏 Contributions
 
 Any contributions are welcome and appreciated!

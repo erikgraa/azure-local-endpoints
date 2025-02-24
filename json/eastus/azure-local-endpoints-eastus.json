@@ -291,7 +291,7 @@
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "time.windows.com",
       "port": "123",
-      "notes": "OS time sync in appliance VM &amp; Management machine (Windows NTP).",
+      "notes": "OS time sync in appliance VM & Management machine (Windows NTP).",
       "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
