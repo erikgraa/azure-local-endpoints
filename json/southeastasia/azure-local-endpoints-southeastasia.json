@@ -1073,19 +1073,6 @@
     {
       "id": "84",
       "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "ntservicepack.microsoft.com",
-      "port": "80",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "85",
-      "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "go.microsoft.com",
       "port": "80",
       "notes": "For Microsoft Update, allowing the OS to receive updates.",
@@ -1097,7 +1084,7 @@
       "wildcard": false
     },
     {
-      "id": "86",
+      "id": "85",
       "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "*.delivery.mp.microsoft.com",
       "port": [
@@ -1113,7 +1100,7 @@
       "wildcard": true
     },
     {
-      "id": "87",
+      "id": "86",
       "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "*.windowsupdate.microsoft.com",
       "port": [
@@ -1129,7 +1116,7 @@
       "wildcard": true
     },
     {
-      "id": "88",
+      "id": "87",
       "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "*.windowsupdate.com",
       "port": "80",
@@ -1142,7 +1129,7 @@
       "wildcard": true
     },
     {
-      "id": "89",
+      "id": "88",
       "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "*.update.microsoft.com",
       "port": [
@@ -1158,7 +1145,7 @@
       "wildcard": true
     },
     {
-      "id": "90",
+      "id": "89",
       "azureLocalComponent": "Microsoft Defender",
       "endpointUrl": "*.endpoint.security.microsoft.com",
       "port": "443",
@@ -1171,7 +1158,7 @@
       "wildcard": true
     },
     {
-      "id": "91",
+      "id": "90",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "login.microsoft.com",
       "port": "443",
@@ -1184,7 +1171,7 @@
       "wildcard": false
     },
     {
-      "id": "92",
+      "id": "91",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "pythonhosted.org",
       "port": "443",
@@ -1197,7 +1184,7 @@
       "wildcard": false
     },
     {
-      "id": "93",
+      "id": "92",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.blob.storage.azure.net",
       "port": "443",
@@ -1210,7 +1197,7 @@
       "wildcard": true
     },
     {
-      "id": "94",
+      "id": "93",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "https://eastus.obo.arc.azure.com",
       "port": "8084",
@@ -1220,7 +1207,7 @@
       "wildcard": false
     },
     {
-      "id": "95",
+      "id": "94",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "https://southeastasia.obo.arc.azure.com",
       "port": "8084",
@@ -1230,7 +1217,7 @@
       "wildcard": false
     },
     {
-      "id": "96",
+      "id": "95",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "oneocsp.microsoft.com",
       "port": "80",
@@ -1243,7 +1230,7 @@
       "wildcard": false
     },
     {
-      "id": "97",
+      "id": "96",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-crl.ws.symantec.com",
       "port": "80",
@@ -1256,7 +1243,7 @@
       "wildcard": false
     },
     {
-      "id": "98",
+      "id": "97",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-ocsp.ws.symantec.com",
       "port": "80",
@@ -1269,7 +1256,7 @@
       "wildcard": false
     },
     {
-      "id": "99",
+      "id": "98",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "s.symcd.com",
       "port": "80",
@@ -1282,7 +1269,7 @@
       "wildcard": false
     },
     {
-      "id": "100",
+      "id": "99",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp.digicert.com",
       "port": "80",
@@ -1295,7 +1282,7 @@
       "wildcard": false
     },
     {
-      "id": "101",
+      "id": "100",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp2.globalsign.com",
       "port": "80",
@@ -1308,7 +1295,7 @@
       "wildcard": false
     },
     {
-      "id": "102",
+      "id": "101",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "hciarcvmsstorage.z13.web.core.windows.net",
       "port": "443",
@@ -1321,7 +1308,7 @@
       "wildcard": false
     },
     {
-      "id": "103",
+      "id": "102",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "http://www.msftconnecttest.com/connecttest.txt",
       "port": "80",
@@ -1331,7 +1318,7 @@
       "wildcard": false
     },
     {
-      "id": "104",
+      "id": "103",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "edgesupprd.trafficmanager.net",
       "port": "443",
@@ -1344,7 +1331,7 @@
       "wildcard": false
     },
     {
-      "id": "105",
+      "id": "104",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "azurewatsonanalysis-prod.core.windows.net",
       "port": "443",

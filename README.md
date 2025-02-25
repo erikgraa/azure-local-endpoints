@@ -53,13 +53,13 @@ The JSON-formatted lists of endpoints can be used for automation, documentation 
 
 |Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|
 | :--- | --- | --- | --- |
-|eastus|2025-01-23|101|65|
-|westeurope|2025-01-23|106|69|
-|australiaeast|2025-01-23|106|69|
-|canadacentral|2025-01-23|106|69|
-|indiacentral|2025-01-23|105|67|
-|southeastasia|2025-01-23|105|68|
-|japaneast|2025-01-23|106|67|
+|eastus|2025-01-23|100|65|
+|westeurope|2025-01-23|105|69|
+|australiaeast|2025-01-23|105|69|
+|canadacentral|2025-01-23|105|69|
+|indiacentral|2025-01-23|104|67|
+|southeastasia|2025-01-23|104|68|
+|japaneast|2025-01-23|105|67|
 |southcentralus|2025-01-23|105|67|
 ## 👏 Contributions
 
