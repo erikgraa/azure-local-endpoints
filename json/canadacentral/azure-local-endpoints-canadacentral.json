@@ -1352,6 +1352,19 @@
         "Post deployment"
       ],
       "wildcard": false
+    },
+    {
+      "id": "106",
+      "azureLocalComponent": "Azure Local ARB infra",
+      "endpointUrl": "arcplatformcliextprod.z13.web.core.windows.net",
+      "port": "443",
+      "notes": "Used to deploy ARB extensions",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
     }
   ]
 }
