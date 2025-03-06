@@ -1,6 +1,6 @@
 # Azure Local Endpoints Codified as JSON
 
-This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local and codifies it as JSON. Everything is retrieved from Microsoft documentation.
+This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local. Everything is retrieved from Microsoft documentation.
 
 ## 🗺️ Regions and endpoints
 The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.
@@ -19,7 +19,7 @@ The current regions supporting Azure Local are documented in the table below, al
 ## 🚀 Features
 
 - List of Azure Local endpoints as JSON for supported regions.
-- The URL of the `json\azure-local-endpoints.json` file can be used as an evergreen link to the various Azure Local regions' required firewall endpoints/URLs.
+- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the various Azure Local regions'required firewall endpoints/URLs.
 ## 📄 Howto
 
 ### 1️⃣ Run in GitHub
