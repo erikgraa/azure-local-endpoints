@@ -156,7 +156,7 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
     $readmeMarkdown += ''    
 
-    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local. Everything is retrieved from Microsoft documentation.'
+    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local and codifies it as JSON. Everything is retrieved from Microsoft documentation.'
     $readmeMarkdown += '' 
 
     $readmeMarkdown += '## 🗺️ Regions and endpoints'
