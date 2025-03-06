@@ -18,14 +18,14 @@ The current regions supporting Azure Local along with the number of required end
 
 ## 🚀 Features
 
-- Parses the list of Azure Local endpoints from Microsoft documentation and converts them to JSON for each region.
-- The URL of the `json\azure-local-endpoints.json` file in this repository can be used as an evergreen link to JSON-formatted files for the various Azure Local required firewall endpoints/URLs.
+- List of Azure Local endpoints as JSON for each region.
+- The URL of the json\azure-local-endpoints.json file can be used as an evergreen link to the various Azure Local regions' required firewall endpoints/URLs.
 ## 📄 Howto
 
 ### 1️⃣ Run in GitHub
-Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. This allows for updates every morning at 6am - or at your preferred cadence.
+Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. Updates (if any) are retrieved every morning at 6am - or at your preferred cadence.
 ### 2️⃣ Run locally
-Clone the repository and run the script. Updated list of endpoints codified as JSON will be available in the `json` folder.
+Clone the repository and run the script. Updated lists of endpoints codified as JSON will be available in the `json` folder.
 ```powershell
 git clone https://github.com/erikgraa/azure-local-endpoints.git
 cd azure-local-endpoints
