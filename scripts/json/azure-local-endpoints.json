@@ -1,0 +1,58 @@
+[
+  {
+    "region": "eastus",
+    "updated": "2025-01-23",
+    "count": 101,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\eastus\\azure-local-endpoints-eastus.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\eastus\\azure-local-endpoints-eastus-compressed.json"
+  },
+  {
+    "region": "westeurope",
+    "updated": "2025-01-23",
+    "count": 106,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\westeurope\\azure-local-endpoints-westeurope.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\westeurope\\azure-local-endpoints-westeurope-compressed.json"
+  },
+  {
+    "region": "australiaeast",
+    "updated": "2025-01-23",
+    "count": 106,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\australiaeast\\azure-local-endpoints-australiaeast.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\australiaeast\\azure-local-endpoints-australiaeast-compressed.json"
+  },
+  {
+    "region": "canadacentral",
+    "updated": "2025-01-23",
+    "count": 106,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\canadacentral\\azure-local-endpoints-canadacentral.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\canadacentral\\azure-local-endpoints-canadacentral-compressed.json"
+  },
+  {
+    "region": "indiacentral",
+    "updated": "2025-01-23",
+    "count": 105,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\indiacentral\\azure-local-endpoints-indiacentral.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\indiacentral\\azure-local-endpoints-indiacentral-compressed.json"
+  },
+  {
+    "region": "southeastasia",
+    "updated": "2025-01-23",
+    "count": 105,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\southeastasia\\azure-local-endpoints-southeastasia.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\southeastasia\\azure-local-endpoints-southeastasia-compressed.json"
+  },
+  {
+    "region": "japaneast",
+    "updated": "2025-01-23",
+    "count": 106,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\japaneast\\azure-local-endpoints-japaneast.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\japaneast\\azure-local-endpoints-japaneast-compressed.json"
+  },
+  {
+    "region": "southcentralus",
+    "updated": "2025-01-23",
+    "count": 106,
+    "url": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\southcentralus\\azure-local-endpoints-southcentralus.json",
+    "urlCompressed": "C:\\temp\\endpoints\\azure-local-endpoints\\scripts\\json\\southcentralus\\azure-local-endpoints-southcentralus-compressed.json"
+  }
+]

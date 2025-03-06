@@ -156,37 +156,17 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
     $readmeMarkdown += ''    
 
-    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation and creates two JSON files per region (one readable and one compressed).'
-    $readmeMarkdown += ''    
+    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation. Two JSON files are created per region - one readable/prettified and one compressed.'
+    $readmeMarkdown += '' 
 
-    $readmeMarkdown += '## 🌳 Repository'
-    $readmeMarkdown += ''    
-    $readmeMarkdown += "The repository structure is as follows (with multiple regions' endpoints):"
-    $readmeMarkdown += ''    
-    $readmeMarkdown += @'
-```plaintext
-│   LICENSE
-│   README.md
-│
-├───.github
-│   └───workflows
-│           update.yml
-│
-├───assets
-│       json.png
-│
-├───json
-│   │   azure-local-endpoints.json 🍏
-│   │
-│   │
-│   └───<region>
-│           azure-local-endpoints-<region>-compressed.json
-│           azure-local-endpoints-<region>.json
-│
-└───scripts
-        Export-AzureLocalEndpoints.ps1
-```
-'@
+    $readmeMarkdown += '## 🗺️ Regions and endpoints'
+    $readmeMarkdown += ''  
+
+    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|'
+    $readmeMarkdown += '| :--- | --- | --- | --- |'
+
+    $readmeMarkdown += $regionTableInfo  
+    $readmeMarkdown += ''       
 
     $readmeMarkdown += '## 🚀 Features'
     $readmeMarkdown += ''
@@ -215,18 +195,40 @@ cd azure-local-endpoints
 Export-AzureLocalEndpoints
 ```'
 
-    $readmeMarkdown += '### 3️⃣ Use cases and making sense of the output'
+    $readmeMarkdown += '### ⚡ Use cases and making sense of the output'
     $readmeMarkdown += 'The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.'
 
     $readmeMarkdown += ('[![Example](/assets/json.png)](https://github.com/{0}/tree/main/json) ' -f $env:GITHUB_REPOSITORY)    
 
-    $readmeMarkdown += '## 🗺️ Regions and endpoints'
+    $readmeMarkdown += ''
+    $readmeMarkdown += '## 🌳 Repository'
     $readmeMarkdown += ''    
-
-    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|'
-    $readmeMarkdown += '| :--- | --- | --- | --- |'
-
-    $readmeMarkdown += $regionTableInfo
+    $readmeMarkdown += "The repository structure is as follows (with multiple regions' endpoints):"
+    $readmeMarkdown += ''    
+    $readmeMarkdown += @'
+```plaintext
+│   LICENSE
+│   README.md
+│
+├───.github
+│   └───workflows
+│           update.yml
+│
+├───assets
+│       json.png
+│
+├───json
+│   │   azure-local-endpoints.json 🍏
+│   │
+│   │
+│   └───<region>
+│           azure-local-endpoints-<region>-compressed.json
+│           azure-local-endpoints-<region>.json
+│
+└───scripts
+        Export-AzureLocalEndpoints.ps1
+```
+'@    
 
     $readmeMarkdown += '## 👏 Contributions'
     $readmeMarkdown += ''    
