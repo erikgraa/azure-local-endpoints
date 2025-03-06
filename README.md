@@ -1,11 +1,11 @@
 # Azure Local Endpoints Codified as JSON
 
-This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation. Two JSON files are created per region - one readable/prettified, and one compressed.
+This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local. Everything is retrieved from Microsoft documentation.
 
 ## 🗺️ Regions and endpoints
 The current regions supporting Azure Local along with the number of required endpoints to open are documented in the table below
 
-|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|
+|Region|Updated by Microsoft|Endpoint count|Azure Arc gateway supported endpoints|
 | :--- | --- | --- | --- |
 |eastus|2025-01-23|101|65|
 |westeurope|2025-01-23|106|69|
