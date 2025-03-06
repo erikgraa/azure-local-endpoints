@@ -160,10 +160,10 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '' 
 
     $readmeMarkdown += '## 🗺️ Regions and endpoints'
-    $readmeMarkdown += 'The current regions supporting Azure Local along with the number of required endpoints to open are documented in the table below'      
+    $readmeMarkdown += 'The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
     $readmeMarkdown += ''  
 
-    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Azure Arc gateway supported endpoints|'
+    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Azure Arc gateway support|'
     $readmeMarkdown += '| :--- | --- | --- | --- |'
 
     $readmeMarkdown += $regionTableInfo  
@@ -172,8 +172,8 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '## 🚀 Features'
     $readmeMarkdown += ''
 
-    $readmeMarkdown += '- List of Azure Local endpoints as JSON for each region.'
-    $readmeMarkdown += ("- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the various Azure Local regions' required firewall endpoints/URLs." -f $DestinationPathName, $FileName)
+    $readmeMarkdown += '- List of Azure Local endpoints as JSON for supported regions.'
+    $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the various Azure Local regions' + "'" + 'required firewall endpoints/URLs.' -f $DestinationPathName, $FileName)
 
     $readmeMarkdown += '## 📄 Howto'
     $readmeMarkdown += ''    
@@ -204,7 +204,7 @@ Export-AzureLocalEndpoints
     $readmeMarkdown += ''
     $readmeMarkdown += '## 🌳 Repository'
     $readmeMarkdown += ''    
-    $readmeMarkdown += "The repository structure is as follows (with multiple regions' endpoints):"
+    $readmeMarkdown += "The repository structure is as follows. Each region gets its own folder."
     $readmeMarkdown += ''    
     $readmeMarkdown += @'
 ```plaintext
