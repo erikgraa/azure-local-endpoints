@@ -172,19 +172,19 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '## 🚀 Features'
     $readmeMarkdown += ''
 
-    $readmeMarkdown += '- Parses the list of Azure Local endpoints from Microsoft documentation and converts them to JSON for each region.'
-    $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file in this repository can be used as an evergreen link to JSON-formatted files for the various Azure Local required firewall endpoints/URLs.' -f $DestinationPathName, $FileName)
+    $readmeMarkdown += '- List of Azure Local endpoints as JSON for each region.'
+    $readmeMarkdown += ("- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the various Azure Local regions' required firewall endpoints/URLs." -f $DestinationPathName, $FileName)
 
     $readmeMarkdown += '## 📄 Howto'
     $readmeMarkdown += ''    
 
     $readmeMarkdown += '### 1️⃣ Run in GitHub'
     
-    $readmeMarkdown += 'Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. This allows for updates every morning at 6am - or at your preferred cadence.'    
+    $readmeMarkdown += 'Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. Updates (if any) are retrieved every morning at 6am - or at your preferred cadence.'    
 
     $readmeMarkdown += '### 2️⃣ Run locally'
 
-    $readmeMarkdown += 'Clone the repository and run the script. Updated list of endpoints codified as JSON will be available in the `json` folder.'
+    $readmeMarkdown += 'Clone the repository and run the script. Updated lists of endpoints codified as JSON will be available in the `json` folder.'
 
     $readmeMarkdown += '```powershell
 git clone https://github.com/erikgraa/azure-local-endpoints.git
