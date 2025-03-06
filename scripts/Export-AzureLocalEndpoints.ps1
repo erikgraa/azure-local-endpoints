@@ -156,14 +156,14 @@ function Export-AzureLocalEndpoints {
     $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
     $readmeMarkdown += ''    
 
-    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation. Two JSON files are created per region - one readable/prettified, and one compressed.'
+    $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local. Everything is retrieved from Microsoft documentation.'
     $readmeMarkdown += '' 
 
     $readmeMarkdown += '## 🗺️ Regions and endpoints'
     $readmeMarkdown += 'The current regions supporting Azure Local along with the number of required endpoints to open are documented in the table below'      
     $readmeMarkdown += ''  
 
-    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Arc gateway supported endpoints|'
+    $readmeMarkdown += '|Region|Updated by Microsoft|Endpoint count|Azure Arc gateway supported endpoints|'
     $readmeMarkdown += '| :--- | --- | --- | --- |'
 
     $readmeMarkdown += $regionTableInfo  
