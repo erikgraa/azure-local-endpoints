@@ -11,14 +11,14 @@ The current regions supporting Azure Local are documented in the table below, al
 
 | Region         | Updated by Microsoft | Endpoint count | Azure Arc gateway support |
 | -------------- | -------------------- | -------------- | ------------------------- |
-| eastus | 2025-01-23 | 101 | 65 |
-| westeurope | 2025-01-23 | 106 | 69 |
-| australiaeast | 2025-01-23 | 106 | 69 |
-| canadacentral | 2025-01-23 | 106 | 69 |
-| indiacentral | 2025-01-23 | 105 | 67 |
-| southeastasia | 2025-01-23 | 105 | 68 |
-| japaneast | 2025-01-23 | 106 | 67 |
-| southcentralus | 2025-01-23 | 106 | 67 |
+| eastus | 2025-01-23 | 99 | 67 |
+| westeurope | 2025-01-23 | 104 | 71 |
+| australiaeast | 2025-01-23 | 104 | 71 |
+| canadacentral | 2025-01-23 | 104 | 71 |
+| indiacentral | 2025-01-23 | 103 | 69 |
+| southeastasia | 2025-01-23 | 103 | 70 |
+| japaneast | 2025-01-23 | 104 | 69 |
+| southcentralus | 2025-01-23 | 104 | 69 |
 
 ## 📄 Howto
 
