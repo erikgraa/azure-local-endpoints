@@ -134,19 +134,6 @@
       "wildcard": false
     },
     {
-      "id": "11",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "hybridaksstorage.z13.web.core.windows.net",
-      "port": "443",
-      "notes": "AKS Azure Local static website hosted in Azure Storage.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
       "id": "12",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.dl.delivery.mp.microsoft.com",
