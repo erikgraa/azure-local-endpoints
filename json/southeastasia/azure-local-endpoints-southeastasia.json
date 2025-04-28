@@ -134,7 +134,7 @@
       "wildcard": false
     },
     {
-      "id": "12",
+      "id": "11",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.dl.delivery.mp.microsoft.com",
       "port": "443",
@@ -147,7 +147,7 @@
       "wildcard": true
     },
     {
-      "id": "13",
+      "id": "12",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.do.dsp.mp.microsoft.com",
       "port": "443",
@@ -160,7 +160,7 @@
       "wildcard": true
     },
     {
-      "id": "14",
+      "id": "13",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.prod.do.dsp.mp.microsoft.com",
       "port": "443",
@@ -173,7 +173,7 @@
       "wildcard": true
     },
     {
-      "id": "15",
+      "id": "14",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "eastus.dp.kubernetesconfiguration.azure.com",
       "port": "443",
@@ -183,7 +183,7 @@
       "wildcard": false
     },
     {
-      "id": "16",
+      "id": "15",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "southeastasia.dp.kubernetesconfiguration.azure.com",
       "port": "443",
@@ -196,7 +196,7 @@
       "wildcard": false
     },
     {
-      "id": "17",
+      "id": "16",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "sts.windows.net",
       "port": "443",
@@ -209,7 +209,7 @@
       "wildcard": false
     },
     {
-      "id": "18",
+      "id": "17",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "ecpacr.azurecr.io",
       "port": "443",
@@ -222,12 +222,25 @@
       "wildcard": false
     },
     {
-      "id": "19",
+      "id": "18",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "pypi.org",
       "port": "443",
       "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "No",
+      "arcGatewaySupport": "Not required on 2504 and later new deployments",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "19",
+      "azureLocalComponent": "Azure Local AKS infra",
+      "endpointUrl": "files.pythonhosted.org",
+      "port": "443",
+      "notes": "Used to download Az CLI and Az CLI extensions.",
+      "arcGatewaySupport": "Not required on 2504 and later new deployments",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -237,10 +250,10 @@
     {
       "id": "20",
       "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "files.pythonhosted.org",
+      "endpointUrl": "pythonhosted.org",
       "port": "443",
       "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "No",
+      "arcGatewaySupport": "Not required on 2504 and later new deployments",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -253,7 +266,7 @@
       "endpointUrl": "raw.githubusercontent.com",
       "port": "443",
       "notes": "Used for GitHub.",
-      "arcGatewaySupport": "No",
+      "arcGatewaySupport": "Not required on 2504 and later new deployments",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -406,7 +419,7 @@
       "endpointUrl": "download.microsoft.com",
       "port": "443",
       "notes": "For downloading the Windows installation package.",
-      "arcGatewaySupport": "No. Arc registration required",
+      "arcGatewaySupport": "Yes. 2503 or later new deployment",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -978,11 +991,11 @@
     },
     {
       "id": "78",
-      "azureLocalComponent": "Microsoft official web site",
-      "endpointUrl": "http://www.microsoft.com",
-      "port": "443",
-      "notes": "Microsoft web site.",
-      "arcGatewaySupport": "Yes. 2411 or later new deployment",
+      "azureLocalComponent": "Azure Local CRLs",
+      "endpointUrl": "crl.microsoft.com/pkiinfra",
+      "port": "80",
+      "notes": "Azure Local certificate revocation list for mandatory Arc extensions.",
+      "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -1134,19 +1147,6 @@
     {
       "id": "89",
       "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "pythonhosted.org",
-      "port": "443",
-      "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "90",
-      "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.blob.storage.azure.net",
       "port": "443",
       "notes": "To access blob storage.",
@@ -1158,7 +1158,7 @@
       "wildcard": true
     },
     {
-      "id": "91",
+      "id": "90",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "https://eastus.obo.arc.azure.com",
       "port": "8084",
@@ -1168,7 +1168,7 @@
       "wildcard": false
     },
     {
-      "id": "92",
+      "id": "91",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "https://southeastasia.obo.arc.azure.com",
       "port": "8084",
@@ -1178,7 +1178,7 @@
       "wildcard": false
     },
     {
-      "id": "93",
+      "id": "92",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "oneocsp.microsoft.com",
       "port": "80",
@@ -1191,7 +1191,7 @@
       "wildcard": false
     },
     {
-      "id": "94",
+      "id": "93",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-crl.ws.symantec.com",
       "port": "80",
@@ -1204,7 +1204,7 @@
       "wildcard": false
     },
     {
-      "id": "95",
+      "id": "94",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-ocsp.ws.symantec.com",
       "port": "80",
@@ -1217,7 +1217,7 @@
       "wildcard": false
     },
     {
-      "id": "96",
+      "id": "95",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "s.symcd.com",
       "port": "80",
@@ -1230,7 +1230,7 @@
       "wildcard": false
     },
     {
-      "id": "97",
+      "id": "96",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp.digicert.com",
       "port": "80",
@@ -1243,7 +1243,7 @@
       "wildcard": false
     },
     {
-      "id": "98",
+      "id": "97",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp2.globalsign.com",
       "port": "80",
@@ -1256,7 +1256,7 @@
       "wildcard": false
     },
     {
-      "id": "99",
+      "id": "98",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "hciarcvmsstorage.z13.web.core.windows.net",
       "port": "443",
@@ -1269,7 +1269,7 @@
       "wildcard": false
     },
     {
-      "id": "100",
+      "id": "99",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "http://www.msftconnecttest.com/connecttest.txt",
       "port": "80",
@@ -1279,7 +1279,7 @@
       "wildcard": false
     },
     {
-      "id": "101",
+      "id": "100",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "edgesupprd.trafficmanager.net",
       "port": "443",
@@ -1292,7 +1292,7 @@
       "wildcard": false
     },
     {
-      "id": "102",
+      "id": "101",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "azurewatsonanalysis-prod.core.windows.net",
       "port": "443",
@@ -1305,7 +1305,7 @@
       "wildcard": false
     },
     {
-      "id": "103",
+      "id": "102",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "arcplatformcliextprod.z13.web.core.windows.net",
       "port": "443",
