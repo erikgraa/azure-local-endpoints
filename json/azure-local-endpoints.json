@@ -51,7 +51,7 @@
   {
     "region": "southcentralus",
     "updated": "2025-01-23",
-    "count": 103,
+    "count": 102,
     "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southcentralus/azure-local-endpoints-southcentralus.json",
     "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southcentralus/azure-local-endpoints-southcentralus-compressed.json"
   }

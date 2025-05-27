@@ -18,7 +18,7 @@ The current regions supporting Azure Local are documented in the table below, al
 | indiacentral | 2025-01-23 | 102 | 68 |
 | southeastasia | 2025-01-23 | 102 | 69 |
 | japaneast | 2025-01-23 | 103 | 68 |
-| southcentralus | 2025-01-23 | 103 | 68 |
+| southcentralus | 2025-01-23 | 102 | 65 |
 
 ## 📄 Howto
 
@@ -28,13 +28,13 @@ Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub 
 ### 2️⃣ Run PowerShell cmdlet locally
 Clone the repository and run the script. Updated lists of endpoints codified as JSON will be available in the `json` folder.
 ```powershell
-git clone https://github.com/erikgraa/azure-local-endpoints.git
-cd azure-local-endpoints
-```
+  git clone https://github.com/erikgraa/azure-local-endpoints.git
+  cd azure-local-endpoints
+  ```
 ```powershell
-. .\scripts\Export-AzureLocalEndpoints.ps1
-Export-AzureLocalEndpoints
-```
+  . .\scripts\Export-AzureLocalEndpoints.ps1
+  Export-AzureLocalEndpoints
+  ```
 ## ⚡ Use cases and making sense of the output
 The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.
 [![Example](/assets/json.png)](https://github.com/erikgraa/azure-local-endpoints/tree/main/json) 
