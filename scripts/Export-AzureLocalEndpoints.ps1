@@ -1,5 +1,5 @@
 <#PSScriptInfo
-  .VERSION 1.0
+  .VERSION 1.1
   .GUID 5010fe8f-5e56-4361-8cd8-b760206adbea
   .AUTHOR erikgraa
 #>
@@ -42,14 +42,14 @@ function Export-AzureLocalEndpoints {
 │   └───workflows
 │           update.yml
 │
-├───assets
-│       json.png
-│
 ├───json
 │   │   azure-local-endpoints.json 🍏
 │   │
+│   ├───oem 📦
+│   │       azure-local-endpoints-vendor-compressed.json
+│   │       azure-local-endpoints-vendor.json 
 │   │
-│   └───region
+│   └───regions 🗺️
 │           azure-local-endpoints-region-compressed.json
 │           azure-local-endpoints-region.json
 │
@@ -127,7 +127,8 @@ function Export-AzureLocalEndpoints {
       $table = $markdown | Select-String -AllMatches -Pattern $markdownPattern
 
       $json = [Ordered]@{
-        'region' = $regionLowerCase
+        'type' = 'region'
+        'name' = $regionLowerCase
         'updated' = $updatedDate
         'url' = $_region.Value
       }
@@ -172,7 +173,7 @@ function Export-AzureLocalEndpoints {
           $hash.add('port', $table.matches.groups[$i+4].Value)
           $hash.add('notes', $table.matches.groups[$i+5].Value)
           $hash.add('arcGatewaySupport', $table.matches.groups[$i+6].Value)
-          $hash.add('requiredFor', $table.matches.groups[$i+7].Value)
+          $hash.add('requiredFor', $table.matches.groups[$i+7].Value.Split('8').Split('&').Trim())
           $hash.add('wildcard', $wildcard)
         }
         catch {
@@ -187,7 +188,7 @@ function Export-AzureLocalEndpoints {
 
       $json.Add('endpoints', $endpoints)
 
-      $regionPath = ('{0}\{1}' -f $destinationPath, $regionLowerCase)
+      $regionPath = ('{0}\regions\{1}' -f $destinationPath, $regionLowerCase)
 
       if (-not(Test-Path -Path $regionPath -ErrorAction SilentlyContinue)) {
         $null = New-Item -Path $regionPath -ItemType Directory
@@ -196,8 +197,8 @@ function Export-AzureLocalEndpoints {
       $regionFileName = ('{0}-{1}' -f $FileName, $regionLowerCase) 
       $regionFileNameCompressed = ('{0}-compressed' -f $regionFileName) 
 
-      $actualFilePath = ('{0}\{1}\{2}.json' -f $destinationPath, $regionLowerCase, $regionFileName)
-      $actualFilePathCompressed = ('{0}\{1}\{2}.json' -f $destinationPath, $regionLowerCase, $regionFileNameCompressed)
+      $actualFilePath = ('{0}\regions\{1}\{2}.json' -f $destinationPath, $regionLowerCase, $regionFileName)
+      $actualFilePathCompressed = ('{0}\regions\{1}\{2}.json' -f $destinationPath, $regionLowerCase, $regionFileNameCompressed)
 
       $gitHubUri = ('https://raw.githubusercontent.com/{0}/{1}{2}' -f $env:GITHUB_REPOSITORY, $env:GITHUB_REF, $actualFilePath.Replace('\','/').Replace($location,''))
       $gitHubUriCompressed = ('https://raw.githubusercontent.com/{0}/{1}{2}' -f $env:GITHUB_REPOSITORY, $env:GITHUB_REF, $actualFilePathCompressed.Replace('\','/').Replace($location,''))
@@ -220,7 +221,8 @@ function Export-AzureLocalEndpoints {
       $json | ConvertTo-Json -Depth 5 -Compress | Out-File -FilePath $actualFilePathCompressed -Encoding utf8
 
       $_regionHash = [Ordered]@{
-        'region' = $regionLowerCase
+        'type' = 'region'
+        'name' = $regionLowerCase
         'updated' = $updatedDate
         'count' = $endpoints.Count
         'url' = $actualUri
@@ -235,10 +237,10 @@ function Export-AzureLocalEndpoints {
     foreach ($_vendor in $vendorHash.GetEnumerator()) {
       $markdown = Invoke-RestMethod -Uri $_vendor.Value
 
-      $updatedDate = (Select-String -InputObject $markdown -Pattern 'Last updated on (\w+\s\d{1,2}\w+,\s\d{4,4})').Matches.Groups[-1].Value
+      $updatedDate = (Select-String -InputObject $markdown -Pattern 'Last updated on (\w+\s\d+,\s\d+)').Matches.Groups[-1].Value
 
       try {
-        $updatedDateNormalized = Select-String -InputObject $updatedDate -Pattern '(\w+)\s(\d{1,2})\w+,\s(\d{4,4})' 
+        $updatedDateNormalized = Select-String -InputObject $updatedDate -Pattern '(\w+)\s(\d+),\s(\d+)' 
 
         $month = ((New-Object System.Globalization.CultureInfo('en-US')).DateTimeFormat.MonthNames.IndexOf($updatedDateNormalized.Matches.Groups[-3].Value)+1).ToString()
         $month = $month.PadLeft(2, "0")
@@ -255,12 +257,9 @@ function Export-AzureLocalEndpoints {
 
       $table = $markdown | Select-String -AllMatches -Pattern $markdownPattern
 
-      $table
-
-      $vendorLowerCase
-
       $json = [Ordered]@{
-        'vendor' = $vendorLowerCase
+        'type' = 'vendor'
+        'name' = $vendorLowerCase
         'updated' = $updatedDate
         'url' = $_vendor.Value
       }
@@ -296,7 +295,7 @@ function Export-AzureLocalEndpoints {
             $false
           }
 
-          Write-Output ("Processing endpoint ID {0} for vendor {1}" -f $table.matches.groups[$i+1].Value, $vendorLowerCase)
+          Write-Verbose ("Processing endpoint ID {0} for vendor {1}" -f $table.matches.groups[$i+1].Value, $vendorLowerCase)
         
           $hash = [Ordered]@{}
           $hash.add('id', $table.matches.groups[$i+1].Value.Trim())
@@ -305,7 +304,7 @@ function Export-AzureLocalEndpoints {
           $hash.add('port', $table.matches.groups[$i+4].Value.Trim())
           $hash.add('notes', $table.matches.groups[$i+5].Value.Trim())
           $hash.add('arcGatewaySupport', $table.matches.groups[$i+6].Value.Trim())
-          $hash.add('requiredFor', $table.matches.groups[$i+7].Value.Trim())
+          $hash.add('requiredFor', $table.matches.groups[$i+7].Value.Split('8').Split('&').Trim())
           $hash.add('wildcard', $wildcard)
         }
         catch {
@@ -320,7 +319,7 @@ function Export-AzureLocalEndpoints {
 
       $json.Add('endpoints', $endpoints)
 
-      $vendorPath = ('{0}\{1}' -f $destinationPath, $vendorLowerCase)
+      $vendorPath = ('{0}\oem\{1}' -f $destinationPath, $vendorLowerCase)
 
       if (-not(Test-Path -Path $vendorPath -ErrorAction SilentlyContinue)) {
         $null = New-Item -Path $vendorPath -ItemType Directory
@@ -329,8 +328,8 @@ function Export-AzureLocalEndpoints {
       $vendorFileName = ('{0}-{1}' -f $FileName, $vendorLowerCase) 
       $vendorFileNameCompressed = ('{0}-compressed' -f $vendorFileName) 
 
-      $actualFilePath = ('{0}\{1}\{2}.json' -f $destinationPath, $vendorLowerCase, $vendorFileName)
-      $actualFilePathCompressed = ('{0}\{1}\{2}.json' -f $destinationPath, $vendorLowerCase, $vendorFileNameCompressed)
+      $actualFilePath = ('{0}\oem\{1}\{2}.json' -f $destinationPath, $vendorLowerCase, $vendorFileName)
+      $actualFilePathCompressed = ('{0}\oem\{1}\{2}.json' -f $destinationPath, $vendorLowerCase, $vendorFileNameCompressed)
 
       $gitHubUri = ('https://raw.githubusercontent.com/{0}/{1}{2}' -f $env:GITHUB_REPOSITORY, $env:GITHUB_REF, $actualFilePath.Replace('\','/').Replace($location,''))
       $gitHubUriCompressed = ('https://raw.githubusercontent.com/{0}/{1}{2}' -f $env:GITHUB_REPOSITORY, $env:GITHUB_REF, $actualFilePathCompressed.Replace('\','/').Replace($location,''))
@@ -353,7 +352,8 @@ function Export-AzureLocalEndpoints {
       $json | ConvertTo-Json -Depth 5 -Compress | Out-File -FilePath $actualFilePathCompressed -Encoding utf8
 
       $_vendorHash = [Ordered]@{
-        'vendor' = $vendorLowerCase
+        'type' = 'vendor'
+        'name' = $vendorLowerCase
         'updated' = $updatedDate
         'count' = $endpoints.Count
         'url' = $actualUri
@@ -386,7 +386,7 @@ function Export-AzureLocalEndpoints {
       $readmeMarkdown += 'The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
       $readmeMarkdown += ''
 
-      $readmeMarkdown += '| Region         | Updated by Microsoft | Endpoint count | Azure Arc gateway support |'
+      $readmeMarkdown += '| Region         | Last updated         | Endpoint count | Azure Arc gateway support |'
       $readmeMarkdown += '| -------------- | -------------------- | -------------- | ------------------------- |'
 
       $readmeMarkdown += $regionTableInfo
@@ -396,7 +396,7 @@ function Export-AzureLocalEndpoints {
       $readmeMarkdown += 'The current OEM hardware vendors supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
       $readmeMarkdown += ''
 
-      $readmeMarkdown += '| Vendor         | Updated by Microsoft | Endpoint count | Azure Arc gateway support |'
+      $readmeMarkdown += '| Vendor         | Last updated         | Endpoint count | Azure Arc gateway support |'
       $readmeMarkdown += '| -------------- | -------------------- | -------------- | ------------------------- |'
 
       $readmeMarkdown += $vendorTableInfo
@@ -427,8 +427,6 @@ function Export-AzureLocalEndpoints {
 
       $readmeMarkdown += '## ⚡ Use cases and making sense of the output'
       $readmeMarkdown += 'The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.'
-
-      $readmeMarkdown += ('[![Example](/assets/json.png)](https://github.com/{0}/tree/main/json) ' -f $env:GITHUB_REPOSITORY)    
 
       $readmeMarkdown += ''
       $readmeMarkdown += '## 🌳 Repository'
