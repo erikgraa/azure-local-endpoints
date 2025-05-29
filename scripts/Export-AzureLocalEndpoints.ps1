@@ -379,8 +379,8 @@ function Export-AzureLocalEndpoints {
       $readmeMarkdown += '## 🚀 Features'
       $readmeMarkdown += ''
 
-      $readmeMarkdown += '- List of Azure Local endpoints as JSON for supported regions.'
-      $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the various Azure Local regions' -f $DestinationPathName, $FileName) + "'" + 'required firewall endpoints/URLs.'
+      $readmeMarkdown += '- List of Azure Local endpoints as JSON for supported regions and OEM hardware vendors.'
+      $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the Azure Local endpoints' -f $DestinationPathName, $FileName) + "'" + 'required firewall endpoints/URLs.'
 
       $readmeMarkdown += '## 🗺️ Regions and endpoints'
       $readmeMarkdown += 'The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
