@@ -1,58 +1,106 @@
 [
   {
-    "region": "eastus",
+    "type": "region",
+    "name": "eastus",
     "updated": "2025-01-23",
     "count": 98,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/eastus/azure-local-endpoints-eastus.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/eastus/azure-local-endpoints-eastus-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/eastus/azure-local-endpoints-eastus.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/eastus/azure-local-endpoints-eastus-compressed.json"
   },
   {
-    "region": "westeurope",
+    "type": "region",
+    "name": "westeurope",
     "updated": "2025-01-23",
     "count": 103,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/westeurope/azure-local-endpoints-westeurope.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/westeurope/azure-local-endpoints-westeurope-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/westeurope/azure-local-endpoints-westeurope.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/westeurope/azure-local-endpoints-westeurope-compressed.json"
   },
   {
-    "region": "australiaeast",
+    "type": "region",
+    "name": "australiaeast",
     "updated": "2025-01-23",
     "count": 103,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/australiaeast/azure-local-endpoints-australiaeast.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/australiaeast/azure-local-endpoints-australiaeast-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/australiaeast/azure-local-endpoints-australiaeast.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/australiaeast/azure-local-endpoints-australiaeast-compressed.json"
   },
   {
-    "region": "canadacentral",
+    "type": "region",
+    "name": "canadacentral",
     "updated": "2025-01-23",
     "count": 103,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/canadacentral/azure-local-endpoints-canadacentral.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/canadacentral/azure-local-endpoints-canadacentral-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/canadacentral/azure-local-endpoints-canadacentral.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/canadacentral/azure-local-endpoints-canadacentral-compressed.json"
   },
   {
-    "region": "indiacentral",
+    "type": "region",
+    "name": "indiacentral",
     "updated": "2025-01-23",
     "count": 102,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/indiacentral/azure-local-endpoints-indiacentral.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/indiacentral/azure-local-endpoints-indiacentral-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/indiacentral/azure-local-endpoints-indiacentral.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/indiacentral/azure-local-endpoints-indiacentral-compressed.json"
   },
   {
-    "region": "southeastasia",
+    "type": "region",
+    "name": "southeastasia",
     "updated": "2025-01-23",
     "count": 102,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southeastasia/azure-local-endpoints-southeastasia.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southeastasia/azure-local-endpoints-southeastasia-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southeastasia/azure-local-endpoints-southeastasia.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southeastasia/azure-local-endpoints-southeastasia-compressed.json"
   },
   {
-    "region": "japaneast",
+    "type": "region",
+    "name": "japaneast",
     "updated": "2025-01-23",
     "count": 103,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/japaneast/azure-local-endpoints-japaneast.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/japaneast/azure-local-endpoints-japaneast-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/japaneast/azure-local-endpoints-japaneast.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/japaneast/azure-local-endpoints-japaneast-compressed.json"
   },
   {
-    "region": "southcentralus",
+    "type": "region",
+    "name": "southcentralus",
     "updated": "2025-01-23",
     "count": 102,
-    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southcentralus/azure-local-endpoints-southcentralus.json",
-    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/southcentralus/azure-local-endpoints-southcentralus-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southcentralus/azure-local-endpoints-southcentralus.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southcentralus/azure-local-endpoints-southcentralus-compressed.json"
+  },
+  {
+    "type": "vendor",
+    "name": "dataon",
+    "updated": "2025-03-19",
+    "count": 3,
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dataon/azure-local-endpoints-dataon.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dataon/azure-local-endpoints-dataon-compressed.json"
+  },
+  {
+    "type": "vendor",
+    "name": "dell",
+    "updated": "2025-03-19",
+    "count": 2,
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dell/azure-local-endpoints-dell.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dell/azure-local-endpoints-dell-compressed.json"
+  },
+  {
+    "type": "vendor",
+    "name": "hpe",
+    "updated": "2025-03-19",
+    "count": 4,
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hpe/azure-local-endpoints-hpe.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hpe/azure-local-endpoints-hpe-compressed.json"
+  },
+  {
+    "type": "vendor",
+    "name": "hitachi",
+    "updated": "2025-03-19",
+    "count": 2,
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hitachi/azure-local-endpoints-hitachi.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hitachi/azure-local-endpoints-hitachi-compressed.json"
+  },
+  {
+    "type": "vendor",
+    "name": "lenovo",
+    "updated": "2025-03-19",
+    "count": 4,
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/lenovo/azure-local-endpoints-lenovo.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/lenovo/azure-local-endpoints-lenovo-compressed.json"
   }
 ]

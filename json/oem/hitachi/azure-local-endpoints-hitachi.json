@@ -1,0 +1,34 @@
+{
+  "type": "vendor",
+  "name": "hitachi",
+  "updated": "2025-03-19",
+  "url": "https://raw.githubusercontent.com/Azure/AzureStack-Tools/refs/heads/master/HCI/OEMEndpoints/Hitachi/HitachiAzureLocalEndpoints.md",
+  "endpoints": [
+    {
+      "id": "1",
+      "description": "SBE Manifest endpoint",
+      "endpointUrl": "download.hitachivantara.com/ucpasbe/xml/SBE_Discovery_HitachiVantara.xml",
+      "port": "443",
+      "notes": "Enables discovery and confirmation of validity for SBE updates from OEM",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "2",
+      "description": "SBE Manifest redirection link",
+      "endpointUrl": "aka.ms/AzureStackSBEUpdate/HitachiVantara",
+      "port": "443",
+      "notes": "Microsoft redirection to the explicit OEM SBE manifest endpoint.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    }
+  ]
+}
