@@ -373,8 +373,13 @@ function Export-AzureLocalEndpoints {
       $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
       $readmeMarkdown += ''    
 
-      $readmeMarkdown += 'This PowerShell script enumerates the list of required firewall endpoints/URLs for Azure Local - for regions and OEM hardware vendors - and codifies it as JSON. Everything is retrieved from Microsoft documentation.'
-      $readmeMarkdown += ''   
+      $readmeMarkdown += 'This PowerShell tool enumerates the list of required firewall endpoints/URLs for Azure Local - for regions and OEM hardware vendors - and codifies it as JSON.'
+      $readmeMarkdown += ''
+
+      $readmeMarkdown += '> [!IMPORTANT]  '
+      $readmeMarkdown += "> This tool covers required firewall endpoints as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements). There may be other requirements, such as for additional Azure services  "
+      $readmeMarkdown += ''
+
 
       $readmeMarkdown += '## 🚀 Features'
       $readmeMarkdown += ''
