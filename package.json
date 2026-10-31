@@ -1,0 +1,15 @@
+{
+  "name": "azure-local-endpoints",
+  "version": "2.0.0",
+  "description": "Browse Azure Local firewall endpoints and generate Terraform for firewalls",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "bin": { "azlocal-endpoints": "src/cli.js" },
+  "scripts": {
+    "build": "node src/build-site.js",
+    "test": "node --test",
+    "list": "node src/cli.js list"
+  },
+  "engines": { "node": ">=20" }
+}
