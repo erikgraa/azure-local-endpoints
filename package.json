@@ -9,6 +9,7 @@
   "scripts": {
     "build": "node src/build-site.js",
     "test": "node --test",
+    "validate:terraform": "node scripts/validate-terraform.js",
     "list": "node src/cli.js list"
   },
   "engines": { "node": ">=20" }
