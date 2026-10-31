@@ -156,7 +156,7 @@ catch { document.documentElement.dataset.theme = 'dark'; }
     <select id="scope"></select>
     <select id="phase"><option value="">Required for: any</option></select>
     <select id="arc"><option value="">Arc gateway: any</option><option value="yes">Arc gateway: supported</option><option value="no">Arc gateway: not supported</option></select>
-    <button class="sec" id="link">🔗 Copy link</button>
+    <button class="sec" id="link" title="Copy a link that restores this exact selection, filters and Terraform settings">🔗 Share selection</button>
     <button class="sec" id="csv">⬇ Export CSV</button>
   </div>
   <div class="chips" id="chips"></div>
@@ -217,7 +217,38 @@ let initParams = new URLSearchParams(hashQuery);
 const wanted = decodeURIComponent(hashScope);
 $('scope').value = [...$('scope').options].some((o) => o.value === wanted) ? wanted : 'region/westeurope';
 
-// Keeps the filters in the URL hash so a view can be shared.
+// Generator settings and the active tab are scope independent, so restore them right away.
+const defaultsUi = { v: generators[0].id, p: 'azlocal', sz: 'trust', dz: 'untrust', sa: 'any' };
+const uiFields = { v: 'vendor', p: 'prefix', sz: 'szone', dz: 'dzone', sa: 'saddr' };
+for (const [k, id] of Object.entries(uiFields)) {
+  const val = initParams.get(k);
+  if (val && (k !== 'v' || generators.some((g) => g.id === val))) $(id).value = val;
+}
+const showTab = (name) => {
+  document.querySelectorAll('.tab,main').forEach((e) => e.classList.remove('active'));
+  document.querySelector(`.tab[data-t="${name}"]`).classList.add('active');
+  $(name).classList.add('active');
+};
+if (initParams.get('t') === 'gen') showTab('gen');
+
+// Endpoint ids are numeric; encode them as ranges ("3-5.9") to keep shared links short.
+const toRanges = (nums) => {
+  const out = [];
+  let s = null, last = null;
+  const flush = () => { if (s !== null) out.push(s === last ? `${s}` : `${s}-${last}`); };
+  for (const n of nums) {
+    if (s !== null && n === last + 1) last = n;
+    else { flush(); s = last = n; }
+  }
+  flush();
+  return out.join('.');
+};
+const fromRanges = (str) => str.split('.').filter(Boolean).flatMap((part) => {
+  const [a, b = a] = part.split('-').map(Number);
+  return Number.isInteger(a) && Number.isInteger(b) && b >= a && b - a < 10000 ? Array.from({ length: b - a + 1 }, (_, i) => String(a + i)) : [];
+});
+
+// Keeps the whole view (scope, filters, selection, generator settings) in the URL hash so it can be shared.
 function writeHash() {
   const p = new URLSearchParams();
   if ($('q').value) p.set('q', $('q').value);
@@ -225,6 +256,14 @@ function writeHash() {
   if ($('arc').value) p.set('arc', $('arc').value);
   const off = [...$('chips').children].filter((c) => !c.classList.contains('on')).map((c) => c.textContent);
   if (off.length) p.set('off', off.join('|'));
+  const nums = (pick) => scope.endpoints.filter((e) => pick(e)).map((e) => Number(e.id)).filter(Number.isInteger).sort((a, b) => a - b);
+  const deselected = toRanges(nums((e) => !selected.has(e.id)));
+  if (deselected) {
+    const only = toRanges(nums((e) => selected.has(e.id)));
+    if (deselected.length <= only.length) p.set('x', deselected); else p.set('o', only);
+  }
+  for (const [k, id] of Object.entries(uiFields)) if ($(id).value && $(id).value !== defaultsUi[k]) p.set(k, $(id).value);
+  if ($('gen').classList.contains('active')) p.set('t', 'gen');
   const qs = p.toString();
   history.replaceState(null, '', `#${$('scope').value}${qs ? `?${qs}` : ''}`);
 }
@@ -236,7 +275,10 @@ async function loadScope() {
   initParams = new URLSearchParams();
   const off = new Set((p.get('off') || '').split('|').filter(Boolean));
   const eps = scope.endpoints;
-  selected = new Set(eps.map((e) => e.id));
+  const known = new Set(eps.map((e) => e.id));
+  selected = new Set(known);
+  if (p.has('o')) selected = new Set(fromRanges(p.get('o')).filter((id) => known.has(id)));
+  else if (p.has('x')) fromRanges(p.get('x')).forEach((id) => selected.delete(id));
   const opts = (vals, el, first) => { el.innerHTML = `<option value="">${first}</option>` + vals.map((v) => `<option>${esc(v)}</option>`).join(''); };
   opts([...new Set(eps.flatMap((e) => e.requiredFor))].sort(), $('phase'), 'Required for: any');
   $('q').value = p.get('q') || '';
@@ -273,11 +315,11 @@ function render() {
   $('s-sel').textContent = included.length;
   $('all').checked = visible.length > 0 && included.length === visible.length;
   $('all').indeterminate = included.length > 0 && included.length < visible.length;
-  writeHash();
   generate();
 }
 
 function generate() {
+  writeHash();
   const g = generators.find((x) => x.id === $('vendor').value);
   $('vdesc').textContent = g.description;
   const eps = visible.filter((e) => selected.has(e.id));
@@ -304,9 +346,10 @@ $('rows').onclick = (ev) => {
   setTimeout(() => (b.textContent = '⧉'), 1000);
 };
 $('link').onclick = () => {
+  writeHash();
   navigator.clipboard.writeText(location.href);
-  $('link').textContent = '✓ Copied';
-  setTimeout(() => ($('link').textContent = '🔗 Copy link'), 1200);
+  $('link').textContent = '✓ Link copied';
+  setTimeout(() => ($('link').textContent = '🔗 Share selection'), 1500);
 };
 $('theme').onclick = () => {
   const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
@@ -337,8 +380,8 @@ $('csv').onclick = () => {
   a.download = `azure-local-${scope.name}.csv`; a.click();
 };
 document.querySelectorAll('.tab').forEach((t) => (t.onclick = () => {
-  document.querySelectorAll('.tab,main').forEach((e) => e.classList.remove('active'));
-  t.classList.add('active'); $(t.dataset.t).classList.add('active');
+  showTab(t.dataset.t);
+  writeHash();
 }));
 await loadScope();
 </script>
