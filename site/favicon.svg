@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Azure Local Endpoints">
   <rect width="64" height="64" rx="14" fill="#0f1420"/>
-  <path d="M20 44a10 10 0 0 1-1-19.95A13 13 0 0 1 44 22a11 11 0 0 1 1 22z" fill="#4aa3ff"/>
-  <path d="M32 26l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z" fill="#0f1420"/>
-  <path d="M28 35l3 3 5-6" fill="none" stroke="#3ecf8e" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 37a8.500 8.500 0 0 1-1-16.900A12 12 0 0 1 36 15a11 11 0 0 1 12 6.500A8 8 0 0 1 50 37z" fill="#2b3d63"/>
+  <path d="M32 5C34 13 43 17 43 26c0 6.500-5 10-11 10s-11-3.500-11-10c0-4.500 2.500-7 4.500-9.500.5 3 2 4.500 3.500 5.500-.5-6 .5-11 3-17z" fill="#f5834a"/>
+  <path d="M32 19c2.500 4 6 6 6 10 0 3.500-2.500 5-6 5s-6-1.500-6-5c0-4 3.500-6 6-10z" fill="#ffc857"/>
+  <g fill="#4aa3ff">
+    <rect x="6" y="39" width="16" height="6" rx="1.200"/>
+    <rect x="24" y="39" width="16" height="6" rx="1.200"/>
+    <rect x="42" y="39" width="16" height="6" rx="1.200"/>
+    <rect x="6" y="47" width="8" height="6" rx="1.200"/>
+    <rect x="16" y="47" width="16" height="6" rx="1.200"/>
+    <rect x="34" y="47" width="16" height="6" rx="1.200"/>
+    <rect x="52" y="47" width="6" height="6" rx="1.200"/>
+    <rect x="6" y="55" width="16" height="6" rx="1.200"/>
+    <rect x="42" y="55" width="16" height="6" rx="1.200"/>
+  </g>
+  <rect x="24" y="55" width="16" height="6" rx="1.200" fill="#3ecf8e"/>
 </svg>
