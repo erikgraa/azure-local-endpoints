@@ -5,7 +5,7 @@ const PROTO = { tcp: 'TCP', udp: 'UDP' };
 function generate(endpoints, options = {}) {
   const o = defaults(options);
   const label = o.scope ? ` (${o.scope})` : '';
-  const action = o.action === 'deny' ? 'BLOCK' : 'ALLOW';
+  const action = 'ALLOW';
   const out = [];
   const ruleBlocks = [];
 

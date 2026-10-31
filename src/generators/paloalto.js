@@ -11,7 +11,7 @@ const rule = (o, fields) =>
     applications          = ${fields.apps}
     services              = ${fields.services}
     categories            = ${fields.categories}
-    action                = ${q(o.action)}`;
+    action                = "allow"`;
 
 function generate(endpoints, options = {}) {
   const o = defaults(options);

@@ -21,7 +21,6 @@ export const unique = (a) => [...new Set(a)];
 export function defaults(options = {}) {
   return {
     prefix: options.prefix ?? 'azlocal',
-    action: options.action ?? 'allow',
     sourceZone: options.sourceZone ?? 'trust',
     destinationZone: options.destinationZone ?? 'untrust',
     sourceAddress: options.sourceAddress ?? 'any',
