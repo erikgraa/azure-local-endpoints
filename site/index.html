@@ -5,56 +5,115 @@
 <title>Azure Local Endpoints</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Browse Azure Local firewall endpoints and generate Terraform for Palo Alto and Cisco firewalls.">
 <style>
-  :root{--bg:#0f1420;--panel:#171e2e;--line:#263049;--text:#e6ebf5;--mute:#8b97b3;--accent:#4aa3ff;--ok:#3ecf8e;--warn:#f5b84a}
+  :root{
+    --bg:#0a0e1a;--panel:#131a2c;--panel2:#18213a;--line:#263353;--text:#e8edf8;--mute:#8d9bbd;
+    --accent:#4aa3ff;--accent2:#8b7bff;--ok:#3ecf8e;--warn:#f5b84a;--fire:#f5834a;
+    --grad:linear-gradient(135deg,#4aa3ff,#8b7bff 60%,#f5834a);
+  }
   *{box-sizing:border-box}
-  body{margin:0;font:14px/1.45 system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
-  header{padding:16px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  header h1{font-size:18px;margin:0}
-  header a{color:var(--accent);text-decoration:none;font-size:13px}
-  .badge{background:#22304d;color:var(--accent);border-radius:99px;padding:2px 10px;font-size:12px}
-  .right{margin-left:auto;display:flex;gap:16px}
-  .tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--line)}
-  .tab{padding:10px 16px;cursor:pointer;color:var(--mute);border-bottom:2px solid transparent}
-  .tab.active{color:var(--text);border-color:var(--accent)}
-  main{padding:20px 24px;display:none}main.active{display:block}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:14px/1.5 Inter,system-ui,Segoe UI,sans-serif;color:var(--text);min-height:100vh;
+    background:radial-gradient(900px 500px at 8% -10%,rgba(74,163,255,.18),transparent 60%),
+               radial-gradient(800px 500px at 100% 0%,rgba(139,123,255,.16),transparent 60%),
+               radial-gradient(700px 400px at 50% 110%,rgba(245,131,74,.08),transparent 60%),var(--bg);
+    background-attachment:fixed}
+  a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  header{padding:28px 0 8px}
+  .top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .logo{width:64px;height:64px;filter:drop-shadow(0 6px 18px rgba(74,163,255,.35))}
+  h1{margin:0;font-size:30px;letter-spacing:-.02em;line-height:1.1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tag-line{color:var(--mute);margin:4px 0 0}
+  .links{margin-left:auto;display:flex;gap:10px}
+  .links a{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:rgba(19,26,44,.6);color:var(--text);font-size:13px;backdrop-filter:blur(6px)}
+  .links a:hover{border-color:var(--accent);text-decoration:none}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:22px 0 6px}
+  .stat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px 16px;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--c,var(--accent))}
+  .stat b{display:block;font-size:26px;letter-spacing:-.02em}
+  .stat span{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+
+  .tabs{display:inline-flex;gap:4px;margin:20px 0 18px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  .tab{padding:8px 18px;cursor:pointer;color:var(--mute);border-radius:9px;font-weight:600;transition:.15s}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:#06101f;background:var(--grad);box-shadow:0 4px 16px rgba(74,163,255,.3)}
+  main{display:none}main.active{display:block}
+
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-  input,select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:6px;font:inherit}
-  input[type=search]{flex:1;min-width:240px}
+  input,select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:10px;font:inherit;transition:.15s}
+  input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(74,163,255,.2)}
+  input[type=search]{flex:1;min-width:240px;padding-left:36px;
+    background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238d9bbd' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l4 4'/%3E%3C/svg%3E") 12px center no-repeat}
+  input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;padding:0}
+  button{background:var(--grad);color:#06101f;border:0;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;transition:.15s}
+  button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+  button.sec{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .chip{padding:3px 11px;border:1px solid var(--line);border-radius:99px;cursor:pointer;color:var(--mute);user-select:none}
-  .chip.on{background:var(--accent);color:#04111f;border-color:var(--accent)}
-  table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:8px;overflow:hidden}
-  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  th{font-size:12px;text-transform:uppercase;color:var(--mute);letter-spacing:.04em;position:sticky;top:0;background:var(--panel)}
-  tr:hover td{background:#1c2540}
-  code{font-family:Consolas,monospace;color:#9fd1ff;word-break:break-all}
-  .tag{font-size:11px;padding:1px 8px;border-radius:4px;background:#22304d;margin-right:4px;white-space:nowrap}
-  .tag.wild{background:#4d3a14;color:var(--warn)}
-  .tag.ok{background:#123d2b;color:var(--ok)}
+  .chip{padding:4px 12px;border:1px solid hsl(var(--h) 60% 45% / .5);border-radius:99px;cursor:pointer;color:hsl(var(--h) 80% 75%);user-select:none;font-size:12.5px;transition:.15s;background:hsl(var(--h) 60% 50% / .08)}
+  .chip.on{background:hsl(var(--h) 70% 55%);color:#071020;border-color:transparent;font-weight:600}
   .count{color:var(--mute);margin:0 0 10px}
-  .gen{display:grid;grid-template-columns:300px 1fr;gap:20px}
-  @media(max-width:800px){.gen{grid-template-columns:1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
-  .card h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;color:var(--mute)}
-  .card label{display:block;margin:10px 0 4px;color:var(--mute);font-size:12px}
+
+  .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:var(--panel);max-height:70vh;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid rgba(38,51,83,.6);vertical-align:top}
+  th{font-size:11.5px;text-transform:uppercase;color:var(--mute);letter-spacing:.07em;position:sticky;top:0;background:var(--panel2);z-index:1}
+  tbody tr:nth-child(even) td{background:rgba(24,33,58,.45)}
+  tbody tr:hover td{background:rgba(74,163,255,.1)}
+  td.comp{white-space:nowrap}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 75% 60%)}
+  code{font-family:Consolas,ui-monospace,monospace;color:#9fd1ff;word-break:break-all}
+  .tag{font-size:11px;padding:2px 9px;border-radius:99px;background:#22304d;margin-right:4px;white-space:nowrap;display:inline-block}
+  .tag.dep{background:rgba(74,163,255,.18);color:#8cc4ff}
+  .tag.post{background:rgba(139,123,255,.2);color:#b6abff}
+  .tag.wild{background:rgba(245,184,74,.18);color:var(--warn)}
+  .tag.ok{background:rgba(62,207,142,.16);color:var(--ok)}
+  .tag.port{background:rgba(245,131,74,.16);color:#ffa57a;font-family:Consolas,monospace}
+  .tag.udp{background:rgba(245,131,74,.28)}
+  .mute{color:var(--mute)}
+  td.notes{color:var(--mute);font-size:13px;max-width:380px}
+
+  .gen{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.gen{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card h3{margin:0 0 12px;font-size:12px;text-transform:uppercase;color:var(--mute);letter-spacing:.08em}
+  .card label{display:block;margin:12px 0 5px;color:var(--mute);font-size:12px}
   .card select,.card input{width:100%}
-  pre{margin:0;background:#0b0f19;border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto;max-height:600px;font:13px/1.5 Consolas,monospace;color:#cfe3ff}
-  button{background:var(--accent);color:#04111f;border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer}
-  button.sec{background:#22304d;color:var(--text)}
+  pre{margin:0;background:#070a14;border:1px solid var(--line);border-radius:14px;padding:18px;overflow:auto;max-height:640px;font:13px/1.55 Consolas,ui-monospace,monospace;color:#cfe3ff;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .k{color:#c792ea}.s{color:#a5e075}.c{color:#5f6c8c;font-style:italic}.r{color:#82aaff}
   .actions{display:flex;gap:8px;margin-bottom:10px;align-items:center}
   .note{color:var(--mute);font-size:12px;margin-top:12px}
-  .mute{color:var(--mute)}
+  .pill{display:inline-block;background:rgba(74,163,255,.15);color:var(--accent);border-radius:99px;padding:2px 10px;font-size:12px}
+  footer{color:var(--mute);font-size:12.5px;text-align:center;padding:30px 0 40px}
 </style>
 </head>
 <body>
+<div class="wrap">
 <header>
-  <h1><img src="favicon.svg" alt="" width="28" height="28" style="vertical-align:middle;margin-right:8px">Azure Local Endpoints</h1><span class="badge" id="updated">loading…</span>
-  <div class="right">
-    <a href="api/v1/index.json">API</a>
-    <a href="https://github.com/erikgraa/azure-local-endpoints">GitHub</a>
+  <div class="top">
+    <img class="logo" src="favicon.svg" alt="">
+    <div>
+      <h1>Azure Local Endpoints</h1>
+      <p class="tag-line">Browse the required firewall endpoints and generate Terraform for your firewall.</p>
+    </div>
+    <div class="links">
+      <a href="api/v1/index.json">API</a>
+      <a href="https://github.com/erikgraa/azure-local-endpoints">GitHub</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat" style="--c:var(--accent)"><b id="s-scopes">–</b><span>Regions &amp; OEMs</span></div>
+    <div class="stat" style="--c:var(--accent2)"><b id="s-eps">–</b><span>Endpoints in scope</span></div>
+    <div class="stat" style="--c:var(--ok)"><b id="s-sel">–</b><span>Selected</span></div>
+    <div class="stat" style="--c:var(--fire)"><b id="s-built">–</b><span>Data built</span></div>
   </div>
 </header>
+
 <div class="tabs">
   <div class="tab active" data-t="browse">Browse endpoints</div>
   <div class="tab" data-t="gen">Generate firewall config</div>
@@ -70,10 +129,12 @@
   </div>
   <div class="chips" id="chips"></div>
   <p class="count" id="count"></p>
+  <div class="tablewrap">
   <table>
     <thead><tr><th><input type="checkbox" id="all" checked></th><th>Component</th><th>Endpoint</th><th>Port</th><th>Required for</th><th>Arc GW</th><th>Notes</th></tr></thead>
     <tbody id="rows"></tbody>
   </table>
+  </div>
 </main>
 
 <main id="gen">
@@ -87,8 +148,8 @@
       <label>Destination zone</label><input id="dzone" value="untrust">
       <label>Source address / object</label><input id="saddr" value="any">
       <label>Action</label><select id="action"><option>allow</option><option>deny</option></select>
-      <p class="note" id="selnote"></p>
-      <p class="note">Uses the scope and the endpoints currently selected in the Browse tab. Generation runs in your browser.</p>
+      <p class="note"><span class="pill" id="selnote"></span></p>
+      <p class="note">Uses the scope and the endpoints selected in the Browse tab. Generation runs in your browser.</p>
     </div>
     <div>
       <div class="actions"><button id="copy">Copy</button><button class="sec" id="dl">Download .tf</button><span class="note" id="fn" style="margin:0"></span></div>
@@ -96,6 +157,9 @@
     </div>
   </div>
 </main>
+
+<footer>Demo site · data from <a href="https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements">Microsoft documentation</a> · rebuilt nightly</footer>
+</div>
 
 <script type="module">
 import { generators } from './generators/index.js';
@@ -106,15 +170,19 @@ const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
 const index = await getJson('api/v1/index.json');
 let scope, selected = new Set(), visible = [];
 
-$('updated').textContent = `built ${index.generated.slice(0, 10)}`;
+const hue = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+const highlight = (t) => esc(t).replace(/(#.*$)|(&quot;.*?&quot;)|\b(resource|variable|provider|terraform|required_providers)\b/gm,
+  (m, c, s, k) => c ? `<span class="c">${c}</span>` : s ? `<span class="s">${s}</span>` : `<span class="k">${k}</span>`);
+
+$('s-scopes').textContent = index.scopes.length;
+$('s-built').textContent = index.generated.slice(0, 10);
 $('scope').innerHTML = ['region', 'oem'].map((t) =>
   `<optgroup label="${t === 'region' ? 'Regions' : 'OEM vendors'}">${index.scopes.filter((s) => s.type === t)
     .map((s) => `<option value="${s.type}/${s.name}">${s.name} (${s.count})</option>`).join('')}</optgroup>`).join('');
 $('vendor').innerHTML = generators.map((g) => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
 
 const hash = decodeURIComponent(location.hash.slice(1));
-if ([...$('scope').options].some((o) => o.value === hash)) $('scope').value = hash;
-else $('scope').value = 'region/westeurope';
+$('scope').value = [...$('scope').options].some((o) => o.value === hash) ? hash : 'region/westeurope';
 
 async function loadScope() {
   const s = index.scopes.find((x) => `${x.type}/${x.name}` === $('scope').value);
@@ -128,11 +196,12 @@ async function loadScope() {
   $('chips').innerHTML = '';
   [...new Set(eps.map((e) => e.component))].sort().forEach((c) => {
     const el = document.createElement('span');
-    el.className = 'chip on'; el.textContent = c;
+    el.className = 'chip on'; el.textContent = c; el.style.setProperty('--h', hue(c));
     el.onclick = () => { el.classList.toggle('on'); render(); };
     $('chips').appendChild(el);
   });
   $('all').checked = true;
+  $('s-eps').textContent = eps.length;
   render();
 }
 
@@ -143,12 +212,14 @@ function render() {
     (!port || e.ports.includes(Number(port))) &&
     (!q || `${e.url} ${e.component} ${e.notes}`.toLowerCase().includes(q)));
   $('rows').innerHTML = visible.map((e) => `<tr><td><input type="checkbox" data-id="${e.id}" ${selected.has(e.id) ? 'checked' : ''}></td>
-    <td>${esc(e.component)}</td><td><code>${esc(e.url)}</code>${e.wildcard ? ' <span class="tag wild">wildcard</span>' : ''}</td>
-    <td>${e.ports.join(', ')}${e.protocol === 'udp' ? ' <span class="tag">udp</span>' : ''}</td>
-    <td>${e.requiredFor.map((r) => `<span class="tag">${esc(r)}</span>`).join('')}</td>
+    <td class="comp"><span class="dot" style="--h:${hue(e.component)}"></span>${esc(e.component)}</td>
+    <td><code>${esc(e.url)}</code>${e.wildcard ? ' <span class="tag wild">wildcard</span>' : ''}</td>
+    <td>${e.ports.map((p) => `<span class="tag port ${e.protocol === 'udp' ? 'udp' : ''}">${e.protocol === 'udp' ? 'udp/' : ''}${p}</span>`).join('')}</td>
+    <td>${e.requiredFor.map((r) => `<span class="tag ${r === 'Deployment' ? 'dep' : 'post'}">${esc(r)}</span>`).join('')}</td>
     <td>${/^yes/i.test(e.arcGateway) ? `<span class="tag ok" title="${esc(e.arcGateway)}">Yes</span>` : `<span class="mute" title="${esc(e.arcGateway)}">${esc(e.arcGateway.split('.')[0] || '–')}</span>`}</td>
-    <td class="mute">${esc(e.notes)}</td></tr>`).join('');
-  $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints · ${selected.size} selected for generation`;
+    <td class="notes">${esc(e.notes)}</td></tr>`).join('');
+  $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints`;
+  $('s-sel').textContent = selected.size;
   generate();
 }
 
@@ -161,7 +232,7 @@ function generate() {
     prefix: $('prefix').value.trim() || 'azlocal', action: $('action').value, sourceZone: $('szone').value,
     destinationZone: $('dzone').value, sourceAddress: $('saddr').value, scope: scope.name
   });
-  $('code').textContent = files.map((f) => f.content).join('\n');
+  $('code').innerHTML = highlight(files.map((f) => f.content).join('\n'));
   $('fn').textContent = files.map((f) => f.filename).join(', ');
   generate.files = files;
 }
@@ -175,17 +246,16 @@ $('all').onchange = (ev) => {
   visible.forEach((e) => (ev.target.checked ? selected.add(e.id) : selected.delete(e.id)));
   render();
 };
-['q'].forEach((id) => ($(id).oninput = render));
+$('q').oninput = render;
 ['phase', 'port'].forEach((id) => ($(id).onchange = render));
 ['vendor', 'action'].forEach((id) => ($(id).onchange = generate));
 ['prefix', 'szone', 'dzone', 'saddr'].forEach((id) => ($(id).oninput = generate));
 $('scope').onchange = loadScope;
 $('copy').onclick = () => navigator.clipboard.writeText($('code').textContent);
 $('dl').onclick = () => {
-  const f = generate.files[0];
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([generate.files.map((x) => x.content).join('\n')], { type: 'text/plain' }));
-  a.download = f.filename; a.click();
+  a.download = generate.files[0].filename; a.click();
 };
 $('csv').onclick = () => {
   const rows = [['component', 'endpoint', 'port', 'requiredFor', 'wildcard', 'notes'],
