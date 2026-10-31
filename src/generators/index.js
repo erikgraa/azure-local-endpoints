@@ -5,8 +5,7 @@ import cisco from './cisco.js';
 import nsx from './nsx.js';
 import fortinet from './fortinet.js';
 import checkpoint from './checkpoint.js';
-import azurefirewall from './azurefirewall.js';
 
-export const generators = [paloalto, cisco, nsx, fortinet, checkpoint, azurefirewall];
+export const generators = [paloalto, cisco, nsx, fortinet, checkpoint];
 
 export const getGenerator = (id) => generators.find((g) => g.id === id);

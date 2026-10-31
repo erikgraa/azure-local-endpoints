@@ -16,7 +16,7 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 ## 🚀 Features
 
 - **Web UI** at https://endpoints.azurelocal.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
-- **Terraform generation** for Palo Alto (PAN-OS), Cisco (Secure Firewall/FMC), VMware NSX, Fortinet (FortiGate), Check Point and Azure Firewall, in the browser, via the CLI, or as pre-generated files.
+- **Terraform generation** for Palo Alto (PAN-OS), Cisco (Secure Firewall/FMC), VMware NSX, Fortinet (FortiGate) and Check Point, in the browser, via the CLI, or as pre-generated files.
 - **Static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`.
 - **Pluggable generators**: one small file per firewall vendor.
 - Rebuilt and deployed nightly by GitHub Actions; the evergreen `json/azure-local-endpoints.json` is still maintained.
@@ -138,7 +138,6 @@ The repository structure is as follows. Each region gets its own folder.
 │           nsx.js
 │           fortinet.js
 │           checkpoint.js
-│           azurefirewall.js
 │           util.js
 │
 └───test
