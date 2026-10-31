@@ -8,6 +8,9 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 > This tool covers required firewall endpoints as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements). There may be other requirements, such as for additional Azure services  
 
 > [!NOTE]
+> This project is not affiliated with, endorsed by, or sponsored by Microsoft. Azure and Azure Local are trademarks of Microsoft Corporation.
+
+> [!NOTE]
 > https://endpoints.azurelocal.graa.dev is a **demo site** provided as-is, without any guarantee of availability. For production use, fork the repository and host your own copy (see Howto below).
 
 ## 🚀 Features
