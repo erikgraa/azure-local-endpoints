@@ -124,7 +124,7 @@
     <input type="search" id="q" placeholder="Search URL, component, notes…">
     <select id="scope"></select>
     <select id="phase"><option value="">Required for: any</option></select>
-    <select id="port"><option value="">Port: any</option></select>
+    <select id="arc"><option value="">Arc gateway: any</option><option value="yes">Arc gateway: supported</option><option value="no">Arc gateway: not supported</option></select>
     <button class="sec" id="csv">⬇ Export CSV</button>
   </div>
   <div class="chips" id="chips"></div>
@@ -158,7 +158,7 @@
   </div>
 </main>
 
-<footer>Demo site · data from <a href="https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements">Microsoft documentation</a> · rebuilt nightly</footer>
+<footer>Demo site · data from <a href="https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements">Microsoft documentation</a> · rebuilt nightly<br>This project is not affiliated with, endorsed by, or sponsored by Microsoft. Azure and Azure Local are trademarks of Microsoft Corporation.</footer>
 </div>
 
 <script type="module">
@@ -192,7 +192,7 @@ async function loadScope() {
   selected = new Set(eps.map((e) => e.id));
   const opts = (vals, el, first) => { el.innerHTML = `<option value="">${first}</option>` + vals.map((v) => `<option>${esc(v)}</option>`).join(''); };
   opts([...new Set(eps.flatMap((e) => e.requiredFor))].sort(), $('phase'), 'Required for: any');
-  opts([...new Set(eps.flatMap((e) => e.ports))].sort((a, b) => a - b), $('port'), 'Port: any');
+  $('arc').value = '';
   $('chips').innerHTML = '';
   [...new Set(eps.map((e) => e.component))].sort().forEach((c) => {
     const el = document.createElement('span');
@@ -206,10 +206,10 @@ async function loadScope() {
 }
 
 function render() {
-  const q = $('q').value.toLowerCase(), ph = $('phase').value, port = $('port').value;
+  const q = $('q').value.toLowerCase(), ph = $('phase').value, arc = $('arc').value;
   const on = new Set([...$('chips').children].filter((c) => c.classList.contains('on')).map((c) => c.textContent));
   visible = scope.endpoints.filter((e) => on.has(e.component) && (!ph || e.requiredFor.includes(ph)) &&
-    (!port || e.ports.includes(Number(port))) &&
+    (!arc || /^yes/i.test(e.arcGateway) === (arc === 'yes')) &&
     (!q || `${e.url} ${e.component} ${e.notes}`.toLowerCase().includes(q)));
   $('rows').innerHTML = visible.map((e) => `<tr><td><input type="checkbox" data-id="${e.id}" ${selected.has(e.id) ? 'checked' : ''}></td>
     <td class="comp"><span class="dot" style="--h:${hue(e.component)}"></span>${esc(e.component)}</td>
@@ -247,7 +247,7 @@ $('all').onchange = (ev) => {
   render();
 };
 $('q').oninput = render;
-['phase', 'port'].forEach((id) => ($(id).onchange = render));
+['phase', 'arc'].forEach((id) => ($(id).onchange = render));
 ['vendor', 'action'].forEach((id) => ($(id).onchange = generate));
 ['prefix', 'szone', 'dzone', 'saddr'].forEach((id) => ($(id).oninput = generate));
 $('scope').onchange = loadScope;
