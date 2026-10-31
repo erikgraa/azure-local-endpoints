@@ -5,9 +5,12 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 > [!IMPORTANT]  
 > This tool covers required firewall endpoints as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements). There may be other requirements, such as for additional Azure services  
 
+> [!NOTE]
+> https://endpoints.azurelocal.graa.dev is a **demo site** provided as-is, without any guarantee of availability. For production use, fork the repository and host your own copy (see Howto below).
+
 ## 🚀 Features
 
-- **Web UI** at https://endpoints.azurelocal.graa.dev: search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
+- **Web UI** at https://endpoints.azurelocal.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
 - **Terraform generation** for Palo Alto (PAN-OS) and Cisco (Secure Firewall/FMC), in the browser, via the CLI, or as pre-generated files.
 - **Static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`.
 - **Pluggable generators**: one small file per firewall vendor.
@@ -91,24 +94,44 @@ The repository structure is as follows. Each region gets its own folder.
 ```plaintext
 │   LICENSE
 │   README.md
+│   package.json
 │
 ├───.github
 │   └───workflows
-│           update.yml
+│           update.yml            nightly: export JSON, test, build, deploy to Pages
 │
-├───json
+├───json                          source data (written by the PowerShell script)
 │   │   azure-local-endpoints.json 🍏
 │   │
 │   ├───oem 📦
-│   │       azure-local-endpoints-vendor-compressed.json
-│   │       azure-local-endpoints-vendor.json 
+│   │   └───<vendor>
+│   │           azure-local-endpoints-<vendor>.json
+│   │           azure-local-endpoints-<vendor>-compressed.json
 │   │
 │   └───regions 🗺️
-│           azure-local-endpoints-region-compressed.json
-│           azure-local-endpoints-region.json
+│       └───<region>
+│               azure-local-endpoints-<region>.json
+│               azure-local-endpoints-<region>-compressed.json
 │
-└───scripts
-        Export-AzureLocalEndpoints.ps1
+├───scripts
+│       Export-AzureLocalEndpoints.ps1
+│
+├───site
+│       index.html                static web UI
+│
+├───src
+│   │   cli.js                    command line tool
+│   │   endpoints.js              loads and normalizes the JSON
+│   │   build-site.js             builds ./dist (UI, API, Terraform)
+│   │
+│   └───generators                one file per firewall vendor
+│           index.js
+│           paloalto.js
+│           cisco.js
+│           util.js
+│
+└───test
+        generators.test.js
 ```
 ## 👏 Contributions
 
