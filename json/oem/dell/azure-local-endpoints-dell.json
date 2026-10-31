@@ -29,6 +29,32 @@
         "Post deployment"
       ],
       "wildcard": false
+    },
+    {
+      "id": "3",
+      "description": "Digicert Certificate Revocation Status",
+      "endpointUrl": "http://crl3.digicert.com/*",
+      "port": "80",
+      "notes": "Enables Dell SBE Download Catalog Signer Verification",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "4",
+      "description": "Digicert Certificate Revocation Status",
+      "endpointUrl": "http://crl4.digicert.com/*",
+      "port": "80",
+      "notes": "Enables Dell SBE Download Catalog Signer Verification",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
     }
   ]
 }

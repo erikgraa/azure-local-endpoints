@@ -1,0 +1,1306 @@
+{
+  "type": "region",
+  "name": "usgovarizona",
+  "updated": "2026-10-19",
+  "url": "https://raw.githubusercontent.com/Azure/AzureStack-Tools/refs/heads/master/HCI/usgovarizona-hci-endpoints/usgovarizona-hci-endpoints.md",
+  "endpoints": [
+    {
+      "id": "1",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "*.blob.storage.azure.net",
+      "port": "443",
+      "notes": "To access blob storage.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "2",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "*.data.mcr.microsoft.com",
+      "port": "443",
+      "notes": "Microsoft Artifact Registry CDN locations.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "3",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "*.prod.do.dsp.mp.microsoft.com",
+      "port": "443",
+      "notes": "Used for AKS Arc VHD image download and update.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "4",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "aszk8snetworking.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "5",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "azurearcfork8s.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "6",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "azurearcfork8sdev.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "7",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "azurewatsonanalysis-prod.core.windows.net",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "8",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "ecpacr.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "9",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "edgesupprd.trafficmanager.net",
+      "port": "443",
+      "notes": "Remote Support Extension",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "10",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "hciarcvmscontainerregistry.azurecr.io",
+      "port": "443",
+      "notes": "For Arc VM container registry on Azure Local 23H2.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "11",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "hciarcvmsstorage.z13.web.core.windows.net",
+      "port": "443",
+      "notes": "Storage account for stack-hci-vm CLI extension files.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "12",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "https://usgovarizona.obo.arc.azure.us",
+      "port": "8084",
+      "notes": "Requested Arizona counterpart for the post-deployment AKS endpoint; service availability on port 8084 is unverified.",
+      "arcGatewaySupport": "No",
+      "requiredFor": "Post Deployment",
+      "wildcard": false
+    },
+    {
+      "id": "13",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "hybridaks.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "14",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "hybridaksstorage.z13.web.core.windows.net",
+      "port": "443",
+      "notes": "AKS Azure Local static website hosted in Azure Storage.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "15",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "linuxgeneva-microsoft.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "16",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "mcr.microsoft.com",
+      "port": "443",
+      "notes": "Microsoft Artifact Registry Endpoint and discovery UI",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "17",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "sts.windows.net",
+      "port": "443",
+      "notes": "For Cluster Connect and Custom Location-based scenario.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "18",
+      "azureLocalComponent": " Azure Local AKS infra",
+      "endpointUrl": "usgovarizona.dp.kubernetesconfiguration.azure.us",
+      "port": "443",
+      "notes": "Required for AKS.",
+      "arcGatewaySupport": "No",
+      "requiredFor": "Deployment",
+      "wildcard": false
+    },
+    {
+      "id": "19",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "arcplatformcliextprod.blob.core.windows.net",
+      "port": "443",
+      "notes": "Used to deploy Azure Resource Bridge extensions.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "20",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "arcplatformcliextprod.z13.web.core.windows.net",
+      "port": "443",
+      "notes": "Used to deploy Azure Resource Bridge extensions.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "21",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "k8connecthelm.azureedge.net",
+      "port": "443",
+      "notes": "Deploy Azure Arc agent.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "22",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "k8sconnectcsp.azureedge.net",
+      "port": "443",
+      "notes": "Required for Custom Location.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "23",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "kvamanagementoperator.azurecr.io",
+      "port": "443",
+      "notes": "Pull artifacts for Appliance managed components.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "24",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "msk8s.api.cdp.microsoft.com",
+      "port": "443",
+      "notes": "Download product catalog, product bits, and OS images from SFS.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "25",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "msk8s.sb.tlu.dl.delivery.mp.microsoft.com",
+      "port": "443",
+      "notes": "Download the Arc Resource Bridge OS images.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "26",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "packages.microsoft.com",
+      "port": "443",
+      "notes": "Download Linux installation package.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "27",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "prod5.prod.hot.ingest.monitor.core.windows.net",
+      "port": "443",
+      "notes": "Periodically sends Microsoft required diagnostic data.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "28",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "prod5.prod.hot.ingestion.msftcloudes.com",
+      "port": "443",
+      "notes": "Periodically sends Microsoft required diagnostic data.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "29",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "time.windows.com",
+      "port": "123",
+      "notes": "OS time sync in appliance VM & Management machine (Windows NTP).",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "30",
+      "azureLocalComponent": " Azure Local ARB infra",
+      "endpointUrl": "usgovarizona.dp.prod.appliances.azure.us",
+      "port": "443",
+      "notes": "Used for ARB data plane operations in US Gov Arizona",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "31",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "*.servicebus.usgovcloudapi.net",
+      "port": "443",
+      "notes": "For multiple Azure Local components.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "32",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "agentserviceapi.guestconfiguration.azure.us",
+      "port": "443",
+      "notes": "For notification service for extension and connectivity scenarios.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "33",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "download.microsoft.com",
+      "port": "443",
+      "notes": "For downloading the Windows installation package.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "34",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "gbl.his.arc.azure.us",
+      "port": "443",
+      "notes": "For global metadata and hybrid identity services.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "35",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "guestnotificationservice.azure.us",
+      "port": "443",
+      "notes": "For the notification service for extension and connectivity scenarios.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "36",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "pasff.usgovcloudapi.net",
+      "port": "443",
+      "notes": "For Microsoft Entra ID.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "37",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "usgv.his.arc.azure.us",
+      "port": "443",
+      "notes": "For US Gov Virginia metadata and hybrid identity services.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "38",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "usgovarizona-gas.guestconfiguration.azure.us",
+      "port": "443",
+      "notes": "Used for extension management and guest configuration services in US Gov Arizona.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "39",
+      "azureLocalComponent": " Azure Local Arc gateway",
+      "endpointUrl": "yourarcgatewayendpointid.gw.arc.azure.net",
+      "port": "443",
+      "notes": "Required if using Arc gateway for Azure Local. ENSURE THIS IS YOUR UNIQUE GATEWAY NAME",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "40",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "graph.microsoft.us",
+      "port": "443",
+      "notes": "For Graph authentication and Azure Resource Bridge RBAC.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "41",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "graph.windows.net",
+      "port": "443",
+      "notes": "For Graph authentication, token fetch, and validation.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "42",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "login.microsoft.com",
+      "port": "443",
+      "notes": "Required to fetch and update Azure Resource Manager tokens.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "43",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "login.microsoftonline.us",
+      "port": "443",
+      "notes": "For Microsoft Entra authority and authentication, including ARM token fetch, update, and validation.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "44",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "login.windows.net",
+      "port": "443",
+      "notes": "For Microsoft Entra ID.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "45",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "usgovarizona.login.microsoftonline.us",
+      "port": "443",
+      "notes": "Required to fetch and update Azure Resource Manager tokens for logging into Azure.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "46",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "yourhcikeyvaultname.vault.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Key vault for deployment secrets. ENSURE THIS IS YOUR UNIQUE KEY VAULT NAME",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "47",
+      "azureLocalComponent": " Azure Local benefits",
+      "endpointUrl": "crl3.digicert.com",
+      "port": "80",
+      "notes": "Platform attestation service on Azure Local to perform a certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "48",
+      "azureLocalComponent": " Azure Local benefits",
+      "endpointUrl": "crl4.digicert.com",
+      "port": "80",
+      "notes": "Platform attestation service on Azure Local to perform a certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "49",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "crl.microsoft.com/pkiinfra",
+      "port": "80",
+      "notes": "Azure Local certificate revocation list for mandatory Arc extensions.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "50",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "http://www.microsoft.com/pkiops",
+      "port": "80",
+      "notes": "Certificate Revocation List for Microsoft Code Signing PCA2011.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "51",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ocsp.digicert.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "52",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ocsp.globalsign.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "53",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ocsp2.globalsign.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "54",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "oneocsp.microsoft.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "55",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "s.symcd.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "56",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ts-crl.ws.symantec.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "57",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ts-ocsp.ws.symantec.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "58",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "aka.ms",
+      "port": "443",
+      "notes": "For resolving addresses to discover Azure Local",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "59",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "azurestackreleases.download.prss.microsoft.com",
+      "port": "443",
+      "notes": "For Azure Local Arc extensions deployment.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "60",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "go.microsoft.com",
+      "port": "443",
+      "notes": "For Microsoft Update, allowing the OS to receive updates.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "61",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "portal.azure.us",
+      "port": "443",
+      "notes": "For Azure Local deployment in Azure Government.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "62",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "settings-win.data.microsoft.com",
+      "port": "443",
+      "notes": "For Azure Local deployment",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "63",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "www.microsoft.com",
+      "port": "443",
+      "notes": "Used to access required Microsoft deployment and update content.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "64",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "www.msftconnecttest.com/connecttest.txt",
+      "port": "80",
+      "notes": "Bootstrap Windows outbound connectivity validation",
+      "arcGatewaySupport": "No",
+      "requiredFor": "Deployment",
+      "wildcard": false
+    },
+    {
+      "id": "65",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "www.powershellgallery.com",
+      "port": "443",
+      "notes": "To install required PSGallery modules for Arc registration.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "66",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "yourwitnessstorageaccount.blob.core.usgovcloudapi.net",
+      "port": "443",
+      "notes": "For multiple Azure Local components.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "67",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "azurestackhci.azurefd.net",
+      "port": "443",
+      "notes": "Previous URL for Data plane for backwards compatibility.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "68",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "billing.platform.edge.azure.us",
+      "port": "443",
+      "notes": "For Data plane licensing billing data. Required only for Azure Local.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "69",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "dp.azurestackhci.azure.us",
+      "port": "443",
+      "notes": "For Data plane diagnostics and billing data.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "70",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "licensing.platform.edge.azure.us",
+      "port": "443",
+      "notes": "For Data plane licensing billing data. Required only for Azure Local.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "71",
+      "azureLocalComponent": " Azure Local management",
+      "endpointUrl": "arm-fdweb.usdodeast.cloudapp.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Used for Azure Resource Manager operations.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "72",
+      "azureLocalComponent": " Azure Local management",
+      "endpointUrl": "management.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Initial Azure Local cluster registration, bootstrapping and management operations.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "73",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "adhs.events.data.microsoft.com",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "74",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "analysisservice.watson.azure.us",
+      "port": "443",
+      "notes": "Used for diagnostics and analysis services.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "75",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "dc.services.visualstudio.com",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "76",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "fp1phx.prod.microsoftmetrics.us",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "77",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "gcs.monitoring.core.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "78",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "global.handler.control.monitor.azure.us",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "79",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "global.prod.microsoftmetrics.com",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "80",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "prod5.prod.microsoftmetrics.com",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "81",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "qos.prod.warm.ingest.monitor.core.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "82",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "usgovarizona-mdm.prod.hot.ingest.monitor.core.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "83",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "usgovarizona-shared.prod.warm.ingest.monitor.core.usgovcloudapi.net",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": "Deployment",
+      "wildcard": false
+    },
+    {
+      "id": "84",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "v20.events.data.microsoft.com",
+      "port": "443",
+      "notes": "Used for metrics and monitoring telemetry traffic.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "85",
+      "azureLocalComponent": " Azure Local WAC",
+      "endpointUrl": "*.waconazure.com",
+      "port": "443",
+      "notes": "For Windows Admin Center management after deployment.",
+      "arcGatewaySupport": "No",
+      "requiredFor": "Post deployment",
+      "wildcard": true
+    },
+    {
+      "id": "86",
+      "azureLocalComponent": " Microsoft Defender",
+      "endpointUrl": "*.endpoint.security.microsoft.com",
+      "port": "443",
+      "notes": "Required only if using Microsoft Defender extension (MDE.windows).",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": true
+    },
+    {
+      "id": "87",
+      "azureLocalComponent": " Microsoft Update",
+      "endpointUrl": "fe2cr.update.microsoft.com",
+      "port": "443",
+      "notes": "Used to download Microsoft Update content.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "88",
+      "azureLocalComponent": " Microsoft Update",
+      "endpointUrl": "slscr.update.microsoft.com",
+      "port": "443",
+      "notes": "Used to download Microsoft Update content.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "89",
+      "azureLocalComponent": " Microsoft Update",
+      "endpointUrl": "tsfe.trafficshaping.dsp.mp.microsoft.com",
+      "port": "443",
+      "notes": "For Microsoft Update content regulation",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "90",
+      "azureLocalComponent": " Azure Local CRLs",
+      "endpointUrl": "ctldl.windowsupdate.com",
+      "port": "80",
+      "notes": "Windows certificate trust and untrusted-certificate list updates.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "91",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "agentserviceapi.guestconfiguration.azure.com",
+      "port": "443",
+      "notes": "Public-cloud guest-configuration API; included alongside the Government API.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "92",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "billing.platform.edge.azure.com",
+      "port": "443",
+      "notes": "Requested public-cloud billing endpoint; consuming scenario to confirm.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "93",
+      "azureLocalComponent": " Azure Local deployment",
+      "endpointUrl": "cdn.oneget.org",
+      "port": "443",
+      "notes": "Package discovery and download dependency for PowerShell tooling.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "94",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "dp.stackhci.azure.com",
+      "port": "443",
+      "notes": "Requested public-cloud Azure Local data-plane endpoint; consuming scenario to confirm.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "95",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "gbl.his.arc.azure.com",
+      "port": "443",
+      "notes": "Public-cloud global hybrid-identity discovery service.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "96",
+      "azureLocalComponent": " Azure Local monitoring",
+      "endpointUrl": "gcs.prod.monitoring.core.windows.net",
+      "port": "443",
+      "notes": "Public-cloud diagnostic and monitoring service.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "97",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "graph.microsoft.com",
+      "port": "443",
+      "notes": "Public-cloud Microsoft Graph endpoint used by role-based access scenarios.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "98",
+      "azureLocalComponent": " Azure Local Arc agent",
+      "endpointUrl": "guestnotificationservice.azure.com",
+      "port": "443",
+      "notes": "Public-cloud notification service for extension and connectivity scenarios.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "99",
+      "azureLocalComponent": " Azure Local diag & billing",
+      "endpointUrl": "licensing.platform.edge.azure.com",
+      "port": "443",
+      "notes": "Requested public-cloud licensing endpoint; consuming scenario to confirm.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "100",
+      "azureLocalComponent": " Azure Local authentication",
+      "endpointUrl": "login.microsoftonline.com",
+      "port": "443",
+      "notes": "Public-cloud identity-token endpoint; retained in addition to Government identity endpoints.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "101",
+      "azureLocalComponent": " Microsoft Defender",
+      "endpointUrl": "winatp-gw-usgv.microsoft.com",
+      "port": "443",
+      "notes": "Defender for Endpoint Government command/control service; applies when the relevant Defender scenario is enabled.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    }
+  ]
+}

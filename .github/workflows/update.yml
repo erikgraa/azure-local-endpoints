@@ -22,7 +22,7 @@ jobs:
         run: |
           Import-Module ('{0}\scripts\Export-AzureLocalEndpoints.ps1' -f $env:GITHUB_WORKSPACE) 
           $fileName = ($env:GITHUB_REPOSITORY -split '/')[-1]
-          Export-AzureLocalEndpoints -FileName $fileName -IncludeDocumentation
+          Export-AzureLocalEndpoints -FileName $fileName
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
