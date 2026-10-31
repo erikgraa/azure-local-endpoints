@@ -4,119 +4,119 @@
     "name": "eastus",
     "updated": "2025-11-27",
     "count": 85,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\eastus\\azure-local-endpoints-eastus.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\eastus\\azure-local-endpoints-eastus-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/eastus/azure-local-endpoints-eastus.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/eastus/azure-local-endpoints-eastus-compressed.json"
   },
   {
     "type": "region",
     "name": "westeurope",
     "updated": "2025-11-27",
     "count": 82,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\westeurope\\azure-local-endpoints-westeurope.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\westeurope\\azure-local-endpoints-westeurope-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/westeurope/azure-local-endpoints-westeurope.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/westeurope/azure-local-endpoints-westeurope-compressed.json"
   },
   {
     "type": "region",
     "name": "australiaeast",
     "updated": "2025-11-27",
     "count": 81,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\australiaeast\\azure-local-endpoints-australiaeast.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\australiaeast\\azure-local-endpoints-australiaeast-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/australiaeast/azure-local-endpoints-australiaeast.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/australiaeast/azure-local-endpoints-australiaeast-compressed.json"
   },
   {
     "type": "region",
     "name": "canadacentral",
     "updated": "2025-11-27",
     "count": 82,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\canadacentral\\azure-local-endpoints-canadacentral.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\canadacentral\\azure-local-endpoints-canadacentral-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/canadacentral/azure-local-endpoints-canadacentral.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/canadacentral/azure-local-endpoints-canadacentral-compressed.json"
   },
   {
     "type": "region",
     "name": "indiacentral",
     "updated": "2025-11-27",
     "count": 81,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\indiacentral\\azure-local-endpoints-indiacentral.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\indiacentral\\azure-local-endpoints-indiacentral-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/indiacentral/azure-local-endpoints-indiacentral.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/indiacentral/azure-local-endpoints-indiacentral-compressed.json"
   },
   {
     "type": "region",
     "name": "southeastasia",
     "updated": "2025-11-27",
     "count": 82,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\southeastasia\\azure-local-endpoints-southeastasia.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\southeastasia\\azure-local-endpoints-southeastasia-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southeastasia/azure-local-endpoints-southeastasia.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southeastasia/azure-local-endpoints-southeastasia-compressed.json"
   },
   {
     "type": "region",
     "name": "japaneast",
     "updated": "2025-11-27",
     "count": 82,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\japaneast\\azure-local-endpoints-japaneast.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\japaneast\\azure-local-endpoints-japaneast-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/japaneast/azure-local-endpoints-japaneast.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/japaneast/azure-local-endpoints-japaneast-compressed.json"
   },
   {
     "type": "region",
     "name": "southcentralus",
     "updated": "2025-11-27",
     "count": 82,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\southcentralus\\azure-local-endpoints-southcentralus.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\southcentralus\\azure-local-endpoints-southcentralus-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southcentralus/azure-local-endpoints-southcentralus.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/southcentralus/azure-local-endpoints-southcentralus-compressed.json"
   },
   {
     "type": "region",
     "name": "usgovvirginia",
     "updated": "2026-10-20",
     "count": 93,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\usgovvirginia\\azure-local-endpoints-usgovvirginia.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\usgovvirginia\\azure-local-endpoints-usgovvirginia-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/usgovvirginia/azure-local-endpoints-usgovvirginia.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/usgovvirginia/azure-local-endpoints-usgovvirginia-compressed.json"
   },
   {
     "type": "region",
     "name": "usgovarizona",
     "updated": "2026-10-19",
     "count": 101,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\usgovarizona\\azure-local-endpoints-usgovarizona.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\regions\\usgovarizona\\azure-local-endpoints-usgovarizona-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/usgovarizona/azure-local-endpoints-usgovarizona.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/regions/usgovarizona/azure-local-endpoints-usgovarizona-compressed.json"
   },
   {
     "type": "vendor",
     "name": "dataon",
     "updated": "2025-03-19",
     "count": 3,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\dataon\\azure-local-endpoints-dataon.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\dataon\\azure-local-endpoints-dataon-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dataon/azure-local-endpoints-dataon.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dataon/azure-local-endpoints-dataon-compressed.json"
   },
   {
     "type": "vendor",
     "name": "dell",
     "updated": "2025-03-19",
     "count": 4,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\dell\\azure-local-endpoints-dell.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\dell\\azure-local-endpoints-dell-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dell/azure-local-endpoints-dell.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/dell/azure-local-endpoints-dell-compressed.json"
   },
   {
     "type": "vendor",
     "name": "hpe",
     "updated": "2026-06-25",
     "count": 5,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\hpe\\azure-local-endpoints-hpe.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\hpe\\azure-local-endpoints-hpe-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hpe/azure-local-endpoints-hpe.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hpe/azure-local-endpoints-hpe-compressed.json"
   },
   {
     "type": "vendor",
     "name": "hitachi",
     "updated": "2025-03-19",
     "count": 2,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\hitachi\\azure-local-endpoints-hitachi.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\hitachi\\azure-local-endpoints-hitachi-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hitachi/azure-local-endpoints-hitachi.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/hitachi/azure-local-endpoints-hitachi-compressed.json"
   },
   {
     "type": "vendor",
     "name": "lenovo",
     "updated": "2025-03-19",
     "count": 4,
-    "url": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\lenovo\\azure-local-endpoints-lenovo.json",
-    "urlCompressed": "C:\\Users\\erikgraa\\.copilot\\repos\\copilot-worktrees\\azure-local-endpoints\\erikgraa-glowing-fortnight\\json\\oem\\lenovo\\azure-local-endpoints-lenovo-compressed.json"
+    "url": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/lenovo/azure-local-endpoints-lenovo.json",
+    "urlCompressed": "https://raw.githubusercontent.com/erikgraa/azure-local-endpoints/refs/heads/main/json/oem/lenovo/azure-local-endpoints-lenovo-compressed.json"
   }
 ]
