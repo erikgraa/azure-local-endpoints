@@ -180,7 +180,7 @@ catch { document.documentElement.dataset.theme = 'dark'; }
       <label>Destination zone</label><input id="dzone" value="untrust">
       <label>Source address / object</label><input id="saddr" value="any">
       <p class="note"><span class="pill" id="selnote"></span></p>
-      <p class="note">Uses the scope and the endpoints selected in the Browse tab. Generation runs in your browser.</p>
+      <p class="note">Uses the scope and the endpoints shown and ticked in the Browse tab; filters apply. Generation runs in your browser.</p>
     </div>
     <div>
       <div class="actions"><button id="copy">Copy</button><button class="sec" id="dl">Download .tf</button><span class="note" id="fn" style="margin:0"></span></div>
@@ -267,8 +267,12 @@ function render() {
     <td>${e.requiredFor.map((r) => `<span class="tag ${r === 'Deployment' ? 'dep' : 'post'}">${esc(r)}</span>`).join('')}</td>
     <td class="hide-sm">${/^yes/i.test(e.arcGateway) ? `<span class="tag ok" title="${esc(e.arcGateway)}">Yes</span>` : `<span class="mute" title="${esc(e.arcGateway)}">${esc(e.arcGateway.split('.')[0] || '–')}</span>`}</td>
     <td class="notes hide-sm">${esc(e.notes)}</td></tr>`).join('');
-  $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints`;
-  $('s-sel').textContent = selected.size;
+  // Only rows that are visible (pass the filters) and ticked are included, so the counter and the Terraform match what is shown.
+  const included = visible.filter((e) => selected.has(e.id));
+  $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints · ${included.length} selected`;
+  $('s-sel').textContent = included.length;
+  $('all').checked = visible.length > 0 && included.length === visible.length;
+  $('all').indeterminate = included.length > 0 && included.length < visible.length;
   writeHash();
   generate();
 }
@@ -276,7 +280,7 @@ function render() {
 function generate() {
   const g = generators.find((x) => x.id === $('vendor').value);
   $('vdesc').textContent = g.description;
-  const eps = scope.endpoints.filter((e) => selected.has(e.id));
+  const eps = visible.filter((e) => selected.has(e.id));
   $('selnote').textContent = `${eps.length} endpoints selected`;
   const files = g.generate(eps, {
     prefix: $('prefix').value.trim() || 'azlocal', sourceZone: $('szone').value,
