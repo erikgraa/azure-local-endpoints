@@ -13,7 +13,7 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 ## 🚀 Features
 
 - **Web UI** at https://endpoints.azurelocal.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
-- **Terraform generation** for Palo Alto (PAN-OS) and Cisco (Secure Firewall/FMC), in the browser, via the CLI, or as pre-generated files.
+- **Terraform generation** for Palo Alto (PAN-OS), Cisco (Secure Firewall/FMC) and VMware NSX (distributed firewall), in the browser, via the CLI, or as pre-generated files.
 - **Static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`.
 - **Pluggable generators**: one small file per firewall vendor.
 - Rebuilt and deployed nightly by GitHub Actions; the evergreen `json/azure-local-endpoints.json` is still maintained.
@@ -25,6 +25,7 @@ https://endpoints.azurelocal.graa.dev/api/v1/index.json
 https://endpoints.azurelocal.graa.dev/api/v1/region/westeurope.json
 https://endpoints.azurelocal.graa.dev/terraform/paloalto/region-westeurope.tf
 https://endpoints.azurelocal.graa.dev/terraform/cisco/region-westeurope.tf
+https://endpoints.azurelocal.graa.dev/terraform/nsx/region-westeurope.tf
 ```
 
 ### CLI (Node.js 20+, no dependencies)
@@ -130,6 +131,7 @@ The repository structure is as follows. Each region gets its own folder.
 │           index.js
 │           paloalto.js
 │           cisco.js
+│           nsx.js
 │           util.js
 │
 └───test

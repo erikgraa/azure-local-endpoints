@@ -61,6 +61,15 @@ test('cisco output drops wildcard prefix and balances braces', () => {
   assert.equal(content.split('{').length, content.split('}').length);
 });
 
+test('nsx output has context profiles and policy, balanced braces', () => {
+  const s = loadScopes().find((x) => x.name === 'westeurope');
+  const [{ content }] = generators.find((g) => g.id === 'nsx').generate(s.endpoints);
+  assert.match(content, /nsxt_policy_context_profile/);
+  assert.match(content, /nsxt_policy_security_policy/);
+  assert.match(content, /"\*\.servicebus\.windows\.net"/);
+  assert.equal(content.split('{').length, content.split('}').length);
+});
+
 test('options are honoured', () => {
   const s = loadScopes().find((x) => x.name === 'dell');
   const [{ content }] = generators.find((g) => g.id === 'paloalto').generate(s.endpoints, { prefix: 'foo', action: 'deny' });
