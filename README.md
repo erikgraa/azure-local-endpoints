@@ -1,3 +1,5 @@
+<p align="center"><img src="site/favicon.svg" alt="Azure Local Endpoints icon" width="96" height="96"></p>
+
 # Azure Local Endpoints Codified as JSON
 
 This PowerShell tool enumerates the list of required firewall endpoints/URLs for Azure Local - for regions and OEM hardware vendors - and codifies it as JSON.
