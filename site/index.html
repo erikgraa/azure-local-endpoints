@@ -11,6 +11,17 @@
     --bg:#0a0e1a;--panel:#131a2c;--panel2:#18213a;--line:#263353;--text:#e8edf8;--mute:#8d9bbd;
     --accent:#4aa3ff;--accent2:#8b7bff;--ok:#3ecf8e;--warn:#f5b84a;--fire:#f5834a;
     --grad:linear-gradient(135deg,#4aa3ff,#8b7bff 60%,#f5834a);
+    --zebra:rgba(24,33,58,.45);--hover:rgba(74,163,255,.1);--rowline:rgba(38,51,83,.6);--shadow:rgba(0,0,0,.35);
+    --linkbg:rgba(19,26,44,.6);--code:#9fd1ff;--tagbg:#22304d;
+    --dep:#8cc4ff;--post:#b6abff;--warnfg:#f5b84a;--okfg:#3ecf8e;--portfg:#ffa57a;--chipl:75%;
+    color-scheme:dark;
+  }
+  [data-theme=light]{
+    --bg:#f4f7fc;--panel:#ffffff;--panel2:#eef3fb;--line:#d5deee;--text:#16203a;--mute:#5b6b8c;
+    --accent:#1c7ed6;--zebra:rgba(230,238,250,.55);--hover:rgba(28,126,214,.08);--rowline:rgba(190,203,226,.7);--shadow:rgba(40,60,100,.12);
+    --linkbg:rgba(255,255,255,.8);--code:#0b5cad;--tagbg:#e3eaf7;
+    --dep:#0b5cad;--post:#5b3fd1;--warnfg:#9a6400;--okfg:#0a7a4a;--portfg:#b8430f;--chipl:30%;
+    color-scheme:light;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -29,7 +40,7 @@
     background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .tag-line{color:var(--mute);margin:4px 0 0}
   .links{margin-left:auto;display:flex;gap:10px}
-  .links a{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:rgba(19,26,44,.6);color:var(--text);font-size:13px;backdrop-filter:blur(6px)}
+  .links a{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:var(--linkbg);color:var(--text);font-size:13px;backdrop-filter:blur(6px)}
   .links a:hover{border-color:var(--accent);text-decoration:none}
 
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:22px 0 6px}
@@ -55,25 +66,25 @@
   button.sec{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
 
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .chip{padding:4px 12px;border:1px solid hsl(var(--h) 60% 45% / .5);border-radius:99px;cursor:pointer;color:hsl(var(--h) 80% 75%);user-select:none;font-size:12.5px;transition:.15s;background:hsl(var(--h) 60% 50% / .08)}
+  .chip{padding:4px 12px;border:1px solid hsl(var(--h) 60% 45% / .5);border-radius:99px;cursor:pointer;color:hsl(var(--h) 80% var(--chipl));user-select:none;font-size:12.5px;transition:.15s;background:hsl(var(--h) 60% 50% / .08)}
   .chip.on{background:hsl(var(--h) 70% 55%);color:#071020;border-color:transparent;font-weight:600}
   .count{color:var(--mute);margin:0 0 10px}
 
-  .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:var(--panel);max-height:70vh;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:var(--panel);max-height:70vh;box-shadow:0 10px 40px var(--shadow)}
   table{width:100%;border-collapse:collapse}
-  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid rgba(38,51,83,.6);vertical-align:top}
+  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--rowline);vertical-align:top}
   th{font-size:11.5px;text-transform:uppercase;color:var(--mute);letter-spacing:.07em;position:sticky;top:0;background:var(--panel2);z-index:1}
-  tbody tr:nth-child(even) td{background:rgba(24,33,58,.45)}
-  tbody tr:hover td{background:rgba(74,163,255,.1)}
+  tbody tr:nth-child(even) td{background:var(--zebra)}
+  tbody tr:hover td{background:var(--hover)}
   td.comp{white-space:nowrap}
   .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 75% 60%)}
-  code{font-family:Consolas,ui-monospace,monospace;color:#9fd1ff;word-break:break-all}
-  .tag{font-size:11px;padding:2px 9px;border-radius:99px;background:#22304d;margin-right:4px;white-space:nowrap;display:inline-block}
-  .tag.dep{background:rgba(74,163,255,.18);color:#8cc4ff}
-  .tag.post{background:rgba(139,123,255,.2);color:#b6abff}
-  .tag.wild{background:rgba(245,184,74,.18);color:var(--warn)}
-  .tag.ok{background:rgba(62,207,142,.16);color:var(--ok)}
-  .tag.port{background:rgba(245,131,74,.16);color:#ffa57a;font-family:Consolas,monospace}
+  code{font-family:Consolas,ui-monospace,monospace;color:var(--code);word-break:break-all}
+  .tag{font-size:11px;padding:2px 9px;border-radius:99px;background:var(--tagbg);margin-right:4px;white-space:nowrap;display:inline-block}
+  .tag.dep{background:rgba(74,163,255,.18);color:var(--dep)}
+  .tag.post{background:rgba(139,123,255,.2);color:var(--post)}
+  .tag.wild{background:rgba(245,184,74,.18);color:var(--warnfg)}
+  .tag.ok{background:rgba(62,207,142,.16);color:var(--okfg)}
+  .tag.port{background:rgba(245,131,74,.16);color:var(--portfg);font-family:Consolas,monospace}
   .tag.udp{background:rgba(245,131,74,.28)}
   .mute{color:var(--mute)}
   td.notes{color:var(--mute);font-size:13px;max-width:380px}
@@ -90,7 +101,26 @@
   .note{color:var(--mute);font-size:12px;margin-top:12px}
   .pill{display:inline-block;background:rgba(74,163,255,.15);color:var(--accent);border-radius:99px;padding:2px 10px;font-size:12px}
   footer{color:var(--mute);font-size:12.5px;text-align:center;padding:30px 0 40px}
+  .links button{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:var(--linkbg);color:var(--text);font-size:13px;font-weight:500}
+  .cp{padding:0 6px;margin-left:6px;border-radius:6px;background:transparent;color:var(--mute);border:1px solid var(--line);font-size:12px;font-weight:400;opacity:.5}
+  tr:hover .cp{opacity:1}
+  .cp:hover{color:var(--accent);transform:none}
+  @media(max-width:700px){
+    .hide-sm{display:none}
+    h1{font-size:22px}
+    .logo{width:48px;height:48px}
+    .links{margin-left:0;width:100%}
+    .wrap{padding:0 14px}
+    input[type=search],.toolbar select,.toolbar button{flex:1 1 100%}
+    th,td{padding:8px 10px}
+    td.comp{white-space:normal}
+    .tab{padding:8px 12px}
+  }
 </style>
+<script>
+try { document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }
+catch { document.documentElement.dataset.theme = 'dark'; }
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -102,6 +132,7 @@
       <p class="tag-line">Browse the required firewall endpoints and generate Terraform for your firewall.</p>
     </div>
     <div class="links">
+      <button id="theme" title="Toggle light/dark theme">◐ Theme</button>
       <a href="api/v1/index.json">API</a>
       <a href="https://github.com/erikgraa/azure-local-endpoints">GitHub</a>
     </div>
@@ -125,13 +156,14 @@
     <select id="scope"></select>
     <select id="phase"><option value="">Required for: any</option></select>
     <select id="arc"><option value="">Arc gateway: any</option><option value="yes">Arc gateway: supported</option><option value="no">Arc gateway: not supported</option></select>
+    <button class="sec" id="link">🔗 Copy link</button>
     <button class="sec" id="csv">⬇ Export CSV</button>
   </div>
   <div class="chips" id="chips"></div>
   <p class="count" id="count"></p>
   <div class="tablewrap">
   <table>
-    <thead><tr><th><input type="checkbox" id="all" checked></th><th>Component</th><th>Endpoint</th><th>Port</th><th>Required for</th><th>Arc GW</th><th>Notes</th></tr></thead>
+    <thead><tr><th><input type="checkbox" id="all" checked></th><th>Component</th><th>Endpoint</th><th>Port</th><th>Required for</th><th class="hide-sm">Arc GW</th><th class="hide-sm">Notes</th></tr></thead>
     <tbody id="rows"></tbody>
   </table>
   </div>
@@ -180,22 +212,40 @@ $('scope').innerHTML = ['region', 'oem'].map((t) =>
     .map((s) => `<option value="${s.type}/${s.name}">${s.name} (${s.count})</option>`).join('')}</optgroup>`).join('');
 $('vendor').innerHTML = generators.map((g) => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
 
-const hash = decodeURIComponent(location.hash.slice(1));
-$('scope').value = [...$('scope').options].some((o) => o.value === hash) ? hash : 'region/westeurope';
+const [hashScope, hashQuery = ''] = location.hash.slice(1).split('?');
+let initParams = new URLSearchParams(hashQuery);
+const wanted = decodeURIComponent(hashScope);
+$('scope').value = [...$('scope').options].some((o) => o.value === wanted) ? wanted : 'region/westeurope';
+
+// Keeps the filters in the URL hash so a view can be shared.
+function writeHash() {
+  const p = new URLSearchParams();
+  if ($('q').value) p.set('q', $('q').value);
+  if ($('phase').value) p.set('phase', $('phase').value);
+  if ($('arc').value) p.set('arc', $('arc').value);
+  const off = [...$('chips').children].filter((c) => !c.classList.contains('on')).map((c) => c.textContent);
+  if (off.length) p.set('off', off.join('|'));
+  const qs = p.toString();
+  history.replaceState(null, '', `#${$('scope').value}${qs ? `?${qs}` : ''}`);
+}
 
 async function loadScope() {
   const s = index.scopes.find((x) => `${x.type}/${x.name}` === $('scope').value);
   scope = await getJson(s.url);
-  location.hash = $('scope').value;
+  const p = initParams;
+  initParams = new URLSearchParams();
+  const off = new Set((p.get('off') || '').split('|').filter(Boolean));
   const eps = scope.endpoints;
   selected = new Set(eps.map((e) => e.id));
   const opts = (vals, el, first) => { el.innerHTML = `<option value="">${first}</option>` + vals.map((v) => `<option>${esc(v)}</option>`).join(''); };
   opts([...new Set(eps.flatMap((e) => e.requiredFor))].sort(), $('phase'), 'Required for: any');
-  $('arc').value = '';
+  $('q').value = p.get('q') || '';
+  $('phase').value = [...$('phase').options].some((o) => o.value === p.get('phase')) ? p.get('phase') : '';
+  $('arc').value = ['yes', 'no'].includes(p.get('arc')) ? p.get('arc') : '';
   $('chips').innerHTML = '';
   [...new Set(eps.map((e) => e.component))].sort().forEach((c) => {
     const el = document.createElement('span');
-    el.className = 'chip on'; el.textContent = c; el.style.setProperty('--h', hue(c));
+    el.className = off.has(c) ? 'chip' : 'chip on'; el.textContent = c; el.style.setProperty('--h', hue(c));
     el.onclick = () => { el.classList.toggle('on'); render(); };
     $('chips').appendChild(el);
   });
@@ -212,13 +262,14 @@ function render() {
     (!q || `${e.url} ${e.component} ${e.notes}`.toLowerCase().includes(q)));
   $('rows').innerHTML = visible.map((e) => `<tr><td><input type="checkbox" data-id="${e.id}" ${selected.has(e.id) ? 'checked' : ''}></td>
     <td class="comp"><span class="dot" style="--h:${hue(e.component)}"></span>${esc(e.component)}</td>
-    <td><code>${esc(e.url)}</code>${e.wildcard ? ' <span class="tag wild">wildcard</span>' : ''}</td>
+    <td><code>${esc(e.url)}</code><button class="cp" data-copy="${esc(e.url)}" title="Copy endpoint">⧉</button>${e.wildcard ? ' <span class="tag wild">wildcard</span>' : ''}</td>
     <td>${e.ports.map((p) => `<span class="tag port ${e.protocol === 'udp' ? 'udp' : ''}">${e.protocol === 'udp' ? 'udp/' : ''}${p}</span>`).join('')}</td>
     <td>${e.requiredFor.map((r) => `<span class="tag ${r === 'Deployment' ? 'dep' : 'post'}">${esc(r)}</span>`).join('')}</td>
-    <td>${/^yes/i.test(e.arcGateway) ? `<span class="tag ok" title="${esc(e.arcGateway)}">Yes</span>` : `<span class="mute" title="${esc(e.arcGateway)}">${esc(e.arcGateway.split('.')[0] || '–')}</span>`}</td>
-    <td class="notes">${esc(e.notes)}</td></tr>`).join('');
+    <td class="hide-sm">${/^yes/i.test(e.arcGateway) ? `<span class="tag ok" title="${esc(e.arcGateway)}">Yes</span>` : `<span class="mute" title="${esc(e.arcGateway)}">${esc(e.arcGateway.split('.')[0] || '–')}</span>`}</td>
+    <td class="notes hide-sm">${esc(e.notes)}</td></tr>`).join('');
   $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints`;
   $('s-sel').textContent = selected.size;
+  writeHash();
   generate();
 }
 
@@ -240,6 +291,23 @@ $('rows').onchange = (ev) => {
   const id = ev.target.dataset.id;
   ev.target.checked ? selected.add(id) : selected.delete(id);
   render();
+};
+$('rows').onclick = (ev) => {
+  const b = ev.target.closest('.cp');
+  if (!b) return;
+  navigator.clipboard.writeText(b.dataset.copy);
+  b.textContent = '✓';
+  setTimeout(() => (b.textContent = '⧉'), 1000);
+};
+$('link').onclick = () => {
+  navigator.clipboard.writeText(location.href);
+  $('link').textContent = '✓ Copied';
+  setTimeout(() => ($('link').textContent = '🔗 Copy link'), 1200);
+};
+$('theme').onclick = () => {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('theme', next); } catch { /* storage unavailable */ }
 };
 $('all').onchange = (ev) => {
   visible.forEach((e) => (ev.target.checked ? selected.add(e.id) : selected.delete(e.id)));
