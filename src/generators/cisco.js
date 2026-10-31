@@ -1,4 +1,4 @@
-import { defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
 
 const PROTO = { tcp: 'TCP', udp: 'UDP' };
 
@@ -79,20 +79,22 @@ provider "fmc" {
       const id = `${o.prefix}_${slug(h)}`;
       if (!out.some((c) => c.includes(`"fmc_fqdn" "${id}"`))) {
         out.push(`resource "fmc_fqdn" "${id}" {
-  name  = ${q(`${o.prefix}-${h}`.slice(0, 63))}
-  value = ${q(h)}
+  name = ${q(`${o.prefix}-${h}`.slice(0, 63))}
+  fqdn = ${q(h)}
 }
 `);
       }
-      return `{ id = fmc_fqdn.${id}.id }`;
+      return `{ id = fmc_fqdn.${id}.id, type = fmc_fqdn.${id}.type }`;
     });
     ruleBlocks.push(`resource "fmc_access_rule" "${pid}" {
-  access_control_policy_id    = var.access_control_policy_id
-  name                        = ${q(`${o.prefix}-allow-${g.protocol}-${g.port}`)}
-  action                      = ${q(action)}
-  source_zones                = var.source_zone_id == null ? null : [{ id = var.source_zone_id }]
-  destination_network_objects = ${list(refs)}
-  destination_port_objects    = [{ id = fmc_port.${pid}.id }]
+${attrs(2, [
+      ['access_control_policy_id', 'var.access_control_policy_id'],
+      ['name', q(`${o.prefix}-allow-${g.protocol}-${g.port}`)],
+      ['action', q(action)],
+      ['source_zones', 'var.source_zone_id == null ? null : [{ id = var.source_zone_id }]'],
+      ['destination_network_objects', list(refs)],
+      ['destination_port_objects', `[{ id = fmc_port.${pid}.id }]`]
+    ])}
 }
 `);
   }

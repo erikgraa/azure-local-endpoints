@@ -39,6 +39,11 @@ jobs:
       - name: Test
         run: npm test
 
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Validate generated Terraform (fmt + validate)
+        run: npm run validate:terraform
+
       - name: Build site (UI, API and Terraform)
         run: npm run build
 

@@ -39,6 +39,7 @@ node src/cli.js list westeurope --search arc --port 443
 node src/cli.js generate paloalto westeurope --prefix azlocal --source-zone trust -o out
 node src/cli.js generate cisco dell
 npm test          # unit tests
+npm run validate:terraform   # terraform fmt -check + validate on generated files (needs terraform)
 npm run build     # builds ./dist (UI + API + Terraform)
 ```
 

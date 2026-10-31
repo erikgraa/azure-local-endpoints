@@ -18,6 +18,26 @@ export const wholeLabelWildcard = (host) => host.replace(/^[^.]*\*[^.]*(?=\.)/, 
 
 export const unique = (a) => [...new Set(a)];
 
+/**
+ * Renders attribute lines the way `terraform fmt` does: `=` is aligned within runs of
+ * consecutive single-line attributes; a multi-line value ends the run and is not padded.
+ */
+export function attrs(indent, entries) {
+  const pad = ' '.repeat(indent);
+  const lines = [];
+  let run = [];
+  const flush = () => {
+    const w = Math.max(...run.map(([k]) => k.length));
+    run.forEach(([k, v]) => lines.push(`${pad}${k.padEnd(w)} = ${v}`));
+    run = [];
+  };
+  for (const [k, v] of entries) {
+    if (String(v).includes('\n')) { flush(); lines.push(`${pad}${k} = ${v}`); } else run.push([k, v]);
+  }
+  if (run.length) flush();
+  return lines.join('\n');
+}
+
 export function defaults(options = {}) {
   return {
     prefix: options.prefix ?? 'azlocal',

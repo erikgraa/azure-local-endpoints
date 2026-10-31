@@ -1,9 +1,8 @@
-import { defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
 
 const domainBlock = (description, domains) =>
   `  domain_name {
-    description = ${q(description)}
-    value       = ${list(domains.map(q), 6)}
+${attrs(4, [['description', q(description)], ['value', list(domains.map(q), 6)]])}
   }`;
 
 function generate(endpoints, options = {}) {
@@ -100,13 +99,13 @@ resource "nsxt_policy_service" "${id}" {
   category     = "Application"
 ${rules.map((r) => `
   rule {
-    display_name     = ${q(r.name)}
-    action           = ${q(action)}
-    direction        = "OUT"
-    source_groups    = var.source_group_paths
-    services         = ${r.services}
-    context_profiles = ${r.profiles}
-    logged           = true
+    display_name  = ${q(r.name)}
+    action        = ${q(action)}
+    direction     = "OUT"
+    source_groups = var.source_group_paths
+    services      = ${r.services}
+    profiles      = ${r.profiles}
+    logged        = true
   }`).join('\n')}
 }
 `);
