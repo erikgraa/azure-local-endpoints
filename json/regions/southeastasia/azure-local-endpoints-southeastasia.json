@@ -1,7 +1,7 @@
 {
   "type": "region",
   "name": "southeastasia",
-  "updated": "2025-01-23",
+  "updated": "2025-11-27",
   "url": "https://raw.githubusercontent.com/Azure/AzureStack-Tools/refs/heads/master/HCI/SouthEastAsiaEndpoints/southeastasia-hci-endpoints.md",
   "endpoints": [
     {
@@ -33,19 +33,6 @@
     {
       "id": "3",
       "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "westeurope.data.mcr.microsoft.com",
-      "port": "443",
-      "notes": "Western Europe site used for official Microsoft artifacts such as container images.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "4",
-      "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "southeastasia.data.mcr.microsoft.com",
       "port": "443",
       "notes": "SouthEast Asia site used for official Microsoft artifacts such as container images.",
@@ -57,7 +44,7 @@
       "wildcard": false
     },
     {
-      "id": "5",
+      "id": "4",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "azurearcfork8s.azurecr.io",
       "port": "443",
@@ -70,7 +57,7 @@
       "wildcard": false
     },
     {
-      "id": "6",
+      "id": "5",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "linuxgeneva-microsoft.azurecr.io",
       "port": "443",
@@ -83,20 +70,7 @@
       "wildcard": false
     },
     {
-      "id": "7",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "pipelineagent.azurecr.io",
-      "port": "443",
-      "notes": "Used for official Microsoft artifacts such as container images.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "8",
+      "id": "6",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "azurearcfork8sdev.azurecr.io",
       "port": "443",
@@ -109,7 +83,7 @@
       "wildcard": false
     },
     {
-      "id": "9",
+      "id": "7",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "hybridaks.azurecr.io",
       "port": "443",
@@ -122,7 +96,7 @@
       "wildcard": false
     },
     {
-      "id": "10",
+      "id": "8",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "aszk8snetworking.azurecr.io",
       "port": "443",
@@ -135,20 +109,7 @@
       "wildcard": false
     },
     {
-      "id": "11",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "*.dl.delivery.mp.microsoft.com",
-      "port": "443",
-      "notes": "Used for AKS Arc VHD image download and update.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "12",
+      "id": "9",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.do.dsp.mp.microsoft.com",
       "port": "443",
@@ -161,7 +122,7 @@
       "wildcard": true
     },
     {
-      "id": "13",
+      "id": "10",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.prod.do.dsp.mp.microsoft.com",
       "port": "443",
@@ -174,17 +135,7 @@
       "wildcard": true
     },
     {
-      "id": "14",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "eastus.dp.kubernetesconfiguration.azure.com",
-      "port": "443",
-      "notes": "Required for initial validation.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment",
-      "wildcard": false
-    },
-    {
-      "id": "15",
+      "id": "11",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "southeastasia.dp.kubernetesconfiguration.azure.com",
       "port": "443",
@@ -197,7 +148,7 @@
       "wildcard": false
     },
     {
-      "id": "16",
+      "id": "12",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "sts.windows.net",
       "port": "443",
@@ -210,7 +161,7 @@
       "wildcard": false
     },
     {
-      "id": "17",
+      "id": "13",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "ecpacr.azurecr.io",
       "port": "443",
@@ -223,59 +174,7 @@
       "wildcard": false
     },
     {
-      "id": "18",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "pypi.org",
-      "port": "443",
-      "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "Not required on 2504 and later new deployments",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "19",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "files.pythonhosted.org",
-      "port": "443",
-      "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "Not required on 2504 and later new deployments",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "20",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "pythonhosted.org",
-      "port": "443",
-      "notes": "Used to download Az CLI and Az CLI extensions.",
-      "arcGatewaySupport": "Not required on 2504 and later new deployments",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "21",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "raw.githubusercontent.com",
-      "port": "443",
-      "notes": "Used for GitHub.",
-      "arcGatewaySupport": "Not required on 2504 and later new deployments",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "22",
+      "id": "14",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "msk8s.api.cdp.microsoft.com",
       "port": "443",
@@ -288,7 +187,7 @@
       "wildcard": false
     },
     {
-      "id": "23",
+      "id": "15",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "msk8s.sb.tlu.dl.delivery.mp.microsoft.com",
       "port": "443",
@@ -301,7 +200,7 @@
       "wildcard": false
     },
     {
-      "id": "24",
+      "id": "16",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "time.windows.com",
       "port": "123",
@@ -314,7 +213,7 @@
       "wildcard": false
     },
     {
-      "id": "25",
+      "id": "17",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "k8connecthelm.azureedge.net",
       "port": "443",
@@ -327,7 +226,7 @@
       "wildcard": false
     },
     {
-      "id": "26",
+      "id": "18",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "kvamanagementoperator.azurecr.io",
       "port": "443",
@@ -340,7 +239,7 @@
       "wildcard": false
     },
     {
-      "id": "27",
+      "id": "19",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "packages.microsoft.com",
       "port": "443",
@@ -353,7 +252,7 @@
       "wildcard": false
     },
     {
-      "id": "28",
+      "id": "20",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "k8sconnectcsp.azureedge.net",
       "port": "443",
@@ -366,7 +265,7 @@
       "wildcard": false
     },
     {
-      "id": "29",
+      "id": "21",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "*.prod.hot.ingest.monitor.core.windows.net",
       "port": "443",
@@ -379,7 +278,7 @@
       "wildcard": true
     },
     {
-      "id": "30",
+      "id": "22",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "prod5.prod.hot.ingestion.msftcloudes.com",
       "port": "443",
@@ -392,17 +291,7 @@
       "wildcard": false
     },
     {
-      "id": "31",
-      "azureLocalComponent": "Azure Local ARB infra",
-      "endpointUrl": "eastus.dp.prod.appliances.azure.com",
-      "port": "443",
-      "notes": "Used for ARB data plane operations in East Us.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment",
-      "wildcard": false
-    },
-    {
-      "id": "32",
+      "id": "23",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "southeastasia.dp.prod.appliances.azure.com",
       "port": "443",
@@ -415,7 +304,7 @@
       "wildcard": false
     },
     {
-      "id": "33",
+      "id": "24",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "download.microsoft.com",
       "port": "443",
@@ -428,7 +317,7 @@
       "wildcard": false
     },
     {
-      "id": "34",
+      "id": "25",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "pas.windows.net",
       "port": "443",
@@ -441,7 +330,7 @@
       "wildcard": false
     },
     {
-      "id": "35",
+      "id": "26",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "guestnotificationservice.azure.com",
       "port": "443",
@@ -454,7 +343,7 @@
       "wildcard": false
     },
     {
-      "id": "36",
+      "id": "27",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "gbl.his.arc.azure.com",
       "port": "443",
@@ -467,7 +356,20 @@
       "wildcard": false
     },
     {
-      "id": "37",
+      "id": "28",
+      "azureLocalComponent": "Azure Local Arc agent",
+      "endpointUrl": "sea.his.arc.azure.com",
+      "port": "443",
+      "notes": "For South East Asia metadata and hybrid identity services.",
+      "arcGatewaySupport": "No. Arc registration required",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "29",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "southeastasia-gas.guestconfiguration.azure.com",
       "port": "443",
@@ -480,7 +382,7 @@
       "wildcard": false
     },
     {
-      "id": "38",
+      "id": "30",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "agentserviceapi.guestconfiguration.azure.com",
       "port": "443",
@@ -493,7 +395,7 @@
       "wildcard": false
     },
     {
-      "id": "39",
+      "id": "31",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "azgn*.servicebus.windows.net",
       "port": "443",
@@ -506,7 +408,7 @@
       "wildcard": true
     },
     {
-      "id": "40",
+      "id": "32",
       "azureLocalComponent": "Azure Local Arc agent",
       "endpointUrl": "*.servicebus.windows.net",
       "port": "443",
@@ -519,7 +421,7 @@
       "wildcard": true
     },
     {
-      "id": "41",
+      "id": "33",
       "azureLocalComponent": "Azure Local WAC",
       "endpointUrl": "*.waconazure.com",
       "port": "443",
@@ -529,11 +431,11 @@
       "wildcard": true
     },
     {
-      "id": "42",
+      "id": "34",
       "azureLocalComponent": "Azure Local Arc gateway",
       "endpointUrl": "yourarcgatewayendpointid.gw.arc.azure.com",
       "port": "443",
-      "notes": "Required when using Arc gateway for Azure Local.",
+      "notes": "Required if using Arc gateway for Azure Local. ENSURE THIS IS YOUR UNIQUE GATEWAY NAME",
       "arcGatewaySupport": "No. Arc registration required",
       "requiredFor": [
         "Deployment",
@@ -542,7 +444,7 @@
       "wildcard": false
     },
     {
-      "id": "43",
+      "id": "35",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "login.microsoftonline.com",
       "port": "443",
@@ -555,7 +457,7 @@
       "wildcard": false
     },
     {
-      "id": "44",
+      "id": "36",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "graph.windows.net",
       "port": "443",
@@ -568,7 +470,7 @@
       "wildcard": false
     },
     {
-      "id": "45",
+      "id": "37",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "graph.microsoft.com",
       "port": "443",
@@ -581,7 +483,7 @@
       "wildcard": false
     },
     {
-      "id": "46",
+      "id": "38",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "login.windows.net",
       "port": "443",
@@ -594,22 +496,12 @@
       "wildcard": false
     },
     {
-      "id": "47",
-      "azureLocalComponent": "Azure Local authentication",
-      "endpointUrl": "eastus.login.microsoft.com",
-      "port": "443",
-      "notes": "Required to fetch and update ARM tokens for logging into East Us Azure.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment",
-      "wildcard": false
-    },
-    {
-      "id": "48",
+      "id": "39",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "southeastasia.login.microsoft.com",
       "port": "443",
       "notes": "Required to fetch and update Azure Resource Manager tokens for logging into Azure.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
+      "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
         "Post deployment"
@@ -617,7 +509,7 @@
       "wildcard": false
     },
     {
-      "id": "49",
+      "id": "40",
       "azureLocalComponent": "Azure Local benefits",
       "endpointUrl": "crl3.digicert.com",
       "port": "80",
@@ -630,7 +522,7 @@
       "wildcard": false
     },
     {
-      "id": "50",
+      "id": "41",
       "azureLocalComponent": "Azure Local benefits",
       "endpointUrl": "crl4.digicert.com",
       "port": "80",
@@ -643,7 +535,7 @@
       "wildcard": false
     },
     {
-      "id": "51",
+      "id": "42",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "www.powershellgallery.com",
       "port": "443",
@@ -656,33 +548,7 @@
       "wildcard": false
     },
     {
-      "id": "52",
-      "azureLocalComponent": "Azure Local deployment",
-      "endpointUrl": "psg-prod-eastus.azureedge.net",
-      "port": "443",
-      "notes": "To install required PSGallery modules for Arc registration.",
-      "arcGatewaySupport": "Yes. 2411 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "53",
-      "azureLocalComponent": "Azure Local deployment",
-      "endpointUrl": "onegetcdn.azureedge.net",
-      "port": "443",
-      "notes": "To install required PSGallery modules for Arc registration.",
-      "arcGatewaySupport": "Yes. 2411 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "54",
+      "id": "43",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "portal.azure.com",
       "port": "443",
@@ -695,7 +561,7 @@
       "wildcard": false
     },
     {
-      "id": "55",
+      "id": "44",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "*.blob.core.windows.net",
       "port": "443",
@@ -708,7 +574,7 @@
       "wildcard": true
     },
     {
-      "id": "56",
+      "id": "45",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "hciarcvmscontainerregistry.azurecr.io",
       "port": "443",
@@ -721,24 +587,11 @@
       "wildcard": false
     },
     {
-      "id": "57",
+      "id": "46",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "azurestackreleases.download.prss.microsoft.com",
       "port": "443",
       "notes": "For Azure Local Arc extensions deployment.",
-      "arcGatewaySupport": "Yes. 2411 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "58",
-      "azureLocalComponent": "Azure Local authentication",
-      "endpointUrl": "yourhcikeyvaultname.vault.azure.net",
-      "port": "443",
-      "notes": "Access to key vault to access Azure Local deployment secrets.",
       "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
@@ -747,7 +600,20 @@
       "wildcard": false
     },
     {
-      "id": "59",
+      "id": "47",
+      "azureLocalComponent": "Azure Local authentication",
+      "endpointUrl": "yourhcikeyvaultname.vault.azure.net",
+      "port": "443",
+      "notes": "Key vault for deployment secrets. ENSURE THIS IS YOUR UNIQUE KEY VAULT NAME",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "48",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "settings-win.data.microsoft.com",
       "port": "443",
@@ -760,7 +626,7 @@
       "wildcard": false
     },
     {
-      "id": "60",
+      "id": "49",
       "azureLocalComponent": "Azure Local diag & billing",
       "endpointUrl": "dp.stackhci.azure.com",
       "port": "443",
@@ -773,7 +639,7 @@
       "wildcard": false
     },
     {
-      "id": "61",
+      "id": "50",
       "azureLocalComponent": "Azure Local diag & billing",
       "endpointUrl": "licensing.platform.edge.azure.com",
       "port": "443",
@@ -786,7 +652,7 @@
       "wildcard": false
     },
     {
-      "id": "62",
+      "id": "51",
       "azureLocalComponent": "Azure Local diag & billing",
       "endpointUrl": "billing.platform.edge.azure.com",
       "port": "443",
@@ -799,7 +665,7 @@
       "wildcard": false
     },
     {
-      "id": "63",
+      "id": "52",
       "azureLocalComponent": "Azure Local diag & billing",
       "endpointUrl": "azurestackhci.azurefd.net",
       "port": "443",
@@ -812,7 +678,7 @@
       "wildcard": false
     },
     {
-      "id": "64",
+      "id": "53",
       "azureLocalComponent": "Azure Local management",
       "endpointUrl": "management.azure.com",
       "port": "443",
@@ -825,7 +691,7 @@
       "wildcard": false
     },
     {
-      "id": "65",
+      "id": "54",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "global.prod.microsoftmetrics.com",
       "port": "443",
@@ -838,7 +704,7 @@
       "wildcard": false
     },
     {
-      "id": "66",
+      "id": "55",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "prod5.prod.microsoftmetrics.com",
       "port": "443",
@@ -851,7 +717,7 @@
       "wildcard": false
     },
     {
-      "id": "67",
+      "id": "56",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "dc.services.visualstudio.com",
       "port": "443",
@@ -864,7 +730,7 @@
       "wildcard": false
     },
     {
-      "id": "68",
+      "id": "57",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "qos.prod.warm.ingest.monitor.core.windows.net",
       "port": "443",
@@ -877,17 +743,7 @@
       "wildcard": false
     },
     {
-      "id": "69",
-      "azureLocalComponent": "Azure Local monitoring",
-      "endpointUrl": "eastus-shared.prod.warm.ingest.monitor.core.windows.net",
-      "port": "443",
-      "notes": "Used for metrics and monitoring telemetry traffic.",
-      "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Deployment",
-      "wildcard": false
-    },
-    {
-      "id": "70",
+      "id": "58",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "southeastasia-shared.prod.warm.ingest.monitor.core.windows.net",
       "port": "443",
@@ -900,7 +756,7 @@
       "wildcard": false
     },
     {
-      "id": "71",
+      "id": "59",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "gcs.prod.monitoring.core.windows.net",
       "port": "443",
@@ -913,7 +769,7 @@
       "wildcard": false
     },
     {
-      "id": "72",
+      "id": "60",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "adhs.events.data.microsoft.com",
       "port": "443",
@@ -926,7 +782,7 @@
       "wildcard": false
     },
     {
-      "id": "73",
+      "id": "61",
       "azureLocalComponent": "Azure Local monitoring",
       "endpointUrl": "v20.events.data.microsoft.com",
       "port": "443",
@@ -939,24 +795,11 @@
       "wildcard": false
     },
     {
-      "id": "74",
+      "id": "62",
       "azureLocalComponent": "Azure Local deployment",
       "endpointUrl": "aka.ms",
       "port": "443",
       "notes": "For resolving addresses to discover Azure Local",
-      "arcGatewaySupport": "Yes. 2411 or later new deployment",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "75",
-      "azureLocalComponent": "Azure Local Updates",
-      "endpointUrl": "fe3.delivery.mp.microsoft.com",
-      "port": "443",
-      "notes": "For updating Azure Local.",
       "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
@@ -965,33 +808,7 @@
       "wildcard": false
     },
     {
-      "id": "76",
-      "azureLocalComponent": "Azure Local Updates",
-      "endpointUrl": "fe3cr.delivery.mp.microsoft.com",
-      "port": "443",
-      "notes": "For updating Azure Local.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "77",
-      "azureLocalComponent": "Azure Local Updates",
-      "endpointUrl": "tlu.dl.delivery.mp.microsoft.com",
-      "port": "80",
-      "notes": "For updating Azure Local.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": false
-    },
-    {
-      "id": "78",
+      "id": "63",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "crl.microsoft.com/pkiinfra",
       "port": "80",
@@ -1004,11 +821,11 @@
       "wildcard": false
     },
     {
-      "id": "79",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "windowsupdate.microsoft.com",
+      "id": "64",
+      "azureLocalComponent": "Azure Local CRLs",
+      "endpointUrl": "http://www.microsoft.com/pkiops",
       "port": "80",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
+      "notes": "Certificate Revocation List for Microsoft Code Signing PCA2011.",
       "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
@@ -1017,24 +834,11 @@
       "wildcard": false
     },
     {
-      "id": "80",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "*.download.windowsupdate.com",
-      "port": "80, 443",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "81",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "wustat.windows.com",
+      "id": "65",
+      "azureLocalComponent": "Azure Local CRLs",
+      "endpointUrl": "ctldl.windowsupdate.com",
       "port": "80",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
+      "notes": "Windows certificate trust and untrusted-certificate list updates.",
       "arcGatewaySupport": "No",
       "requiredFor": [
         "Deployment",
@@ -1043,7 +847,7 @@
       "wildcard": false
     },
     {
-      "id": "82",
+      "id": "66",
       "azureLocalComponent": "Microsoft Update",
       "endpointUrl": "go.microsoft.com",
       "port": "443",
@@ -1056,59 +860,7 @@
       "wildcard": false
     },
     {
-      "id": "83",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "*.delivery.mp.microsoft.com",
-      "port": "80, 443",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "84",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "*.windowsupdate.microsoft.com",
-      "port": "80, 443",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "85",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "*.windowsupdate.com",
-      "port": "80",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "86",
-      "azureLocalComponent": "Microsoft Update",
-      "endpointUrl": "*.update.microsoft.com",
-      "port": "80, 443",
-      "notes": "For Microsoft Update, allowing the OS to receive updates.",
-      "arcGatewaySupport": "No",
-      "requiredFor": [
-        "Deployment",
-        "Post deployment"
-      ],
-      "wildcard": true
-    },
-    {
-      "id": "87",
+      "id": "67",
       "azureLocalComponent": "Microsoft Defender",
       "endpointUrl": "*.endpoint.security.microsoft.com",
       "port": "443",
@@ -1121,7 +873,7 @@
       "wildcard": true
     },
     {
-      "id": "88",
+      "id": "68",
       "azureLocalComponent": "Azure Local authentication",
       "endpointUrl": "login.microsoft.com",
       "port": "443",
@@ -1134,7 +886,7 @@
       "wildcard": false
     },
     {
-      "id": "89",
+      "id": "69",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "*.blob.storage.azure.net",
       "port": "443",
@@ -1147,17 +899,7 @@
       "wildcard": true
     },
     {
-      "id": "90",
-      "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "https://eastus.obo.arc.azure.com",
-      "port": "8084",
-      "notes": "Required for initial validation.",
-      "arcGatewaySupport": "No",
-      "requiredFor": "Post Deployment",
-      "wildcard": false
-    },
-    {
-      "id": "91",
+      "id": "70",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "https://southeastasia.obo.arc.azure.com",
       "port": "8084",
@@ -1167,7 +909,7 @@
       "wildcard": false
     },
     {
-      "id": "92",
+      "id": "71",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "oneocsp.microsoft.com",
       "port": "80",
@@ -1180,7 +922,7 @@
       "wildcard": false
     },
     {
-      "id": "93",
+      "id": "72",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-crl.ws.symantec.com",
       "port": "80",
@@ -1193,7 +935,7 @@
       "wildcard": false
     },
     {
-      "id": "94",
+      "id": "73",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ts-ocsp.ws.symantec.com",
       "port": "80",
@@ -1206,7 +948,7 @@
       "wildcard": false
     },
     {
-      "id": "95",
+      "id": "74",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "s.symcd.com",
       "port": "80",
@@ -1219,7 +961,7 @@
       "wildcard": false
     },
     {
-      "id": "96",
+      "id": "75",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp.digicert.com",
       "port": "80",
@@ -1232,7 +974,20 @@
       "wildcard": false
     },
     {
-      "id": "97",
+      "id": "76",
+      "azureLocalComponent": "Azure Local CRLs",
+      "endpointUrl": "ocsp.globalsign.com",
+      "port": "80",
+      "notes": "Required for Public authorities’ certificate revocation list.",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "77",
       "azureLocalComponent": "Azure Local CRLs",
       "endpointUrl": "ocsp2.globalsign.com",
       "port": "80",
@@ -1245,7 +1000,7 @@
       "wildcard": false
     },
     {
-      "id": "98",
+      "id": "78",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "hciarcvmsstorage.z13.web.core.windows.net",
       "port": "443",
@@ -1258,7 +1013,7 @@
       "wildcard": false
     },
     {
-      "id": "99",
+      "id": "79",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "www.msftconnecttest.com/connecttest.txt",
       "port": "80",
@@ -1268,7 +1023,7 @@
       "wildcard": false
     },
     {
-      "id": "100",
+      "id": "80",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "edgesupprd.trafficmanager.net",
       "port": "443",
@@ -1281,7 +1036,7 @@
       "wildcard": false
     },
     {
-      "id": "101",
+      "id": "81",
       "azureLocalComponent": "Azure Local AKS infra",
       "endpointUrl": "azurewatsonanalysis-prod.core.windows.net",
       "port": "443",
@@ -1294,7 +1049,7 @@
       "wildcard": false
     },
     {
-      "id": "102",
+      "id": "82",
       "azureLocalComponent": "Azure Local ARB infra",
       "endpointUrl": "arcplatformcliextprod.z13.web.core.windows.net",
       "port": "443",

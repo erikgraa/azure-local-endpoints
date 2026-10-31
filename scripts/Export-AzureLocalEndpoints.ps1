@@ -26,38 +26,10 @@ function Export-AzureLocalEndpoints {
 
     [Parameter(Mandatory=$false)]
     [ValidateNotNullOrEmpty()]
-    [String]$DestinationPathName = 'json',
-
-    [Parameter(Mandatory=$false)]
-    [Switch]$IncludeDocumentation
+    [String]$DestinationPathName = 'json'
   )
 
-  begin {
-      $tree = @'
-```plaintext
-│   LICENSE
-│   README.md
-│
-├───.github
-│   └───workflows
-│           update.yml
-│
-├───json
-│   │   azure-local-endpoints.json 🍏
-│   │
-│   ├───oem 📦
-│   │       azure-local-endpoints-vendor-compressed.json
-│   │       azure-local-endpoints-vendor.json 
-│   │
-│   └───regions 🗺️
-│           azure-local-endpoints-region-compressed.json
-│           azure-local-endpoints-region.json
-│
-└───scripts
-        Export-AzureLocalEndpoints.ps1
-```
-'@     
-  }
+  begin { }
 
   process {
   try {
@@ -65,13 +37,9 @@ function Export-AzureLocalEndpoints {
 
     $regionHash = [Ordered]@{}
 
-    $regionTableInfo = @()
-
     $regionPattern = '"(https:\/\/github.com\/Azure\/AzureStack-Tools\/.+\/(.+?)-hci-endpoints.md)"'
 
     $vendorHash = [Ordered]@{}
-
-    $vendorTableInfo = @()    
 
     $vendorPattern = '"(https:\/\/github.com\/Azure\/AzureStack-Tools\/.+\/(.+?)AzureLocalEndpoints.md)"'
 
@@ -106,10 +74,10 @@ function Export-AzureLocalEndpoints {
     foreach ($_region in $regionHash.GetEnumerator()) {
       $markdown = Invoke-RestMethod -Uri $_region.Value
 
-      $updatedDate = (Select-String -InputObject $markdown -Pattern 'This list last update is from (\w+\s\d{1,2}\w+,\s\d{4,4})').Matches.Groups[-1].Value
+      $updatedDate = (Select-String -InputObject $markdown -Pattern '(?:This list (?:last update is from|was last updated on)|Last updated:?(?: on)?) (\w+\s\d{1,2}\w*,\s\d{4,4})').Matches.Groups[-1].Value
 
       try {
-        $updatedDateNormalized = Select-String -InputObject $updatedDate -Pattern '(\w+)\s(\d{1,2})\w+,\s(\d{4,4})' 
+        $updatedDateNormalized = Select-String -InputObject $updatedDate -Pattern '(\w+)\s(\d{1,2})\w*,\s(\d{4,4})' 
 
         $month = ((New-Object System.Globalization.CultureInfo('en-US')).DateTimeFormat.MonthNames.IndexOf($updatedDateNormalized.Matches.Groups[-3].Value)+1).ToString()
         $month = $month.PadLeft(2, "0")
@@ -231,7 +199,6 @@ function Export-AzureLocalEndpoints {
 
       $outputJson += New-Object -TypeName PSCustomObject -Property $_regionHash
 
-      $regionTableInfo += ('| {0} | {1} | {2} | {3} |' -f $regionLowerCase, $updatedDate, $endpoints.Count, ($endpoints | Where-Object { $_.arcGatewaySupport -match 'Yes' }).Count)
     }
 
     foreach ($_vendor in $vendorHash.GetEnumerator()) {
@@ -362,91 +329,9 @@ function Export-AzureLocalEndpoints {
 
       $outputJson += New-Object -TypeName PSCustomObject -Property $_vendorHash
 
-      $vendorTableInfo += ('| {0} | {1} | {2} | {3} |' -f $vendorLowerCase, $updatedDate, $endpoints.Count, ($endpoints | Where-Object { $_.arcGatewaySupport -match 'Yes' }).Count)
     }    
 
-    $outputJson | ConvertTo-Json -Depth 5 | Out-File -FilePath $filePath -Encoding utf8  
-
-    if ($PSBoundParameters.ContainsKey('IncludeDocumentation') -and ($null -ne $env:GITHUB_REPOSITORY)) {
-      $readmeMarkdown = @()
-
-      $readmeMarkdown += '# Azure Local Endpoints Codified as JSON'
-      $readmeMarkdown += ''    
-
-      $readmeMarkdown += 'This PowerShell tool enumerates the list of required firewall endpoints/URLs for Azure Local - for regions and OEM hardware vendors - and codifies it as JSON.'
-      $readmeMarkdown += ''
-
-      $readmeMarkdown += '> [!IMPORTANT]  '
-      $readmeMarkdown += "> This tool covers required firewall endpoints as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements). There may be other requirements, such as for additional Azure services  "
-      $readmeMarkdown += ''
-
-
-      $readmeMarkdown += '## 🚀 Features'
-      $readmeMarkdown += ''
-
-      $readmeMarkdown += '- List of Azure Local endpoints as JSON for supported regions and OEM hardware vendors.'
-      $readmeMarkdown += ('- The URL of the `{0}\{1}.json` file can be used as an evergreen link to the Azure Local endpoints' -f $DestinationPathName, $FileName) + "'" + 'required firewall endpoints/URLs.'
-
-      $readmeMarkdown += '## 🗺️ Regions and endpoints'
-      $readmeMarkdown += 'The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
-      $readmeMarkdown += ''
-
-      $readmeMarkdown += '| Region         | Last updated         | Endpoint count | Azure Arc gateway support |'
-      $readmeMarkdown += '| -------------- | -------------------- | -------------- | ------------------------- |'
-
-      $readmeMarkdown += $regionTableInfo
-      $readmeMarkdown += ''
-
-      $readmeMarkdown += '## 📦 OEM hardware vendors and endpoints'
-      $readmeMarkdown += 'The current OEM hardware vendors supporting Azure Local are documented in the table below, along with the number of required endpoints to open.'      
-      $readmeMarkdown += ''
-
-      $readmeMarkdown += '| Vendor         | Last updated         | Endpoint count | Azure Arc gateway support |'
-      $readmeMarkdown += '| -------------- | -------------------- | -------------- | ------------------------- |'
-
-      $readmeMarkdown += $vendorTableInfo
-      $readmeMarkdown += ''      
-
-      $readmeMarkdown += '## 📄 Howto'
-      $readmeMarkdown += ''    
-
-      $readmeMarkdown += '### 1️⃣ Run as workflow GitHub'
-      
-      $readmeMarkdown += 'Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. Updates (if any) are retrieved every morning at 6am - or at your preferred cadence.'    
-
-      $readmeMarkdown += ''    
-
-      $readmeMarkdown += '### 2️⃣ Run PowerShell cmdlet locally'
-
-      $readmeMarkdown += 'Clone the repository and run the script. Updated lists of endpoints codified as JSON will be available in the `json` folder.'
-
-      $readmeMarkdown += '```powershell
-  git clone https://github.com/erikgraa/azure-local-endpoints.git
-  cd azure-local-endpoints
-  ```'
-
-      $readmeMarkdown += '```powershell
-  . .\scripts\Export-AzureLocalEndpoints.ps1
-  Export-AzureLocalEndpoints
-  ```'
-
-      $readmeMarkdown += '## ⚡ Use cases and making sense of the output'
-      $readmeMarkdown += 'The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.'
-
-      $readmeMarkdown += ''
-      $readmeMarkdown += '## 🌳 Repository'
-      $readmeMarkdown += ''    
-      $readmeMarkdown += "The repository structure is as follows. Each region gets its own folder."
-      $readmeMarkdown += '' 
-
-      $readmeMarkdown += $tree
-
-      $readmeMarkdown += '## 👏 Contributions'
-      $readmeMarkdown += ''    
-      $readmeMarkdown += 'Any contributions are welcome and appreciated!'    
-
-      $readmeMarkdown | Out-File -FilePath 'README.md' -Encoding utf8
-    }
+    $outputJson | ConvertTo-Json -Depth 5 | Out-File -FilePath $filePath -Encoding utf8
     }
     catch {
       $PSCmdlet.ThrowTerminatingError($_)

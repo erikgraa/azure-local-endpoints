@@ -39,30 +39,32 @@ Web endpoints (80/443) become a URL category (PAN-OS) or URL group (FMC). Other 
 
 Create `src/generators/<vendor>.js` exporting `{ id, name, description, generate(endpoints, options) }` returning `[{ filename, content }]`, and register it in `src/generators/index.js`. The CLI, web UI, API index and nightly build pick it up automatically.
 
-## 🗺️ Regions and endpoints
-The current regions supporting Azure Local are documented in the table below, along with the number of required endpoints to open.
+## 🗺️ Regions
+The regions currently supporting Azure Local, as of the last data refresh. The tables are maintained manually; the live list is at `api/v1/index.json`.
 
-| Region         | Last updated         | Endpoint count | Azure Arc gateway support |
-| -------------- | -------------------- | -------------- | ------------------------- |
-| eastus | 2025-01-23 | 98 | 66 |
-| westeurope | 2025-01-23 | 103 | 70 |
-| australiaeast | 2025-01-23 | 103 | 70 |
-| canadacentral | 2025-01-23 | 103 | 70 |
-| indiacentral | 2025-01-23 | 102 | 68 |
-| southeastasia | 2025-01-23 | 102 | 69 |
-| japaneast | 2025-01-23 | 103 | 68 |
-| southcentralus | 2025-01-23 | 102 | 65 |
+| Region         | Last updated         |
+| -------------- | -------------------- |
+| eastus | 2025-11-27 |
+| westeurope | 2025-11-27 |
+| australiaeast | 2025-11-27 |
+| canadacentral | 2025-11-27 |
+| indiacentral | 2025-11-27 |
+| southeastasia | 2025-11-27 |
+| japaneast | 2025-11-27 |
+| southcentralus | 2025-11-27 |
+| usgovvirginia | 2026-10-20 |
+| usgovarizona | 2026-10-19 |
 
-## 📦 OEM hardware vendors and endpoints
-The current OEM hardware vendors supporting Azure Local are documented in the table below, along with the number of required endpoints to open.
+## 📦 OEM hardware vendors
+The OEM hardware vendors currently supporting Azure Local.
 
-| Vendor         | Last updated         | Endpoint count | Azure Arc gateway support |
-| -------------- | -------------------- | -------------- | ------------------------- |
-| dataon | 2025-03-19 | 3 | 0 |
-| dell | 2025-03-19 | 2 | 0 |
-| hpe | 2025-03-19 | 4 | 0 |
-| hitachi | 2025-03-19 | 2 | 0 |
-| lenovo | 2025-03-19 | 4 | 0 |
+| Vendor         | Last updated         |
+| -------------- | -------------------- |
+| dataon | 2025-03-19 |
+| dell | 2025-03-19 |
+| hpe | 2026-06-25 |
+| hitachi | 2025-03-19 |
+| lenovo | 2025-03-19 |
 
 ## 📄 Howto
 
