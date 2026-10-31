@@ -72,7 +72,7 @@ test('nsx output has context profiles and policy, balanced braces', () => {
 
 test('options are honoured', () => {
   const s = loadScopes().find((x) => x.name === 'dell');
-  const [{ content }] = generators.find((g) => g.id === 'paloalto').generate(s.endpoints, { prefix: 'foo', action: 'deny' });
+  const [{ content }] = generators.find((g) => g.id === 'paloalto').  generate(s.endpoints, { prefix: 'foo' });
   assert.match(content, /"foo-endpoints"/);
-  assert.match(content, /action\s+= "deny"/);
+    assert.match(content, /action\s+= "allow"/);
 });

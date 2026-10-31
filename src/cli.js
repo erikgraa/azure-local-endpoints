@@ -19,7 +19,6 @@ Options:
   -r, --required <text>   Filter by requiredFor (e.g. Deployment)
       --json              Output JSON (list)
       --prefix <name>     Resource name prefix (default azlocal)
-      --action <a>        allow | deny (default allow)
       --source-zone <z>   Source zone (default trust)
       --dest-zone <z>     Destination zone (default untrust)
       --source-address <a> Source address/object (default any)
@@ -34,7 +33,6 @@ const { values, positionals } = parseArgs({
     required: { type: 'string', short: 'r' },
     json: { type: 'boolean' },
     prefix: { type: 'string' },
-    action: { type: 'string' },
     'source-zone': { type: 'string' },
     'dest-zone': { type: 'string' },
     'source-address': { type: 'string' },
@@ -82,7 +80,7 @@ if (!cmd || values.help) {
   const gen = getGenerator(rest[0]) ?? fail(`Unknown vendor "${rest[0]}". Available: ${generators.map((g) => g.id).join(', ')}`);
   const scope = pickScope(loadScopes(), rest[1]);
   const files = gen.generate(filterEndpoints(scope.endpoints, values), {
-    prefix: values.prefix, action: values.action, sourceZone: values['source-zone'],
+    prefix: values.prefix, sourceZone: values['source-zone'],
     destinationZone: values['dest-zone'], sourceAddress: values['source-address'], scope: scope.name
   });
   if (values.out) {

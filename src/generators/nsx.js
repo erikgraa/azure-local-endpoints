@@ -9,7 +9,7 @@ const domainBlock = (description, domains) =>
 function generate(endpoints, options = {}) {
   const o = defaults(options);
   const label = o.scope ? ` (${o.scope})` : '';
-  const action = o.action === 'deny' ? 'DROP' : 'ALLOW';
+  const action = 'ALLOW';
   const out = [];
   const rules = [];
 

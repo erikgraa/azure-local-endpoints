@@ -147,7 +147,6 @@
       <label>Source zone</label><input id="szone" value="trust">
       <label>Destination zone</label><input id="dzone" value="untrust">
       <label>Source address / object</label><input id="saddr" value="any">
-      <label>Action</label><select id="action"><option>allow</option><option>deny</option></select>
       <p class="note"><span class="pill" id="selnote"></span></p>
       <p class="note">Uses the scope and the endpoints selected in the Browse tab. Generation runs in your browser.</p>
     </div>
@@ -229,7 +228,7 @@ function generate() {
   const eps = scope.endpoints.filter((e) => selected.has(e.id));
   $('selnote').textContent = `${eps.length} endpoints selected`;
   const files = g.generate(eps, {
-    prefix: $('prefix').value.trim() || 'azlocal', action: $('action').value, sourceZone: $('szone').value,
+    prefix: $('prefix').value.trim() || 'azlocal', sourceZone: $('szone').value,
     destinationZone: $('dzone').value, sourceAddress: $('saddr').value, scope: scope.name
   });
   $('code').innerHTML = highlight(files.map((f) => f.content).join('\n'));
@@ -248,7 +247,7 @@ $('all').onchange = (ev) => {
 };
 $('q').oninput = render;
 ['phase', 'arc'].forEach((id) => ($(id).onchange = render));
-['vendor', 'action'].forEach((id) => ($(id).onchange = generate));
+['vendor'].forEach((id) => ($(id).onchange = generate));
 ['prefix', 'szone', 'dzone', 'saddr'].forEach((id) => ($(id).oninput = generate));
 $('scope').onchange = loadScope;
 $('copy').onclick = () => navigator.clipboard.writeText($('code').textContent);
