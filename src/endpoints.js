@@ -7,6 +7,17 @@ const JSON_DIR = join(ROOT, 'json');
 
 const UDP_PORTS = new Set([123]);
 
+const VALID_HOST = /^[a-z0-9*]([a-z0-9*.-]*[a-z0-9*])?\.[a-z0-9*-]+$/;
+
+/** The export script emits strings for single values and "A & B" for combined ones; always return a clean array. */
+function normalizeRequiredFor(value) {
+  const parts = [].concat(value ?? []).flatMap((v) => String(v).split(/&|,/)).map((v) => v.trim().toLowerCase());
+  const out = [];
+  if (parts.includes('deployment')) out.push('Deployment');
+  if (parts.includes('post deployment')) out.push('Post deployment');
+  return out;
+}
+
 /** Normalises one raw endpoint from the source JSON. */
 export function normalizeEndpoint(raw) {
   const url = String(raw.endpointUrl ?? '').trim();
@@ -26,7 +37,7 @@ export function normalizeEndpoint(raw) {
     ports,
     protocol: ports.length && ports.every((p) => UDP_PORTS.has(p)) ? 'udp' : 'tcp',
     wildcard: Boolean(raw.wildcard) || host.startsWith('*.'),
-    requiredFor: raw.requiredFor ?? [],
+    requiredFor: normalizeRequiredFor(raw.requiredFor),
     arcGateway: raw.arcGatewaySupport ?? '',
     notes: raw.notes ?? ''
   };
@@ -42,7 +53,12 @@ export function loadScopes(jsonDir = JSON_DIR) {
       const file = join(base, name, `azure-local-endpoints-${name}.json`);
       if (!existsSync(file)) continue;
       const data = JSON.parse(readFileSync(file, 'utf8'));
-      const endpoints = (data.endpoints ?? []).map(normalizeEndpoint);
+      const all = (data.endpoints ?? []).map(normalizeEndpoint);
+      // Upstream tables occasionally contain malformed rows that the export script mis-parses.
+      const endpoints = all.filter((e) => VALID_HOST.test(e.host));
+      if (endpoints.length !== all.length) {
+        console.warn(`${type}/${name}: skipped ${all.length - endpoints.length} malformed endpoint row(s)`);
+      }
       scopes.push({
         type,
         name,

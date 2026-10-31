@@ -12,6 +12,23 @@ test('normalizes URLs, ports and protocol', () => {
   assert.equal(normalizeEndpoint({ id: 3, endpointUrl: '*.a.com', port: '443' }).wildcard, true);
 });
 
+test('requiredFor is always a clean array', () => {
+  const f = (v) => normalizeEndpoint({ id: 1, endpointUrl: 'a.com', port: '443', requiredFor: v }).requiredFor;
+  assert.deepEqual(f('Deployment & Post deployment'), ['Deployment', 'Post deployment']);
+  assert.deepEqual(f('Post Deployment'), ['Post deployment']);
+  assert.deepEqual(f(['Deployment']), ['Deployment']);
+  assert.deepEqual(f('443'), []);
+});
+
+test('every loaded endpoint has array requiredFor and a valid host', () => {
+  for (const s of loadScopes()) {
+    for (const e of s.endpoints) {
+      assert.ok(Array.isArray(e.requiredFor));
+      assert.match(e.host, /^[a-z0-9*][a-z0-9*.-]*\.[a-z0-9*-]+$/);
+    }
+  }
+});
+
 test('loads all scopes with endpoints', () => {
   const scopes = loadScopes();
   assert.ok(scopes.length >= 10);
