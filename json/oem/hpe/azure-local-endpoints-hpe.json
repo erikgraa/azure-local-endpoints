@@ -55,6 +55,18 @@
         "Post deployment"
       ],
       "wildcard": false
+    },
+    {
+      "id": "5",
+      "description": "SBE Manifest download connector link",
+      "endpointUrl": "h30302.www3.hpe.com/pub/*",
+      "port": "443",
+      "notes": "Enables SBE download connector support.<br><br>The package and meta files of each SBE release are posted in the repository “h30302.www3.hpe.com/pub/” for download purpose. For example:<br><br>h30302.www3.hpe.com/pub/SBE_HPE_ProLiant-Standard_5.0.2604.21.zip?merchantId=PUB_DROPBOX<br><br>h30302.www3.hpe.com/pub/SBE_HPE_ProLiant-Standard_5.0.2604.21.xml?merchantId=PUB_DROPBOX",
+      "arcGatewaySupport": "No",
+      "requiredFor": [
+        "Download Connector"
+      ],
+      "wildcard": true
     }
   ]
 }

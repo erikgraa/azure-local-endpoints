@@ -124,31 +124,53 @@
     {
       "id": "10",
       "azureLocalComponent": "Azure Local AKS infra",
-      "endpointUrl": "southcentralus.dp.kubernetesconfiguration.azure.com| 443",
-      "port": "Used for Azure Arc configuration in South Central US",
-      "notes": "Yes. 2408 or later new deployment",
-      "arcGatewaySupport": "Deployment & Post deployment",
-      "requiredFor": "| 11",
+      "endpointUrl": "southcentralus.dp.kubernetesconfiguration.azure.com",
+      "port": "443",
+      "notes": "Used for Azure Arc configuration in South Central US",
+      "arcGatewaySupport": "Yes. 2408 or later new deployment",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
       "wildcard": false
     },
     {
-      "id": "443",
-      "azureLocalComponent": " For Cluster Connect and Custom Location-based scenario.",
-      "endpointUrl": "Yes. 2408 or later new deployment",
-      "port": "Deployment & Post deployment",
-      "notes": "| 12 |Azure Local AKS infra",
-      "arcGatewaySupport": "ecpacr.azurecr.io",
-      "requiredFor": "443",
+      "id": "11",
+      "azureLocalComponent": "Azure Local AKS infra",
+      "endpointUrl": "sts.windows.net",
+      "port": "443",
+      "notes": "For Cluster Connect and Custom Location-based scenario.",
+      "arcGatewaySupport": "Yes. 2408 or later new deployment",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
       "wildcard": false
     },
     {
-      "id": "2408",
-      "azureLocalComponent": " Deployment & Post deployment",
-      "endpointUrl": "| 13 |Azure Local ARB infra",
-      "port": "msk8s.api.cdp.microsoft.com",
-      "notes": "443",
-      "arcGatewaySupport": "Download product catalog, product bits, and OS images from SFS.",
-      "requiredFor": "Yes. 2411 or later new deployment",
+      "id": "12",
+      "azureLocalComponent": "Azure Local AKS infra",
+      "endpointUrl": "ecpacr.azurecr.io",
+      "port": "443",
+      "notes": "Used for official Microsoft artifacts such as container images.",
+      "arcGatewaySupport": "Yes. 2408 or later new deployment",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
+      "wildcard": false
+    },
+    {
+      "id": "13",
+      "azureLocalComponent": "Azure Local ARB infra",
+      "endpointUrl": "msk8s.api.cdp.microsoft.com",
+      "port": "443",
+      "notes": "Download product catalog, product bits, and OS images from SFS.",
+      "arcGatewaySupport": "Yes. 2411 or later new deployment",
+      "requiredFor": [
+        "Deployment",
+        "Post deployment"
+      ],
       "wildcard": false
     },
     {
@@ -392,7 +414,9 @@
       "port": "443",
       "notes": "For Windows Admin Center management after deployment.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Post deployment",
+      "requiredFor": [
+        "Post deployment"
+      ],
       "wildcard": true
     },
     {
@@ -883,7 +907,9 @@
       "port": "8084",
       "notes": "Required for AKS extensions in South Central US after initial deployment.",
       "arcGatewaySupport": "No",
-      "requiredFor": "Post Deployment",
+      "requiredFor": [
+        "Post Deployment"
+      ],
       "wildcard": false
     },
     {
@@ -997,7 +1023,9 @@
       "port": "80",
       "notes": "Bootstrap Windows outbound connectivity validation",
       "arcGatewaySupport": "No",
-      "requiredFor": "Deployment",
+      "requiredFor": [
+        "Deployment"
+      ],
       "wildcard": false
     },
     {

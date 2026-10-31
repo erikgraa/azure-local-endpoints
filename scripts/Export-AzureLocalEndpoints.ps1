@@ -13,6 +13,39 @@
 
 #Requires -PSEdition Core
 
+function ConvertFrom-EndpointTable {
+  <#
+    Parses the endpoint rows of a Markdown table line by line. Each row is returned as an array of trimmed cells
+    (id first). Rows that do not have the expected number of cells (malformed upstream tables) are skipped with a warning
+    instead of shifting every following row.
+  #>
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory)]
+    [String]$Markdown,
+
+    [Parameter(Mandatory)]
+    [Int]$ColumnCount
+  )
+
+  foreach ($line in ($Markdown -split '\r?\n')) {
+    $trimmed = $line.Trim()
+
+    if ($trimmed -notmatch '^\|\s*\d+\s*\|') {
+      continue
+    }
+
+    $cells = @($trimmed.Trim('|').Split('|') | ForEach-Object { $_.Trim() })
+
+    if ($cells.Count -ne $ColumnCount) {
+      Write-Warning ('Skipping malformed table row ({0} cells, expected {1}): {2}' -f $cells.Count, $ColumnCount, $trimmed)
+      continue
+    }
+
+    , $cells
+  }
+}
+
 function Export-AzureLocalEndpoints {
   [CmdletBinding()]
   param (
@@ -50,13 +83,13 @@ function Export-AzureLocalEndpoints {
     for ($i = 0; $i -lt $regionMatch.count; $i += 3) {
       $gitHubUri = 'https://github.com/Azure/AzureStack-Tools/blob/'
       $gitHubUriRaw = 'https://raw.githubusercontent.com/Azure/AzureStack-Tools/refs/heads/'
-      $regionHash.Add($regionMatch[$i+2].Value.Trim(), $regionMatch[$i+1].Value.Replace($gitHubUri, $gitHubUriRaw))
+      $regionHash.Add($regionMatch[$i+2].Value.Trim(), ($regionMatch[$i+1].Value -replace [regex]::Escape($gitHubUri), $gitHubUriRaw))
     }
 
     for ($i = 0; $i -lt $vendorMatch.count; $i += 3) {
       $gitHubUri = 'https://github.com/Azure/AzureStack-Tools/blob/'
       $gitHubUriRaw = 'https://raw.githubusercontent.com/Azure/AzureStack-Tools/refs/heads/'
-      $vendorHash.Add($vendorMatch[$i+2].Value.Trim(), $vendorMatch[$i+1].Value.Replace($gitHubUri, $gitHubUriRaw))
+      $vendorHash.Add($vendorMatch[$i+2].Value.Trim(), ($vendorMatch[$i+1].Value -replace [regex]::Escape($gitHubUri), $gitHubUriRaw))
     }    
 
     $location = Get-Location | Select-Object -ExpandProperty Path
@@ -90,10 +123,6 @@ function Export-AzureLocalEndpoints {
 
       $regionLowerCase = $_region.Key.ToLower()
 
-      $markdownPattern = "(?ms)\|.*?(\d+).*?\|.*?(.*?)\s+?\|\s+?(.*?)\s+?\|\s+?(.*?)\s+?\|\s+?(.*?)\s+?\|\s+?(.*?)\s+?\|\s+?(.*?)\s+?\|"
-
-      $table = $markdown | Select-String -AllMatches -Pattern $markdownPattern
-
       $json = [Ordered]@{
         'type' = 'region'
         'name' = $regionLowerCase
@@ -103,56 +132,27 @@ function Export-AzureLocalEndpoints {
       
       $endpoints = @()
 
-      $i = 0
+      $rows = @(ConvertFrom-EndpointTable -Markdown $markdown -ColumnCount 7)
 
-      $endpointCount = 0
-
-      $thresholdEndpointCount = 10
-
-      try {
-        $endpointCount = $table.Matches.Groups.Count / 8
+      if ($rows.Count -lt 10) {
+        throw ('Will not write endpoint JSON as count was less than 10 for region {0} - something is amiss' -f $regionLowerCase)
       }
-      catch {
-        throw ("Endpoint count {0} for region {1}" -f $endpointCount, $regionLowerCase)
-      }
-      finally {
-        if ($endpointCount -lt $thresholdEndpointCount) {
-          throw ('Will not write endpoint JSON as count was less than {0} - something is amiss' -f $thresholdEndpointCount)
-        }
-      }    
 
-      do {
-        try {
-          $endpointUrl = $table.matches.groups[$i+3].Value
+      foreach ($cells in $rows) {
+        $endpointUrl = $cells[2]
 
-          $wildcard = if ($endpointUrl -match '\*') {
-            $true
-          }
-          else {
-            $false
-          }
-
-          Write-Debug ("Processing endpoint ID {0} for region {1}" -f $table.matches.groups[$i+1].Value, $regionLowerCase)
-        
-          $hash = [Ordered]@{}
-          $hash.add('id', $table.matches.groups[$i+1].Value)
-          $hash.add('azureLocalComponent', $table.matches.groups[$i+2].Value)
-          $hash.add('endpointUrl', $endpointUrl)
-          $hash.add('port', $table.matches.groups[$i+4].Value)
-          $hash.add('notes', $table.matches.groups[$i+5].Value)
-          $hash.add('arcGatewaySupport', $table.matches.groups[$i+6].Value)
-          $hash.add('requiredFor', $table.matches.groups[$i+7].Value.Split('8').Split('&').Trim())
-          $hash.add('wildcard', $wildcard)
-        }
-        catch {
-          throw ('Failed enumerating endpoints: {0}' -f $_)
-        }
-
-        $i += 8
+        $hash = [Ordered]@{}
+        $hash.add('id', $cells[0])
+        $hash.add('azureLocalComponent', $cells[1])
+        $hash.add('endpointUrl', $endpointUrl)
+        $hash.add('port', $cells[3])
+        $hash.add('notes', $cells[4])
+        $hash.add('arcGatewaySupport', $cells[5])
+        $hash.add('requiredFor', @($cells[6] -split '&' | ForEach-Object { $_.Trim() } | Where-Object { $_ }))
+        $hash.add('wildcard', ($endpointUrl -match '\*'))
 
         $endpoints += New-Object -TypeName PSCustomObject -Property $hash
       }
-      while ($i -lt $table.Matches.Groups.Count)
 
       $json.Add('endpoints', $endpoints)
 
@@ -220,10 +220,6 @@ function Export-AzureLocalEndpoints {
 
       $vendorLowerCase = $_vendor.Key.ToLower()
 
-      $markdownPattern = '(?ms)\|.*?(\d+).*?\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|(.*?)\|'
-
-      $table = $markdown | Select-String -AllMatches -Pattern $markdownPattern
-
       $json = [Ordered]@{
         'type' = 'vendor'
         'name' = $vendorLowerCase
@@ -233,56 +229,27 @@ function Export-AzureLocalEndpoints {
       
       $endpoints = @()
 
-      $i = 0
+      $rows = @(ConvertFrom-EndpointTable -Markdown $markdown -ColumnCount 7)
 
-      $endpointCount = 0
-
-      $thresholdEndpointCount = 1
-
-      try {
-        $endpointCount = $table.Matches.Groups.Count / 8
+      if ($rows.Count -lt 1) {
+        throw ('Will not write endpoint JSON as no endpoints were found for vendor {0} - something is amiss' -f $vendorLowerCase)
       }
-      catch {
-        throw ("Endpoint count {0} for vendor {1}" -f $endpointCount, $vendorLowerCase)
-      }
-      finally {
-        if ($endpointCount -lt $thresholdEndpointCount) {
-          throw ('Will not write endpoint JSON as count was less than {0} - something is amiss' -f $thresholdEndpointCount)
-        }
-      }    
 
-      do {
-        try {
-          $endpointUrl = $table.matches.groups[$i+3].Value.Trim()
+      foreach ($cells in $rows) {
+        $endpointUrl = $cells[2]
 
-          $wildcard = if ($endpointUrl -match '\*') {
-            $true
-          }
-          else {
-            $false
-          }
-
-          Write-Verbose ("Processing endpoint ID {0} for vendor {1}" -f $table.matches.groups[$i+1].Value, $vendorLowerCase)
-        
-          $hash = [Ordered]@{}
-          $hash.add('id', $table.matches.groups[$i+1].Value.Trim())
-          $hash.add('description', $table.matches.groups[$i+2].Value.Trim())
-          $hash.add('endpointUrl', $endpointUrl)
-          $hash.add('port', $table.matches.groups[$i+4].Value.Trim())
-          $hash.add('notes', $table.matches.groups[$i+5].Value.Trim())
-          $hash.add('arcGatewaySupport', $table.matches.groups[$i+6].Value.Trim())
-          $hash.add('requiredFor', $table.matches.groups[$i+7].Value.Split('8').Split('&').Trim())
-          $hash.add('wildcard', $wildcard)
-        }
-        catch {
-          throw ('Failed enumerating endpoints: {0}' -f $_)
-        }
-
-        $i += 8
+        $hash = [Ordered]@{}
+        $hash.add('id', $cells[0])
+        $hash.add('description', $cells[1])
+        $hash.add('endpointUrl', $endpointUrl)
+        $hash.add('port', $cells[3])
+        $hash.add('notes', $cells[4])
+        $hash.add('arcGatewaySupport', $cells[5])
+        $hash.add('requiredFor', @($cells[6] -split '&' | ForEach-Object { $_.Trim() } | Where-Object { $_ }))
+        $hash.add('wildcard', ($endpointUrl -match '\*'))
 
         $endpoints += New-Object -TypeName PSCustomObject -Property $hash
       }
-      while ($i -lt $table.Matches.Groups.Count)
 
       $json.Add('endpoints', $endpoints)
 

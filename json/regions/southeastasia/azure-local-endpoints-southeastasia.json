@@ -427,7 +427,9 @@
       "port": "443",
       "notes": "For Windows Admin Center management after deployment.",
       "arcGatewaySupport": "Yes. 2408 or later new deployment",
-      "requiredFor": "Post deployment",
+      "requiredFor": [
+        "Post deployment"
+      ],
       "wildcard": true
     },
     {
@@ -905,7 +907,9 @@
       "port": "8084",
       "notes": "Required for AKS extensions in SouthEast Asia after initial deployment.",
       "arcGatewaySupport": "No",
-      "requiredFor": "Post Deployment",
+      "requiredFor": [
+        "Post Deployment"
+      ],
       "wildcard": false
     },
     {
@@ -1019,7 +1023,9 @@
       "port": "80",
       "notes": "Bootstrap Windows outbound connectivity validation",
       "arcGatewaySupport": "No",
-      "requiredFor": "Deployment",
+      "requiredFor": [
+        "Deployment"
+      ],
       "wildcard": false
     },
     {
