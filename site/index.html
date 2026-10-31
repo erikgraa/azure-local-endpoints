@@ -101,7 +101,9 @@
 import { generators } from './generators/index.js';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const index = await (await fetch('api/v1/index.json')).json();
+// Pages serves data with max-age=600; revalidate so a fresh deploy is visible immediately.
+const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
+const index = await getJson('api/v1/index.json');
 let scope, selected = new Set(), visible = [];
 
 $('updated').textContent = `built ${index.generated.slice(0, 10)}`;
@@ -116,7 +118,7 @@ else $('scope').value = 'region/westeurope';
 
 async function loadScope() {
   const s = index.scopes.find((x) => `${x.type}/${x.name}` === $('scope').value);
-  scope = await (await fetch(s.url)).json();
+  scope = await getJson(s.url);
   location.hash = $('scope').value;
   const eps = scope.endpoints;
   selected = new Set(eps.map((e) => e.id));
