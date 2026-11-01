@@ -65,9 +65,15 @@
   button:hover{filter:brightness(1.1);transform:translateY(-1px)}
   button.sec{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
 
+  .chipbar{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12.5px}
+  .chipbar .hint{margin-left:auto;font-size:12px}
+  button.mini{padding:3px 12px;font-size:12px;border-radius:99px}
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .chip{padding:4px 12px;border:1px solid hsl(var(--h) 60% 45% / .5);border-radius:99px;cursor:pointer;color:hsl(var(--h) 80% var(--chipl));user-select:none;font-size:12.5px;transition:.15s;background:hsl(var(--h) 60% 50% / .08)}
-  .chip.on{background:hsl(var(--h) 70% 55%);color:#071020;border-color:transparent;font-weight:600}
+  .chip{padding:4px 12px 4px 10px;border:1px solid var(--line);border-radius:99px;cursor:pointer;color:var(--mute);user-select:none;font-size:12.5px;transition:.15s;background:transparent}
+  .chip::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:hsl(var(--h) 62% 60%);opacity:.45}
+  .chip:hover{border-color:var(--accent);color:var(--text)}
+  .chip.on{background:rgba(74,163,255,.13);border-color:rgba(74,163,255,.5);color:var(--text)}
+  .chip.on::before{opacity:1}
   .count{color:var(--mute);margin:0 0 10px}
 
   .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:var(--panel);max-height:70vh;box-shadow:0 10px 40px var(--shadow)}
@@ -77,7 +83,7 @@
   tbody tr:nth-child(even) td{background:var(--zebra)}
   tbody tr:hover td{background:var(--hover)}
   td.comp{white-space:nowrap}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 75% 60%)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 62% 60%)}
   code{font-family:Consolas,ui-monospace,monospace;color:var(--code);word-break:break-all}
   .tag{font-size:11px;padding:2px 9px;border-radius:99px;background:var(--tagbg);margin-right:4px;white-space:nowrap;display:inline-block}
   .tag.dep{background:rgba(74,163,255,.18);color:var(--dep)}
@@ -159,6 +165,12 @@ catch { document.documentElement.dataset.theme = 'dark'; }
     <button class="sec" id="link" title="Copy a link that restores this exact selection, filters and Terraform settings">🔗 Share selection</button>
     <button class="sec" id="csv">⬇ Export CSV</button>
   </div>
+  <div class="chipbar">
+    <span class="mute">Components</span>
+    <button class="sec mini" id="c-all" title="Show all components">All</button>
+    <button class="sec mini" id="c-none" title="Hide all components">None</button>
+    <span class="mute hint">click = toggle · double-click = only this</span>
+  </div>
   <div class="chips" id="chips"></div>
   <p class="count" id="count"></p>
   <div class="tablewrap">
@@ -201,7 +213,9 @@ const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
 const index = await getJson('api/v1/index.json');
 let scope, selected = new Set(), visible = [];
 
-const hue = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+// Each component gets its own hue; the golden angle keeps neighbouring (alphabetical) components visually apart.
+let hues = new Map();
+const hue = (s) => hues.get(s) ?? 0;
 const highlight = (t) => esc(t).replace(/(#.*$)|(&quot;.*?&quot;)|\b(resource|variable|provider|terraform|required_providers)\b/gm,
   (m, c, s, k) => c ? `<span class="c">${c}</span>` : s ? `<span class="s">${s}</span>` : `<span class="k">${k}</span>`);
 
@@ -254,8 +268,12 @@ function writeHash() {
   if ($('q').value) p.set('q', $('q').value);
   if ($('phase').value) p.set('phase', $('phase').value);
   if ($('arc').value) p.set('arc', $('arc').value);
-  const off = [...$('chips').children].filter((c) => !c.classList.contains('on')).map((c) => c.textContent);
-  if (off.length) p.set('off', off.join('|'));
+  const chips = [...$('chips').children];
+  const offNames = chips.filter((c) => !c.classList.contains('on')).map((c) => c.textContent);
+  const onNames = chips.filter((c) => c.classList.contains('on')).map((c) => c.textContent);
+  // Whichever list is shorter keeps the link compact (an empty "on=" means no component is shown).
+  if (offNames.length && offNames.length > onNames.length) p.set('on', onNames.join('|'));
+  else if (offNames.length) p.set('off', offNames.join('|'));
   const nums = (pick) => scope.endpoints.filter((e) => pick(e)).map((e) => Number(e.id)).filter(Number.isInteger).sort((a, b) => a - b);
   const deselected = toRanges(nums((e) => !selected.has(e.id)));
   if (deselected) {
@@ -274,7 +292,9 @@ async function loadScope() {
   const p = initParams;
   initParams = new URLSearchParams();
   const off = new Set((p.get('off') || '').split('|').filter(Boolean));
+  const onOnly = p.has('on') ? new Set(p.get('on').split('|').filter(Boolean)) : null;
   const eps = scope.endpoints;
+  hues = new Map([...new Set(eps.map((e) => e.component))].sort().map((c, i) => [c, Math.round((i * 137.508 + 200) % 360)]));
   const known = new Set(eps.map((e) => e.id));
   selected = new Set(known);
   if (p.has('o')) selected = new Set(fromRanges(p.get('o')).filter((id) => known.has(id)));
@@ -287,8 +307,9 @@ async function loadScope() {
   $('chips').innerHTML = '';
   [...new Set(eps.map((e) => e.component))].sort().forEach((c) => {
     const el = document.createElement('span');
-    el.className = off.has(c) ? 'chip' : 'chip on'; el.textContent = c; el.style.setProperty('--h', hue(c));
+    el.className = (onOnly ? !onOnly.has(c) : off.has(c)) ? 'chip' : 'chip on'; el.textContent = c; el.style.setProperty('--h', hue(c));
     el.onclick = () => { el.classList.toggle('on'); render(); };
+    el.ondblclick = () => { [...$('chips').children].forEach((x) => x.classList.toggle('on', x === el)); render(); };
     $('chips').appendChild(el);
   });
   $('all').checked = true;
@@ -338,6 +359,8 @@ $('rows').onchange = (ev) => {
   ev.target.checked ? selected.add(id) : selected.delete(id);
   render();
 };
+$('c-all').onclick = () => { [...$('chips').children].forEach((x) => x.classList.add('on')); render(); };
+$('c-none').onclick = () => { [...$('chips').children].forEach((x) => x.classList.remove('on')); render(); };
 $('rows').onclick = (ev) => {
   const b = ev.target.closest('.cp');
   if (!b) return;
