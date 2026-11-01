@@ -69,8 +69,11 @@
   .chipbar .hint{margin-left:auto;font-size:12px}
   button.mini{padding:3px 12px;font-size:12px;border-radius:99px}
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-  .chip{padding:4px 12px;border:1px solid hsl(var(--h) 60% 45% / .5);border-radius:99px;cursor:pointer;color:hsl(var(--h) 80% var(--chipl));user-select:none;font-size:12.5px;transition:.15s;background:hsl(var(--h) 60% 50% / .08)}
-  .chip.on{background:hsl(var(--h) 70% 55%);color:#071020;border-color:transparent;font-weight:600}
+  .chip{padding:4px 12px 4px 10px;border:1px solid var(--line);border-radius:99px;cursor:pointer;color:var(--mute);user-select:none;font-size:12.5px;transition:.15s;background:transparent}
+  .chip::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:hsl(var(--h) 62% 60%);opacity:.45}
+  .chip:hover{border-color:var(--accent);color:var(--text)}
+  .chip.on{background:rgba(74,163,255,.13);border-color:rgba(74,163,255,.5);color:var(--text)}
+  .chip.on::before{opacity:1}
   .count{color:var(--mute);margin:0 0 10px}
 
   .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:var(--panel);max-height:70vh;box-shadow:0 10px 40px var(--shadow)}
@@ -80,7 +83,7 @@
   tbody tr:nth-child(even) td{background:var(--zebra)}
   tbody tr:hover td{background:var(--hover)}
   td.comp{white-space:nowrap}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 75% 60%)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:hsl(var(--h) 62% 60%)}
   code{font-family:Consolas,ui-monospace,monospace;color:var(--code);word-break:break-all}
   .tag{font-size:11px;padding:2px 9px;border-radius:99px;background:var(--tagbg);margin-right:4px;white-space:nowrap;display:inline-block}
   .tag.dep{background:rgba(74,163,255,.18);color:var(--dep)}
@@ -210,7 +213,9 @@ const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
 const index = await getJson('api/v1/index.json');
 let scope, selected = new Set(), visible = [];
 
-const hue = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+// Each component gets its own hue; the golden angle keeps neighbouring (alphabetical) components visually apart.
+let hues = new Map();
+const hue = (s) => hues.get(s) ?? 0;
 const highlight = (t) => esc(t).replace(/(#.*$)|(&quot;.*?&quot;)|\b(resource|variable|provider|terraform|required_providers)\b/gm,
   (m, c, s, k) => c ? `<span class="c">${c}</span>` : s ? `<span class="s">${s}</span>` : `<span class="k">${k}</span>`);
 
@@ -289,6 +294,7 @@ async function loadScope() {
   const off = new Set((p.get('off') || '').split('|').filter(Boolean));
   const onOnly = p.has('on') ? new Set(p.get('on').split('|').filter(Boolean)) : null;
   const eps = scope.endpoints;
+  hues = new Map([...new Set(eps.map((e) => e.component))].sort().map((c, i) => [c, Math.round((i * 137.508 + 200) % 360)]));
   const known = new Set(eps.map((e) => e.id));
   selected = new Set(known);
   if (p.has('o')) selected = new Set(fromRanges(p.get('o')).filter((id) => known.has(id)));
