@@ -30,7 +30,7 @@ export function toJson(scope, endpoints, generated = new Date()) {
     count: endpoints.length,
     endpoints: endpoints.map((e) => ({
       id: e.id, component: e.component, endpoint: e.url, host: e.host, path: e.path, ports: e.ports, protocol: e.protocol,
-      requiredFor: e.requiredFor, arcGateway: e.arcGateway, wildcard: e.wildcard, notes: e.notes
+      requiredFor: e.requiredFor, arcGateway: e.arcGateway, wildcard: e.wildcard, notes: e.notes, links: e.links ?? []
     }))
   }, null, 2) + '\n';
 }
