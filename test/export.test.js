@@ -45,8 +45,8 @@ test('toCsv round-trips through a minimal RFC 4180 parser', () => {
 });
 
 test('toJson has scope, timestamp, count and endpoints', () => {
-  const json = JSON.parse(toJson({ type: 'region', name: 'westeurope', updated: '2025-11-27' }, [ep()], new Date('2026-11-01T12:00:00Z')));
-  assert.deepEqual(json.scope, { type: 'region', name: 'westeurope', updated: '2025-11-27' });
+  const json = JSON.parse(  toJson({ type: 'region', name: 'westeurope', updated: '2025-11-27', source: 'https://example.test/src.md', generated: '2026-11-01T11:00:00.000Z' }, [ep()], new Date('2026-11-01T12:00:00Z')));
+    assert.deepEqual(json.scope, { type: 'region', name: 'westeurope', updated: '2025-11-27', source: 'https://example.test/src.md', fetched: '2026-11-01T11:00:00.000Z' });
   assert.equal(json.exported, '2026-11-01T12:00:00.000Z');
   assert.equal(json.count, 1);
   assert.equal(json.endpoints[0].component, 'Azure Local diag & billing');

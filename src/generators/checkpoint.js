@@ -1,4 +1,4 @@
-import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
 
 const domainIndex = (eps) => {
@@ -21,6 +21,7 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Check Point (Management API) objects and rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
+${provenanceComment(o)}
 # Check Point domain objects match domains only, so URL paths are dropped.
 terraform {
   required_providers {
@@ -57,7 +58,7 @@ provider "checkpoint" {
     if (!seen.has(id)) {
       seen.add(id);
       out.push(`resource "checkpoint_management_dns_domain" "${id}" {
-${attrs(2, [['name', q(name)], ['is_sub_domain', String(sub)]])}
+${attrs(2, [['name', q(name)], ['comments', q(descr(o, 'Azure Local endpoint'))], ['is_sub_domain', String(sub)]])}
 }
 `);
     }
@@ -78,7 +79,7 @@ ${attrs(2, [['name', q(name)], ['is_sub_domain', String(sub)]])}
   for (const g of nonWebGroups(endpoints)) {
     const sid = `${o.prefix}_${g.protocol}_${g.port}`;
     out.push(`resource "checkpoint_management_service_${g.protocol}" "${sid}" {
-${attrs(2, [['name', q(`${o.prefix}-${g.protocol}-${g.port}`)], ['port', q(g.port)]])}
+${attrs(2, [['name', q(`${o.prefix}-${g.protocol}-${g.port}`)], ['comments', q(descr(o, `Azure Local ${g.protocol.toUpperCase()}/${g.port}`))], ['port', q(g.port)]])}
 }
 `);
     rules.push({
@@ -95,6 +96,7 @@ ${attrs(2, [['name', q(`${o.prefix}-${g.protocol}-${g.port}`)], ['port', q(g.por
 ${attrs(2, [
       ['layer', 'var.access_layer'],
       ['name', q(r.name)],
+      ['comments', q(descr(o, 'Azure Local required endpoints'))],
       ['action', '"Accept"'],
       ['source', `[${q(src)}]`],
       ['destination', list(r.destination)],

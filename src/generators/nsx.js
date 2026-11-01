@@ -1,4 +1,4 @@
-import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
 
 const domainBlock = (description, domains) =>
@@ -15,6 +15,7 @@ function generate(endpoints, options = {}) {
 
   out.push(`# VMware NSX distributed firewall rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
+${provenanceComment(o)}
 # FQDN filtering in NSX is domain based (URL paths are dropped) and requires DNS snooping/FQDN analysis.
 terraform {
   required_providers {
@@ -51,7 +52,7 @@ provider "nsxt" {
     const ports = unique(web.flatMap((e) => e.ports)).sort((a, b) => a - b);
     out.push(`resource "nsxt_policy_context_profile" "${o.prefix}_web" {
   display_name = ${q(`${o.prefix}-web-fqdns`)}
-  description  = "Azure Local required web FQDNs${label}"
+  description  = ${q(descr(o, 'Azure Local required web FQDNs'))}
 ${domainBlock('Azure Local required FQDNs', domains(web))}
 }
 
@@ -75,6 +76,7 @@ resource "nsxt_policy_service" "${o.prefix}_web" {
     const id = `${o.prefix}_${g.protocol}_${g.port}`;
     out.push(`resource "nsxt_policy_context_profile" "${id}" {
   display_name = ${q(`${o.prefix}-${g.protocol}-${g.port}-fqdns`)}
+  description  = ${q(descr(o, `Azure Local ${g.protocol.toUpperCase()}/${g.port} FQDNs`))}
 ${domainBlock(`Azure Local ${g.protocol.toUpperCase()}/${g.port} FQDNs`, domains(g.endpoints))}
 }
 
@@ -96,7 +98,7 @@ resource "nsxt_policy_service" "${id}" {
 
   out.push(`resource "nsxt_policy_security_policy" "${slug(o.prefix)}" {
   display_name = ${q(`${o.prefix}-azure-local`)}
-  description  = "Azure Local required endpoints${label}"
+  description  = ${q(descr(o, 'Azure Local required endpoints'))}
   category     = "Application"
 ${rules.map((r) => `
   rule {

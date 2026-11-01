@@ -1,4 +1,4 @@
-import { defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
 
 const rule = (o, fields) =>
@@ -22,6 +22,7 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Palo Alto PAN-OS rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
+${provenanceComment(o)}
 terraform {
   required_providers {
     panos = {
@@ -51,14 +52,14 @@ provider "panos" {
     const apps = unique(ports.map((p) => (p === 80 ? 'web-browsing' : 'ssl')));
     out.push(`resource "panos_custom_url_category" "${o.prefix}" {
   name        = ${q(`${o.prefix}-endpoints`)}
-  description = "Azure Local required URLs${label}"
+  description = ${q(descr(o, 'Azure Local required URLs'))}
   type        = "URL List"
   sites = ${list(sites.map(q))}
 }
 `);
     rules.push(rule(o, {
       name: `${o.prefix}-allow-web`,
-      description: 'Azure Local required web endpoints',
+      description: descr(o, 'Azure Local required web endpoints'),
       dest: '["any"]',
       apps: `[${apps.map(q).join(', ')}]`,
       services: `[${services.join(', ')}]`,
@@ -73,18 +74,14 @@ provider "panos" {
     if (!hosts.length) continue;
     const svc = `${o.prefix}-${g.protocol}-${g.port}`;
     out.push(`resource "panos_service_object" "${slug(svc)}" {
-  name             = ${q(svc)}
-  protocol         = ${q(g.protocol)}
-  destination_port = ${q(g.port)}
+${attrs(2, [['name', q(svc)], ['description', q(descr(o, `Azure Local ${g.protocol.toUpperCase()}/${g.port}`))], ['protocol', q(g.protocol)], ['destination_port', q(g.port)]])}
 }
 `);
     const addrRefs = hosts.map((h) => {
       const id = `${o.prefix}_${slug(h)}`;
       if (!out.some((c) => c.includes(`"panos_address_object" "${id}"`))) {
         out.push(`resource "panos_address_object" "${id}" {
-  name  = ${q(`${o.prefix}-${h}`.slice(0, 63))}
-  type  = "fqdn"
-  value = ${q(h)}
+${attrs(2, [['name', q(`${o.prefix}-${h}`.slice(0, 63))], ['description', q(descr(o, 'Azure Local endpoint'))], ['type', '"fqdn"'], ['value', q(h)]])}
 }
 `);
       }
@@ -92,7 +89,7 @@ provider "panos" {
     });
     rules.push(rule(o, {
       name: `${o.prefix}-allow-${g.protocol}-${g.port}`,
-      description: `Azure Local ${g.protocol.toUpperCase()}/${g.port} endpoints`,
+      description: descr(o, `Azure Local ${g.protocol.toUpperCase()}/${g.port} endpoints`),
       dest: `[${addrRefs.join(', ')}]`,
       apps: '["any"]',
       services: `[panos_service_object.${slug(svc)}.name]`,

@@ -81,7 +81,8 @@ if (!cmd || values.help) {
   const scope = pickScope(loadScopes(), rest[1]);
   const files = gen.generate(filterEndpoints(scope.endpoints, values), {
     prefix: values.prefix, sourceZone: values['source-zone'],
-    destinationZone: values['dest-zone'], sourceAddress: values['source-address'], scope: scope.name
+    destinationZone: values['dest-zone'], sourceAddress: values['source-address'], scope: scope.name,
+    dataUpdated: scope.updated, sourceUrl: scope.source
   });
   if (values.out) {
     mkdirSync(values.out, { recursive: true });

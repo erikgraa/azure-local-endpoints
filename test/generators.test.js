@@ -70,6 +70,18 @@ test('nsx output has context profiles and policy, balanced braces', () => {
   assert.equal(content.split('{').length, content.split('}').length);
 });
 
+test('generated Terraform carries data date, fetch time, source and descriptions', () => {
+  const s = loadScopes().find((x) => x.name === 'westeurope');
+  const opts = { scope: 'region/westeurope', dataUpdated: '2025-11-27', fetched: '2026-11-01T11:00:00.000Z', sourceUrl: 'https://example.test/src.md' };
+  for (const g of generators) {
+    const [{ content }] = g.generate(s.endpoints, opts);
+    assert.match(content, /# Data last updated: 2025-11-27 · fetched 2026-11-01T11:00:00\.000Z/, g.id);
+    assert.match(content, /# Data source: https:\/\/example\.test\/src\.md/, g.id);
+    assert.match(content, /official Microsoft documentation is authoritative/, g.id);
+    assert.match(content, /"[^"\n]*data updated 2025-11-27"/, `${g.id} description`);
+  }
+});
+
 test('options are honoured', () => {
   const s = loadScopes().find((x) => x.name === 'dell');
   const [{ content }] = generators.find((g) => g.id === 'paloalto').  generate(s.endpoints, { prefix: 'foo' });

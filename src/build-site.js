@@ -34,7 +34,7 @@ let tfCount = 0;
 for (const s of scopes) {
   write(`api/v1/${s.type}/${s.name}.json`, { generated, ...s });
   for (const g of generators) {
-    const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}` });
+    const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, dataUpdated: s.updated, fetched: generated, sourceUrl: s.source });
     // Single-file generators map to a stable name; multi-file ones go into a folder.
     if (files.length === 1) {
       write(`terraform/${g.id}/${s.type}-${s.name}.tf`, files[0].content);

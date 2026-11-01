@@ -1,4 +1,4 @@
-import { attrs, defaults, isWeb, nonWebGroups, q, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
 
 const host = (e) => wholeLabelWildcard(e.host);
@@ -13,6 +13,7 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Fortinet FortiGate (FortiOS) policies for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
+${provenanceComment(o)}
 # FortiGate FQDN objects match domains only, so URL paths are dropped.
 terraform {
   required_providers {
@@ -45,6 +46,7 @@ provider "fortios" {
       out.push(`resource "fortios_firewall_address" "${id}" {
 ${attrs(2, [
         ['name', q(`${o.prefix}-${h}`.slice(0, 79))],
+        ['comment', q(descr(o, 'Azure Local endpoint'))],
         ['type', q(h.startsWith('*.') ? 'wildcard-fqdn' : 'fqdn')],
         ['fqdn', q(h)]
       ])}
@@ -58,7 +60,8 @@ ${attrs(2, [
     const members = addressesFor(eps);
     const gid = `${o.prefix}_${key}`;
     out.push(`resource "fortios_firewall_addrgrp" "${gid}" {
-  name = ${q(`${o.prefix}-${key.replace(/_/g, '-')}`)}
+  name    = ${q(`${o.prefix}-${key.replace(/_/g, '-')}`)}
+  comment = ${q(descr(o, `Azure Local ${title}`))}
 ${members.map((m) => `
   member {
     name = fortios_firewall_address.${m}.name
@@ -86,6 +89,7 @@ ${attrs(2, [['name', q(`${o.prefix}-${key.replace(/_/g, '-')}`)], [serviceAttr, 
 ${attrs(2, [
       ['name', q(`${o.prefix}-allow-${p.title.replace('/', '-')}`.slice(0, 35))],
       ['action', '"accept"'],
+      ['comments', q(descr(o, `Azure Local ${p.title} endpoints`))],
       ['schedule', '"always"'],
       ['status', '"enable"'],
       ['logtraffic', '"all"']

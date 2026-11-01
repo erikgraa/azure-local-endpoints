@@ -25,7 +25,7 @@ export function toCsv(endpoints) {
 export function toJson(scope, endpoints, generated = new Date()) {
   return JSON.stringify({
     disclaimer: DISCLAIMER,
-    scope: { type: scope.type, name: scope.name, updated: scope.updated },
+    scope: { type: scope.type, name: scope.name, updated: scope.updated, source: scope.source, fetched: scope.generated },
     exported: generated.toISOString(),
     count: endpoints.length,
     endpoints: endpoints.map((e) => ({
