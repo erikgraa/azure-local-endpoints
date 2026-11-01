@@ -3,6 +3,8 @@ import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, loadScopes } from './endpoints.js';
 import { generators } from './generators/index.js';
+import { PROVIDERS, providerConstraint } from './generators/providers.js';
+import { resolveProviders, describeResolution } from './resolve-providers.js';
 
 const DIST = join(ROOT, 'dist');
 const write = (rel, data) => {
@@ -21,6 +23,24 @@ cpSync(join(ROOT, 'src', 'notes.js'), join(DIST, 'notes.js'));
 const scopes = loadScopes();
 const generated = new Date().toISOString();
 
+// Provider versions come from the Terraform Registry; AZL_OFFLINE=1 skips the lookup (pinned defaults are used).
+const resolution = process.env.AZL_OFFLINE === '1'
+  ? { versions: {}, latest: {}, errors: ['AZL_OFFLINE=1, registry lookup skipped'] }
+  : await resolveProviders();
+describeResolution(resolution).forEach((l) => console.warn(`warning: ${l}`));
+const providerVersions = resolution.versions;
+
+write('api/v1/providers.json', {
+  generated,
+  providers: Object.fromEntries(Object.entries(PROVIDERS).map(([id, p]) => [id, {
+    source: p.source,
+    constraint: providerConstraint(id, providerVersions),
+    resolved: providerVersions[id] ?? null,
+    latest: resolution.latest[id] ?? null,
+    pinnedFallback: !providerVersions[id]
+  }]))
+});
+
 write('api/v1/index.json', {
   generated,
   vendors: generators.map(({ id, name, description }) => ({ id, name, description })),
@@ -35,7 +55,7 @@ let tfCount = 0;
 for (const s of scopes) {
   write(`api/v1/${s.type}/${s.name}.json`, { generated, ...s });
   for (const g of generators) {
-    const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, dataUpdated: s.updated, fetched: generated, sourceUrl: s.source });
+    const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, dataUpdated: s.updated, fetched: generated, sourceUrl: s.source, providerVersions });
     // Single-file generators map to a stable name; multi-file ones go into a folder.
     if (files.length === 1) {
       write(`terraform/${g.id}/${s.type}-${s.name}.tf`, files[0].content);

@@ -1,5 +1,6 @@
 import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
+import { providerConstraint } from './providers.js';
 
 const PROTO = { tcp: 'TCP', udp: 'UDP' };
 
@@ -12,12 +13,12 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Cisco Secure Firewall (FTD via FMC) objects and rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
-${provenanceComment(o)}
+${provenanceComment(o, 'cisco')}
 terraform {
   required_providers {
     fmc = {
       source  = "CiscoDevNet/fmc"
-      version = ">= 2.0.0"
+      version = ${q(providerConstraint('cisco', o.providerVersions))}
     }
   }
 }

@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Keeps the actions used by the nightly workflow current (checkout, setup-node, setup-terraform, Pages, ...).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"
+
+  # The repo has no npm dependencies today; this keeps it covered if any are added.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"

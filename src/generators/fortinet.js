@@ -1,5 +1,6 @@
 import { attrs, defaults, isWeb, nonWebGroups, q, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
+import { providerConstraint } from './providers.js';
 
 const host = (e) => wholeLabelWildcard(e.host);
 const addrId = (prefix, h) => `${prefix}_${h.startsWith('*.') ? 'wc_' : ''}${slug(h)}`;
@@ -13,13 +14,13 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Fortinet FortiGate (FortiOS) policies for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
-${provenanceComment(o)}
+${provenanceComment(o, 'fortinet')}
 # FortiGate FQDN objects match domains only, so URL paths are dropped.
 terraform {
   required_providers {
     fortios = {
       source  = "fortinetdev/fortios"
-      version = ">= 1.20"
+      version = ${q(providerConstraint('fortinet', o.providerVersions))}
     }
   }
 }

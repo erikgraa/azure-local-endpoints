@@ -44,11 +44,17 @@ node src/cli.js list westeurope --search arc --port 443
 node src/cli.js generate paloalto westeurope --prefix azlocal --source-zone trust -o out
 node src/cli.js generate cisco dell
 npm test          # unit tests
-npm run validate:terraform   # terraform fmt -check + validate on generated files (needs terraform)
-npm run build     # builds ./dist (UI + API + Terraform)
+npm run validate:terraform   # terraform fmt -check + validate on generated files (needs terraform; uses the resolved provider versions)
+npm run build     # builds ./dist (UI + API + Terraform); set AZL_OFFLINE=1 to skip the provider registry lookup
 ```
 
 Web endpoints (80/443) become a URL category (PAN-OS) or URL group (FMC). Other ports become FQDN, service and port objects. Wildcards on non-web ports are skipped and listed in a comment. Always review generated code before applying.
+
+### Provider versions
+
+At build time the newest stable release of each Terraform provider is looked up in the Terraform Registry and rendered as a `~> MAJOR.MINOR` constraint in the generated `required_providers` block (shown in the header comment and in `api/v1/providers.json`). Only releases inside the major line a generator was written for are used; a newer major (for example `panos` 2.x) is reported as a build warning but not used until the generator is updated. If the registry lookup fails, the pinned default is used and the build still succeeds. The CI step `npm run validate:terraform` runs `terraform validate` against the resolved versions and fails the workflow if a new provider release breaks the generated syntax.
+
+Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions and npm.
 
 ### Adding a firewall vendor
 

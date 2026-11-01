@@ -1,5 +1,6 @@
 import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
+import { providerConstraint } from './providers.js';
 
 const domainBlock = (description, domains) =>
   `  domain_name {
@@ -15,13 +16,13 @@ function generate(endpoints, options = {}) {
 
   out.push(`# VMware NSX distributed firewall rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
-${provenanceComment(o)}
+${provenanceComment(o, 'nsx')}
 # FQDN filtering in NSX is domain based (URL paths are dropped) and requires DNS snooping/FQDN analysis.
 terraform {
   required_providers {
     nsxt = {
       source  = "vmware/nsxt"
-      version = ">= 3.6"
+      version = ${q(providerConstraint('nsx', o.providerVersions))}
     }
   }
 }

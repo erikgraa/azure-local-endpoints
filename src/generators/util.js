@@ -1,3 +1,5 @@
+import { providerNote } from './providers.js';
+
 export const WEB_PORTS = new Set([80, 443]);
 
 /** True when every port of the endpoint is HTTP/HTTPS (URL-filterable). */
@@ -47,16 +49,18 @@ export function defaults(options = {}) {
     scope: options.scope ?? '',
     dataUpdated: options.dataUpdated ?? '',
     fetched: options.fetched ?? '',
-    sourceUrl: options.sourceUrl ?? ''
+    sourceUrl: options.sourceUrl ?? '',
+    providerVersions: options.providerVersions ?? {}
   };
 }
 
-/** Provenance as a Terraform comment block: data date, fetch time, source and a caveat. */
-export function provenanceComment(o) {
+/** Provenance as a Terraform comment block: data date, fetch time, source, provider version and a caveat. */
+export function provenanceComment(o, vendorId) {
   const when = [o.dataUpdated && `Data last updated: ${o.dataUpdated}`, o.fetched && `fetched ${o.fetched}`].filter(Boolean).join(' · ');
   return [
     when && `# ${when}`,
     o.sourceUrl && `# Data source: ${o.sourceUrl}`,
+    vendorId && providerNote(vendorId, o.providerVersions),
     '# Endpoints can vary by Azure Local version; the official Microsoft documentation is authoritative.'
   ].filter(Boolean).join('\n');
 }
