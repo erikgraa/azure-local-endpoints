@@ -16,6 +16,7 @@ mkdirSync(DIST, { recursive: true });
 cpSync(join(ROOT, 'site'), DIST, { recursive: true });
 cpSync(join(ROOT, 'src', 'generators'), join(DIST, 'generators'), { recursive: true });
 cpSync(join(ROOT, 'src', 'export.js'), join(DIST, 'export.js'));
+cpSync(join(ROOT, 'src', 'notes.js'), join(DIST, 'notes.js'));
 
 const scopes = loadScopes();
 const generated = new Date().toISOString();

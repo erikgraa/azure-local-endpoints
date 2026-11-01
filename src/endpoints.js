@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cleanNotes, extractLinks } from './notes.js';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const JSON_DIR = join(ROOT, 'json');
@@ -28,6 +29,7 @@ export function normalizeEndpoint(raw) {
   const ports = [...new Set(
     String(raw.port ?? '').split(/[,\s]+/).map(Number).filter((p) => Number.isInteger(p) && p > 0 && p < 65536)
   )];
+  const notes = cleanNotes(raw.notes);
   return {
     id: String(raw.id),
     component: raw.azureLocalComponent ?? raw.description ?? '',
@@ -39,7 +41,8 @@ export function normalizeEndpoint(raw) {
     wildcard: Boolean(raw.wildcard) || host.startsWith('*.'),
     requiredFor: normalizeRequiredFor(raw.requiredFor),
     arcGateway: raw.arcGatewaySupport ?? '',
-    notes: raw.notes ?? ''
+    notes,
+    links: extractLinks(notes)
   };
 }
 
