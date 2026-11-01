@@ -6,8 +6,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { loadScopes } from '../src/endpoints.js';
-import { generators } from '../src/generators/index.js';
-import { PROVIDERS, providerConstraint } from '../src/generators/providers.js';
+import { generators, variantsOf } from '../src/generators/index.js';
+import { PROVIDERS, providerConstraint, versionKey } from '../src/generators/providers.js';
 import { resolveProviders, describeResolution } from '../src/resolve-providers.js';
 
 const args = process.argv.slice(2);
@@ -31,24 +31,28 @@ const steps = [
 let failed = false;
 
 for (const g of vendors) {
-  const constraint = providerConstraint(g.id, providerVersions);
-  for (const s of sample) {
-    const dir = mkdtempSync(join(tmpdir(), `azlocal-${g.id}-`));
-    for (const f of g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, providerVersions })) {
-      writeFileSync(join(dir, f.filename), f.content);
-    }
-    for (const [name, cmd] of steps) {
-      const r = run(cmd, dir);
-      if (r.status !== 0) {
-        failed = true;
-        console.error(`FAIL ${g.id} / ${s.name}: terraform ${name} with ${PROVIDERS[g.id].source} ${constraint}` +
-          `${providerVersions[g.id] ? ` (resolved ${providerVersions[g.id]})` : ' (pinned default)'}\n` +
-          `A new provider release may have changed the schema; update the generator rather than ignoring this.\n${r.stdout}${r.stderr}`);
-        break;
+  for (const v of variantsOf(g)) {
+    const constraint = providerConstraint(g.id, providerVersions, v.options.providerMajor);
+    const resolved = providerVersions[versionKey(g.id, v.options.providerMajor ?? PROVIDERS[g.id].major)];
+    for (const s of sample) {
+      const label = `${g.id}${v.id ? `/${v.id}` : ''} / ${s.name}`;
+      const dir = mkdtempSync(join(tmpdir(), `azlocal-${g.id}-`));
+      for (const f of g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, providerVersions, ...v.options })) {
+        writeFileSync(join(dir, f.filename), f.content);
       }
-      if (name === 'validate') console.log(`ok   ${g.id} / ${s.name}  ${PROVIDERS[g.id].source} ${constraint}`);
+      for (const [name, cmd] of steps) {
+        const r = run(cmd, dir);
+        if (r.status !== 0) {
+          failed = true;
+          console.error(`FAIL ${label}: terraform ${name} with ${PROVIDERS[g.id].source} ${constraint}` +
+            `${resolved ? ` (resolved ${resolved})` : ' (pinned default)'}\n` +
+            `A new provider release may have changed the schema; update the generator rather than ignoring this.\n${r.stdout}${r.stderr}`);
+          break;
+        }
+        if (name === 'validate') console.log(`ok   ${label}  ${PROVIDERS[g.id].source} ${constraint}`);
+      }
+      rmSync(dir, { recursive: true, force: true });
     }
-    rmSync(dir, { recursive: true, force: true });
   }
 }
 process.exit(failed ? 1 : 0);

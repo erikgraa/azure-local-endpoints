@@ -22,6 +22,7 @@ Options:
       --source-zone <z>   Source zone (default trust)
       --dest-zone <z>     Destination zone (default untrust)
       --source-address <a> Source address/object (default any)
+      --provider-major <n> Provider major line for vendors that support several (Palo Alto: 2 default, 1 legacy)
   -o, --out <dir>         Write generated files to a directory instead of stdout
 `;
 
@@ -35,6 +36,7 @@ const { values, positionals } = parseArgs({
     prefix: { type: 'string' },
     'source-zone': { type: 'string' },
     'dest-zone': { type: 'string' },
+    'provider-major': { type: 'string' },
     'source-address': { type: 'string' },
     out: { type: 'string', short: 'o' },
     help: { type: 'boolean', short: 'h' }
@@ -82,6 +84,7 @@ if (!cmd || values.help) {
   const files = gen.generate(filterEndpoints(scope.endpoints, values), {
     prefix: values.prefix, sourceZone: values['source-zone'],
     destinationZone: values['dest-zone'], sourceAddress: values['source-address'], scope: scope.name,
+    providerMajor: values['provider-major'],
     dataUpdated: scope.updated, sourceUrl: scope.source
   });
   if (values.out) {

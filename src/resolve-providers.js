@@ -1,5 +1,5 @@
 /** Resolves the latest stable provider versions from the Terraform Registry. */
-import { PROVIDERS } from './generators/providers.js';
+import { PROVIDERS, versionKey } from './generators/providers.js';
 
 const stable = (v) => /^\d+\.\d+\.\d+$/.test(v);
 const cmp = (a, b) => {
@@ -8,11 +8,12 @@ const cmp = (a, b) => {
   return pa[0] - pb[0] || pa[1] - pb[1] || pa[2] - pb[2];
 };
 const maxOf = (list) => list.reduce((best, v) => (best === null || cmp(v, best) > 0 ? v : best), null);
+const majorOf = (v) => Number(v.split('.')[0]);
 
 /**
  * Returns { versions, latest, errors }.
- * versions: newest stable release inside the supported major line, per vendor id (used for the constraints).
- * latest: newest stable release overall (reported so a new major can be noticed).
+ * versions: newest stable release inside every supported major line, keyed "vendor@major" (used for the constraints).
+ * latest: newest stable release overall per vendor (reported so a new major can be noticed).
  * A failed lookup never throws; that vendor is simply left out and the generator falls back to its pinned default.
  */
 export async function resolveProviders({ fetchImpl = fetch, timeoutMs = 15000, registry = 'https://registry.terraform.io' } = {}) {
@@ -25,9 +26,11 @@ export async function resolveProviders({ fetchImpl = fetch, timeoutMs = 15000, r
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const all = (await res.json()).versions.map((v) => v.version).filter(stable);
       latest[id] = maxOf(all);
-      const inMajor = maxOf(all.filter((v) => Number(v.split('.')[0]) === p.major));
-      if (inMajor) versions[id] = inMajor;
-      else errors.push(`${p.source}: no stable ${p.major}.x release found`);
+      for (const major of p.majors) {
+        const inMajor = maxOf(all.filter((v) => majorOf(v) === major));
+        if (inMajor) versions[versionKey(id, major)] = inMajor;
+        else errors.push(`${p.source}: no stable ${major}.x release found`);
+      }
     } catch (e) {
       errors.push(`${p.source}: ${e.message}`);
     }
@@ -36,11 +39,11 @@ export async function resolveProviders({ fetchImpl = fetch, timeoutMs = 15000, r
 }
 
 /** Human readable warnings: lookup failures and newer major versions that the generators do not support yet. */
-export function describeResolution({ versions, latest, errors }) {
+export function describeResolution({ latest, errors }) {
   const lines = errors.map((e) => `provider lookup failed, using pinned default: ${e}`);
   for (const [id, p] of Object.entries(PROVIDERS)) {
-    if (latest[id] && Number(latest[id].split('.')[0]) > p.major) {
-      lines.push(`${p.source} ${latest[id]} is a newer major than supported (${p.major}.x); generating for ${versions[id] ?? p.fallback}. Review the generator before bumping.`);
+    if (latest[id] && majorOf(latest[id]) > Math.max(...p.majors)) {
+      lines.push(`${p.source} ${latest[id]} is a newer major than supported (${p.majors.join('.x, ')}.x); review the generator before adding it.`);
     }
   }
   return lines;

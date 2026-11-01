@@ -2,8 +2,8 @@
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, loadScopes } from './endpoints.js';
-import { generators } from './generators/index.js';
-import { PROVIDERS, providerConstraint } from './generators/providers.js';
+import { generators, variantsOf, variantKey } from './generators/index.js';
+import { PROVIDERS, providerConstraint, versionKey } from './generators/providers.js';
 import { resolveProviders, describeResolution } from './resolve-providers.js';
 
 const DIST = join(ROOT, 'dist');
@@ -34,20 +34,26 @@ write('api/v1/providers.json', {
   generated,
   providers: Object.fromEntries(Object.entries(PROVIDERS).map(([id, p]) => [id, {
     source: p.source,
-    constraint: providerConstraint(id, providerVersions),
-    resolved: providerVersions[id] ?? null,
+    defaultMajor: p.major,
     latest: resolution.latest[id] ?? null,
-    pinnedFallback: !providerVersions[id]
+    majors: Object.fromEntries(p.majors.map((m) => [m, {
+      constraint: providerConstraint(id, providerVersions, m),
+      resolved: providerVersions[versionKey(id, m)] ?? null,
+      pinnedFallback: !providerVersions[versionKey(id, m)]
+    }]))
   }]))
 });
 
 write('api/v1/index.json', {
   generated,
-  vendors: generators.map(({ id, name, description }) => ({ id, name, description })),
+  vendors: generators.map((g) => ({
+    id: g.id, name: g.name, description: g.description,
+    variants: variantsOf(g).filter((v) => v.id).map((v) => ({ id: v.id, name: v.name, default: Boolean(v.default), key: variantKey(g, v) }))
+  })),
   scopes: scopes.map(({ type, name, updated, count }) => ({
     type, name, updated, count,
     url: `api/v1/${type}/${name}.json`,
-    terraform: Object.fromEntries(generators.map((g) => [g.id, `terraform/${g.id}/${type}-${name}.tf`]))
+    terraform: Object.fromEntries(generators.flatMap((g) => variantsOf(g).map((v) => [variantKey(g, v), `terraform/${variantKey(g, v)}/${type}-${name}.tf`])))
   }))
 });
 
@@ -55,13 +61,16 @@ let tfCount = 0;
 for (const s of scopes) {
   write(`api/v1/${s.type}/${s.name}.json`, { generated, ...s });
   for (const g of generators) {
-    const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, dataUpdated: s.updated, fetched: generated, sourceUrl: s.source, providerVersions });
-    // Single-file generators map to a stable name; multi-file ones go into a folder.
-    if (files.length === 1) {
-      write(`terraform/${g.id}/${s.type}-${s.name}.tf`, files[0].content);
-      tfCount++;
-    } else {
-      files.forEach((f) => { write(`terraform/${g.id}/${s.type}-${s.name}/${f.filename}`, f.content); tfCount++; });
+    for (const v of variantsOf(g)) {
+      const files = g.generate(s.endpoints, { scope: `${s.type}/${s.name}`, dataUpdated: s.updated, fetched: generated, sourceUrl: s.source, providerVersions, ...v.options });
+      const dir = `terraform/${variantKey(g, v)}`;
+      // Single-file generators map to a stable name; multi-file ones go into a folder.
+      if (files.length === 1) {
+        write(`${dir}/${s.type}-${s.name}.tf`, files[0].content);
+        tfCount++;
+      } else {
+        files.forEach((f) => { write(`${dir}/${s.type}-${s.name}/${f.filename}`, f.content); tfCount++; });
+      }
     }
   }
 }

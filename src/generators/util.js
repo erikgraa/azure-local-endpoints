@@ -50,7 +50,8 @@ export function defaults(options = {}) {
     dataUpdated: options.dataUpdated ?? '',
     fetched: options.fetched ?? '',
     sourceUrl: options.sourceUrl ?? '',
-    providerVersions: options.providerVersions ?? {}
+    providerVersions: options.providerVersions ?? {},
+    providerMajor: options.providerMajor ?? ''
   };
 }
 
@@ -60,7 +61,7 @@ export function provenanceComment(o, vendorId) {
   return [
     when && `# ${when}`,
     o.sourceUrl && `# Data source: ${o.sourceUrl}`,
-    vendorId && providerNote(vendorId, o.providerVersions),
+    vendorId && providerNote(vendorId, o.providerVersions, Number(o.providerMajor) || undefined),
     '# Endpoints can vary by Azure Local version; the official Microsoft documentation is authoritative.'
   ].filter(Boolean).join('\n');
 }
