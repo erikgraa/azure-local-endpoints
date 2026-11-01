@@ -97,7 +97,6 @@
   .tag.udp{background:rgba(245,131,74,.28)}
   .mute{color:var(--mute)}
   td.notes{color:var(--mute);font-size:13px;min-width:260px;max-width:380px;white-space:pre-line;word-break:break-word}
-  td.notes a{color:var(--accent)}
 
   .gen{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
   @media(max-width:860px){.gen{grid-template-columns:1fr}}
@@ -219,7 +218,6 @@ catch { document.documentElement.dataset.theme = 'dark'; }
 <script type="module">
 import { generators } from './generators/index.js';
 import { toCsv, toJson } from './export.js';
-import { linkify } from './notes.js';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // Pages serves data with max-age=600; revalidate so a fresh deploy is visible immediately.
@@ -343,7 +341,7 @@ function render() {
     <td>${e.ports.map((p) => `<span class="tag port ${e.protocol === 'udp' ? 'udp' : ''}">${e.protocol === 'udp' ? 'udp/' : ''}${p}</span>`).join('')}</td>
     <td>${e.requiredFor.map((r) => `<span class="tag ${r === 'Deployment' ? 'dep' : 'post'}">${esc(r)}</span>`).join('')}</td>
     <td class="hide-sm">${/^yes/i.test(e.arcGateway) ? `<span class="tag ok" title="${esc(e.arcGateway)}">Yes</span>` : `<span class="mute" title="${esc(e.arcGateway)}">${esc(e.arcGateway.split('.')[0] || '–')}</span>`}</td>
-    <td class="notes hide-sm">${linkify(e.notes)}</td></tr>`).join('');
+    <td class="notes hide-sm">${esc(e.notes)}</td></tr>`).join('');
   // Only rows that are visible (pass the filters) and ticked are included, so the counter and the Terraform match what is shown.
   const included = visible.filter((e) => selected.has(e.id));
   $('count').textContent = `Showing ${visible.length} of ${scope.endpoints.length} endpoints · ${included.length} selected`;
