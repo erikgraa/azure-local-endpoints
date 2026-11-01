@@ -76,3 +76,13 @@ test('options are honoured', () => {
   assert.match(content, /"foo-endpoints"/);
     assert.match(content, /action\s+= "allow"/);
 });
+
+test('every generator output starts with the disclaimer comment', () => {
+  const s = loadScopes().find((x) => x.name === 'westeurope');
+  for (const g of generators) {
+    const [{ content }] = g.generate(s.endpoints);
+    assert.match(content, /# Community-driven, unofficial tool\. Not affiliated with, endorsed by, or sponsored by Microsoft\./, g.id);
+    assert.match(content, /Always verify the generated rules against the official documentation/, g.id);
+    assert.match(content, /# Source: https:\/\/github\.com\/erikgraa\/azure-local-endpoints/, g.id);
+  }
+});

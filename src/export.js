@@ -1,4 +1,5 @@
 /** Export helpers shared by the web UI (copied into dist by the build) and the tests. */
+import { DISCLAIMER } from './generators/disclaimer.js';
 
 /** RFC 4180 field: always quoted, quotes doubled. Newlines inside notes stay inside the quoted field. */
 export const csvField = (value) => `"${String(value ?? '').replace(/"/g, '""')}"`;
@@ -23,6 +24,7 @@ export function toCsv(endpoints) {
 /** JSON document with scope, generation timestamp and the endpoints array. */
 export function toJson(scope, endpoints, generated = new Date()) {
   return JSON.stringify({
+    disclaimer: DISCLAIMER,
     scope: { type: scope.type, name: scope.name, updated: scope.updated },
     exported: generated.toISOString(),
     count: endpoints.length,

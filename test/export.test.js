@@ -52,3 +52,9 @@ test('toJson has scope, timestamp, count and endpoints', () => {
   assert.equal(json.endpoints[0].component, 'Azure Local diag & billing');
   assert.deepEqual(json.endpoints[0].ports, [80, 443]);
 });
+
+test('toJson includes the disclaimer', () => {
+  const json = JSON.parse(toJson({ type: 'region', name: 'x', updated: '' }, [ep()]));
+  assert.match(json.disclaimer, /^Community-driven, unofficial tool\. Not affiliated with/);
+  assert.match(json.disclaimer, /verify the generated rules/);
+});
