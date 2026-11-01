@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>Azure Local Endpoints</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link id="icon-dark" rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)">
+<link id="icon-light" rel="icon" type="image/svg+xml" href="favicon-light.svg" media="(prefers-color-scheme: light)">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Browse Azure Local firewall endpoints and generate Terraform for Palo Alto and Cisco firewalls.">
 <style>
@@ -39,6 +40,10 @@
   .home{display:inline-flex;border-radius:16px}
   .home:hover .logo{transform:scale(1.06);filter:drop-shadow(0 6px 22px rgba(74,163,255,.6))}
   .home:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .logo-light{display:none}
+  [data-theme=light] .logo-dark{display:none}
+  [data-theme=light] .logo-light{display:block}
+  [data-theme=light] .logo{filter:drop-shadow(0 4px 12px rgba(40,60,100,.25))}
   h1{margin:0;font-size:30px;letter-spacing:-.02em;line-height:1.1;
     background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .tag-line{color:var(--mute);margin:4px 0 0}
@@ -134,13 +139,23 @@
 <script>
 try { document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }
 catch { document.documentElement.dataset.theme = 'dark'; }
+// The tab icon follows the chosen theme (including the manual toggle); the media queries on the links are the fallback.
+window.applyIcon = () => {
+  const t = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  for (const id of ['icon-dark', 'icon-light']) {
+    const l = document.getElementById(id);
+    l.removeAttribute('media');
+    l.setAttribute('href', `favicon-${t}.svg`);
+  }
+};
+window.applyIcon();
 </script>
 </head>
 <body>
 <div class="wrap">
 <header>
   <div class="top">
-    <a class="home" href="./" title="Back to the start page" aria-label="Azure Local Endpoints home"><img class="logo" src="favicon.svg" alt=""></a>
+    <a class="home" href="./" title="Back to the start page" aria-label="Azure Local Endpoints home"><img class="logo logo-dark" src="favicon-dark.svg" alt=""><img class="logo logo-light" src="favicon-light.svg" alt=""></a>
     <div>
       <h1>Azure Local Endpoints</h1>
       <p class="tag-line">Browse the required firewall endpoints and generate Terraform for your firewall.</p>
@@ -395,6 +410,7 @@ $('link').onclick = () => {
 $('theme').onclick = () => {
   const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
   document.documentElement.dataset.theme = next;
+  window.applyIcon();
   try { localStorage.setItem('theme', next); } catch { /* storage unavailable */ }
 };
 $('all').onchange = (ev) => {
