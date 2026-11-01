@@ -163,7 +163,8 @@ catch { document.documentElement.dataset.theme = 'dark'; }
     <select id="phase"><option value="">Required for: any</option></select>
     <select id="arc"><option value="">Arc gateway: any</option><option value="yes">Arc gateway: supported</option><option value="no">Arc gateway: not supported</option></select>
     <button class="sec" id="link" title="Copy a link that restores this exact selection, filters and Terraform settings">🔗 Share selection</button>
-    <button class="sec" id="csv">⬇ Export CSV</button>
+    <button class="sec" id="csv" title="Export the shown and ticked endpoints">⬇ CSV</button>
+    <button class="sec" id="json" title="Export the shown and ticked endpoints">⬇ JSON</button>
   </div>
   <div class="chipbar">
     <span class="mute">Components</span>
@@ -206,6 +207,7 @@ catch { document.documentElement.dataset.theme = 'dark'; }
 
 <script type="module">
 import { generators } from './generators/index.js';
+import { toCsv, toJson } from './export.js';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // Pages serves data with max-age=600; revalidate so a fresh deploy is visible immediately.
@@ -394,14 +396,17 @@ $('dl').onclick = () => {
   a.href = URL.createObjectURL(new Blob([generate.files.map((x) => x.content).join('\n')], { type: 'text/plain' }));
   a.download = generate.files[0].filename; a.click();
 };
-$('csv').onclick = () => {
-  const rows = [['component', 'endpoint', 'port', 'requiredFor', 'wildcard', 'notes'],
-    ...visible.map((e) => [e.component, e.url, e.ports.join(' '), e.requiredFor.join('/'), e.wildcard, e.notes])];
-  const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+// Exports reflect the current selection: shown (filters applied) and ticked.
+const exportRows = () => visible.filter((e) => selected.has(e.id));
+// The BOM makes Excel read the CSV as UTF-8.
+function download(text, name, type, bom = '') {
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-  a.download = `azure-local-${scope.name}.csv`; a.click();
-};
+  a.href = URL.createObjectURL(new Blob([bom, text], { type }));
+  a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+ $('csv').onclick = () => download(toCsv(exportRows()), `azure-local-${scope.name}.csv`, 'text/csv;charset=utf-8', '\ufeff');
+$('json').onclick = () => download(toJson(scope, exportRows()), `azure-local-${scope.name}.json`, 'application/json');
 document.querySelectorAll('.tab').forEach((t) => (t.onclick = () => {
   showTab(t.dataset.t);
   writeHash();

@@ -15,6 +15,7 @@ rmSync(DIST, { recursive: true, force: true });
 mkdirSync(DIST, { recursive: true });
 cpSync(join(ROOT, 'site'), DIST, { recursive: true });
 cpSync(join(ROOT, 'src', 'generators'), join(DIST, 'generators'), { recursive: true });
+cpSync(join(ROOT, 'src', 'export.js'), join(DIST, 'export.js'));
 
 const scopes = loadScopes();
 const generated = new Date().toISOString();
