@@ -11,11 +11,11 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 > This project is not affiliated with, endorsed by, or sponsored by Microsoft. Azure and Azure Local are trademarks of Microsoft Corporation.
 
 > [!NOTE]
-> https://endpoints.azurelocal.graa.dev is a **demo site** provided as-is, without any guarantee of availability. For production use, fork the repository and host your own copy (see Howto below).
+> https://endpoints.azl.graa.dev is a **demo site** provided as-is, without any guarantee of availability. For production use, fork the repository and host your own copy (see Howto below).
 
 ## 🚀 Features
 
-- **Web UI** at https://endpoints.azurelocal.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
+- **Web UI** at https://endpoints.azl.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
 - **Terraform generation** for Palo Alto (PAN-OS), Cisco (Secure Firewall/FMC), VMware NSX, Fortinet (FortiGate) and Check Point, in the browser, via the CLI, or as pre-generated files.
 - **Static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`.
 - **Pluggable generators**: one small file per firewall vendor.
@@ -24,11 +24,11 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 ### Pre-generated Terraform and API
 
 ```text
-https://endpoints.azurelocal.graa.dev/api/v1/index.json
-https://endpoints.azurelocal.graa.dev/api/v1/region/westeurope.json
-https://endpoints.azurelocal.graa.dev/terraform/paloalto/region-westeurope.tf
-https://endpoints.azurelocal.graa.dev/terraform/cisco/region-westeurope.tf
-https://endpoints.azurelocal.graa.dev/terraform/nsx/region-westeurope.tf
+https://endpoints.azl.graa.dev/api/v1/index.json
+https://endpoints.azl.graa.dev/api/v1/region/westeurope.json
+https://endpoints.azl.graa.dev/terraform/paloalto/region-westeurope.tf
+https://endpoints.azl.graa.dev/terraform/cisco/region-westeurope.tf
+https://endpoints.azl.graa.dev/terraform/nsx/region-westeurope.tf
 ```
 
 ### CLI (Node.js 20+, no dependencies)
