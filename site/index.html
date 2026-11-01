@@ -35,7 +35,10 @@
 
   header{padding:28px 0 8px}
   .top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .logo{width:64px;height:64px;filter:drop-shadow(0 6px 18px rgba(74,163,255,.35))}
+  .logo{width:64px;height:64px;filter:drop-shadow(0 6px 18px rgba(74,163,255,.35));transition:.2s}
+  .home{display:inline-flex;border-radius:16px}
+  .home:hover .logo{transform:scale(1.06);filter:drop-shadow(0 6px 22px rgba(74,163,255,.6))}
+  .home:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   h1{margin:0;font-size:30px;letter-spacing:-.02em;line-height:1.1;
     background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .tag-line{color:var(--mute);margin:4px 0 0}
@@ -132,7 +135,7 @@ catch { document.documentElement.dataset.theme = 'dark'; }
 <div class="wrap">
 <header>
   <div class="top">
-    <img class="logo" src="favicon.svg" alt="">
+    <a class="home" href="./" title="Back to the start page" aria-label="Azure Local Endpoints home"><img class="logo" src="favicon.svg" alt=""></a>
     <div>
       <h1>Azure Local Endpoints</h1>
       <p class="tag-line">Browse the required firewall endpoints and generate Terraform for your firewall.</p>
