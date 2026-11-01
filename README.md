@@ -1,4 +1,9 @@
-<p align="center"><img src="site/favicon.svg" alt="Azure Local Endpoints icon" width="96" height="96"></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="site/favicon-dark.svg">
+    <img src="site/favicon-light.svg" alt="Azure Local Endpoints icon" width="96" height="96">
+  </picture>
+</p>
 
 # Azure Local Endpoints Codified as JSON
 
