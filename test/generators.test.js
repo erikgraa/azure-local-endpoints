@@ -45,11 +45,33 @@ test('every generator produces terraform for every scope', () => {
   }
 });
 
-test('paloalto output contains URLs and balanced braces', () => {
+test('paloalto v1 output (panos provider 1.x) contains URLs and balanced braces', () => {
   const s = loadScopes().find((x) => x.name === 'westeurope');
-  const [{ content }] = generators.find((g) => g.id === 'paloalto').generate(s.endpoints);
+  const [{ content }] = generators.find((g) => g.id === 'paloalto').generate(s.endpoints, { providerMajor: 1 });
   assert.match(content, /mcr\.microsoft\.com/);
   assert.match(content, /panos_security_rule_group/);
+  assert.match(content, /panos_address_object/);
+  assert.match(content, /version = "~> 1\.11"/);
+  assert.equal(content.split('{').length, content.split('}').length);
+});
+
+test('paloalto v2 output (panos provider 2.x) uses the new resources and location variable', () => {
+  const s = loadScopes().find((x) => x.name === 'westeurope');
+  const pa = generators.find((g) => g.id === 'paloalto');
+  assert.deepEqual(pa.variants.map((v) => v.id), ['v2', 'v1']);
+  assert.ok(pa.variants[0].default);
+  const [{ content }] = pa.generate(s.endpoints);
+  assert.match(content, /# Palo Alto PAN-OS rules .*\(panos provider 2\.x\)/);
+  assert.match(content, /version = "~> 2\.0"/);
+  assert.match(content, /required_version = ">= 1\.8"/);
+  assert.match(content, /resource "panos_custom_url_category"/);
+  assert.match(content, /resource "panos_security_policy_rules"/);
+  assert.match(content, /resource "panos_address"/);
+  assert.match(content, /resource "panos_service"/);
+  assert.match(content, /variable "location"/);
+  assert.match(content, /location\s+= var\.location/);
+  assert.match(content, /mcr\.microsoft\.com/);
+  assert.doesNotMatch(content, /panos_security_rule_group|panos_address_object|panos_service_object/);
   assert.equal(content.split('{').length, content.split('}').length);
 });
 

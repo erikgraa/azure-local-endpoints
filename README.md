@@ -31,7 +31,8 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 ```text
 https://endpoints.azl.graa.dev/api/v1/index.json
 https://endpoints.azl.graa.dev/api/v1/region/westeurope.json
-https://endpoints.azl.graa.dev/terraform/paloalto/region-westeurope.tf
+https://endpoints.azl.graa.dev/terraform/paloalto/region-westeurope.tf      (panos provider 2.x)
+https://endpoints.azl.graa.dev/terraform/paloalto-v1/region-westeurope.tf   (panos provider 1.x)
 https://endpoints.azl.graa.dev/terraform/cisco/region-westeurope.tf
 https://endpoints.azl.graa.dev/terraform/nsx/region-westeurope.tf
 ```
@@ -52,7 +53,9 @@ Web endpoints (80/443) become a URL category (PAN-OS) or URL group (FMC). Other 
 
 ### Provider versions
 
-At build time the newest stable release of each Terraform provider is looked up in the Terraform Registry and rendered as a `~> MAJOR.MINOR` constraint in the generated `required_providers` block (shown in the header comment and in `api/v1/providers.json`). Only releases inside the major line a generator was written for are used; a newer major (for example `panos` 2.x) is reported as a build warning but not used until the generator is updated. If the registry lookup fails, the pinned default is used and the build still succeeds. The CI step `npm run validate:terraform` runs `terraform validate` against the resolved versions and fails the workflow if a new provider release breaks the generated syntax.
+At build time the newest stable release of each Terraform provider is looked up in the Terraform Registry and rendered as a `~> MAJOR.MINOR` constraint in the generated `required_providers` block (shown in the header comment and in `api/v1/providers.json`). Only releases inside a major line a generator was written for are used; a newer major is reported as a build warning but not used until the generator is updated. If the registry lookup fails, the pinned default is used and the build still succeeds. The CI step `npm run validate:terraform` runs `terraform fmt` and `terraform validate` against the resolved versions and fails the workflow if a new provider release breaks the generated syntax.
+
+**Palo Alto supports both provider lines.** The `panos` provider 2.x renamed its resources (`panos_address`, `panos_service`, `panos_security_policy_rules`) and added a `location` attribute, so the generator produces two variants: 2.x (default, with a `location` variable that works for a firewall vsys, a Panorama device group or `shared`; requires Terraform 1.8+) and 1.x (legacy, `terraform/paloalto-v1/`). The web UI has a "Provider version" dropdown, and the CLI takes `--provider-major 1|2`. A generator declares such variants with a `variants` array (the first, flagged `default`, keeps the plain `terraform/<vendor>/` path).
 
 Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions and npm.
 

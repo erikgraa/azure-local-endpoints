@@ -211,6 +211,7 @@ window.applyIcon();
     <div class="card">
       <h3>Options</h3>
       <label>Firewall vendor</label><select id="vendor"></select>
+      <div id="variantbox" hidden><label>Provider version</label><select id="variant"></select></div>
       <p class="note" id="vdesc" style="margin-top:6px"></p>
       <label>Rule name prefix</label><input id="prefix" value="azlocal">
       <label>Source zone</label><input id="szone" value="trust">
@@ -234,16 +235,17 @@ window.applyIcon();
 </div>
 
 <script type="module">
-import { generators } from './generators/index.js';
+import { generators, variantsOf } from './generators/index.js';
 import { toCsv, toJson } from './export.js';
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // Pages serves data with max-age=600; revalidate so a fresh deploy is visible immediately.
 const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
 const index = await getJson('api/v1/index.json');
-// Provider versions resolved at build time; without them the generators use their pinned defaults.
+// Provider versions resolved at build time (one per supported major line); without them the generators use pinned defaults.
 const providerVersions = await getJson('api/v1/providers.json')
-  .then((d) => Object.fromEntries(Object.entries(d.providers).filter(([, p]) => p.resolved).map(([id, p]) => [id, p.resolved])))
+  .then((d) => Object.fromEntries(Object.entries(d.providers).flatMap(([id, p]) =>
+    Object.entries(p.majors).filter(([, m]) => m.resolved).map(([major, m]) => [`${id}@${major}`, m.resolved]))))
   .catch(() => ({}));
 let scope, selected = new Set(), visible = [];
 
@@ -272,6 +274,15 @@ for (const [k, id] of Object.entries(uiFields)) {
   const val = initParams.get(k);
   if (val && (k !== 'v' || generators.some((g) => g.id === val))) $(id).value = val;
 }
+// Vendors with variants (e.g. Palo Alto provider 1.x / 2.x) get a second dropdown; the default variant is not written to links.
+function refreshVariants(wantedId) {
+  const g = generators.find((x) => x.id === $('vendor').value);
+  const vs = variantsOf(g).filter((v) => v.id);
+  $('variantbox').hidden = vs.length < 2;
+  $('variant').innerHTML = vs.map((v) => `<option value="${v.id}">${esc(v.name)}</option>`).join('');
+  $('variant').value = vs.some((v) => v.id === wantedId) ? wantedId : (vs.find((v) => v.default)?.id ?? '');
+}
+refreshVariants(initParams.get('pv'));
 const showTab = (name) => {
   document.querySelectorAll('.tab,main').forEach((e) => e.classList.remove('active'));
   document.querySelector(`.tab[data-t="${name}"]`).classList.add('active');
@@ -315,6 +326,8 @@ function writeHash() {
     if (deselected.length <= only.length) p.set('x', deselected); else p.set('o', only);
   }
   for (const [k, id] of Object.entries(uiFields)) if ($(id).value && $(id).value !== defaultsUi[k]) p.set(k, $(id).value);
+  const dv = variantsOf(generators.find((x) => x.id === $('vendor').value)).find((v) => v.default);
+  if (!$('variantbox').hidden && $('variant').value !== dv?.id) p.set('pv', $('variant').value);
   if ($('gen').classList.contains('active')) p.set('t', 'gen');
   const qs = p.toString();
   history.replaceState(null, '', `#${$('scope').value}${qs ? `?${qs}` : ''}`);
@@ -379,12 +392,13 @@ function generate() {
   writeHash();
   const g = generators.find((x) => x.id === $('vendor').value);
   $('vdesc').textContent = g.description;
+  const variant = variantsOf(g).find((v) => v.id === $('variant').value) ?? variantsOf(g)[0];
   const eps = visible.filter((e) => selected.has(e.id));
   $('selnote').textContent = `${eps.length} endpoints selected`;
   const files = g.generate(eps, {
     prefix: $('prefix').value.trim() || 'azlocal', sourceZone: $('szone').value,
     destinationZone: $('dzone').value, sourceAddress: $('saddr').value, scope: scope.name,
-    dataUpdated: scope.updated, fetched: scope.generated, sourceUrl: scope.source, providerVersions
+    dataUpdated: scope.updated, fetched: scope.generated, sourceUrl: scope.source, providerVersions, ...variant.options
   });
   $('code').innerHTML = highlight(files.map((f) => f.content).join('\n'));
   $('fn').textContent = files.map((f) => f.filename).join(', ');
@@ -423,7 +437,8 @@ $('all').onchange = (ev) => {
 };
 $('q').oninput = render;
 ['phase', 'arc'].forEach((id) => ($(id).onchange = render));
-['vendor'].forEach((id) => ($(id).onchange = generate));
+$('vendor').onchange = () => { refreshVariants(); generate(); };
+$('variant').onchange = generate;
 ['prefix', 'szone', 'dzone', 'saddr'].forEach((id) => ($(id).oninput = generate));
 $('scope').onchange = loadScope;
 $('copy').onclick = () => navigator.clipboard.writeText($('code').textContent);
