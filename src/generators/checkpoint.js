@@ -1,5 +1,6 @@
 import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
+import { providerConstraint } from './providers.js';
 
 const domainIndex = (eps) => {
   // Check Point domain objects are ".example.com"; is_sub_domain covers subdomains (wildcards).
@@ -21,13 +22,13 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Check Point (Management API) objects and rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
-${provenanceComment(o)}
+${provenanceComment(o, 'checkpoint')}
 # Check Point domain objects match domains only, so URL paths are dropped.
 terraform {
   required_providers {
     checkpoint = {
       source  = "CheckPointSW/checkpoint"
-      version = ">= 2.8"
+      version = ${q(providerConstraint('checkpoint', o.providerVersions))}
     }
   }
 }

@@ -241,6 +241,10 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 // Pages serves data with max-age=600; revalidate so a fresh deploy is visible immediately.
 const getJson = async (url) => (await fetch(url, { cache: 'no-cache' })).json();
 const index = await getJson('api/v1/index.json');
+// Provider versions resolved at build time; without them the generators use their pinned defaults.
+const providerVersions = await getJson('api/v1/providers.json')
+  .then((d) => Object.fromEntries(Object.entries(d.providers).filter(([, p]) => p.resolved).map(([id, p]) => [id, p.resolved])))
+  .catch(() => ({}));
 let scope, selected = new Set(), visible = [];
 
 // Each component gets its own hue; the golden angle keeps neighbouring (alphabetical) components visually apart.
@@ -380,7 +384,7 @@ function generate() {
   const files = g.generate(eps, {
     prefix: $('prefix').value.trim() || 'azlocal', sourceZone: $('szone').value,
     destinationZone: $('dzone').value, sourceAddress: $('saddr').value, scope: scope.name,
-    dataUpdated: scope.updated, fetched: scope.generated, sourceUrl: scope.source
+    dataUpdated: scope.updated, fetched: scope.generated, sourceUrl: scope.source, providerVersions
   });
   $('code').innerHTML = highlight(files.map((f) => f.content).join('\n'));
   $('fn').textContent = files.map((f) => f.filename).join(', ');

@@ -1,5 +1,6 @@
 import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
+import { providerConstraint } from './providers.js';
 
 const rule = (o, fields) =>
   `    name                  = ${q(fields.name)}
@@ -22,12 +23,12 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Palo Alto PAN-OS rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
-${provenanceComment(o)}
+${provenanceComment(o, 'paloalto')}
 terraform {
   required_providers {
     panos = {
       source  = "PaloAltoNetworks/panos"
-      version = "~> 1.11"
+      version = ${q(providerConstraint('paloalto', o.providerVersions))}
     }
   }
 }
