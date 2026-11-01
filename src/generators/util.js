@@ -44,8 +44,27 @@ export function defaults(options = {}) {
     sourceZone: options.sourceZone ?? 'trust',
     destinationZone: options.destinationZone ?? 'untrust',
     sourceAddress: options.sourceAddress ?? 'any',
-    scope: options.scope ?? ''
+    scope: options.scope ?? '',
+    dataUpdated: options.dataUpdated ?? '',
+    fetched: options.fetched ?? '',
+    sourceUrl: options.sourceUrl ?? ''
   };
+}
+
+/** Provenance as a Terraform comment block: data date, fetch time, source and a caveat. */
+export function provenanceComment(o) {
+  const when = [o.dataUpdated && `Data last updated: ${o.dataUpdated}`, o.fetched && `fetched ${o.fetched}`].filter(Boolean).join(' · ');
+  return [
+    when && `# ${when}`,
+    o.sourceUrl && `# Data source: ${o.sourceUrl}`,
+    '# Endpoints can vary by Azure Local version; the official Microsoft documentation is authoritative.'
+  ].filter(Boolean).join('\n');
+}
+
+/** Short text for provider description/comment attributes (kept well under common length limits). */
+export function descr(o, what) {
+  const label = o.scope ? ` (${o.scope})` : '';
+  return `${what}${label}${o.dataUpdated ? `, data updated ${o.dataUpdated}` : ''}`;
 }
 
 /** Distinct (protocol, port) groups of non-web endpoints. */

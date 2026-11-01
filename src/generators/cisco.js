@@ -1,4 +1,4 @@
-import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard } from './util.js';
+import { attrs, defaults, isWeb, nonWebGroups, q, list, slug, unique, wholeLabelWildcard, descr, provenanceComment } from './util.js';
 import { DISCLAIMER_COMMENT } from './disclaimer.js';
 
 const PROTO = { tcp: 'TCP', udp: 'UDP' };
@@ -12,6 +12,7 @@ function generate(endpoints, options = {}) {
 
   out.push(`# Cisco Secure Firewall (FTD via FMC) objects and rules for Azure Local endpoints${label}
 ${DISCLAIMER_COMMENT}
+${provenanceComment(o)}
 terraform {
   required_providers {
     fmc = {
@@ -51,8 +52,9 @@ provider "fmc" {
       e.ports.map((p) => `${p === 80 ? 'http' : 'https'}://${wholeLabelWildcard(e.host).replace(/^\*\./, '')}${e.path}`)
     )).sort();
     out.push(`resource "fmc_url_group" "${o.prefix}" {
-  name = ${q(`${o.prefix}-endpoints`)}
-  urls = []
+  name        = ${q(`${o.prefix}-endpoints`)}
+  description = ${q(descr(o, 'Azure Local required URLs'))}
+  urls        = []
   literals = ${list(literals.map((u) => `{ url = ${q(u)} }`))}
 }
 `);
@@ -71,17 +73,14 @@ provider "fmc" {
     if (!hosts.length) continue;
     const pid = `${o.prefix}_${g.protocol}_${g.port}`;
     out.push(`resource "fmc_port" "${pid}" {
-  name     = ${q(`${o.prefix}-${g.protocol}-${g.port}`)}
-  protocol = ${q(g.protocol === 'udp' ? '17' : '6')}
-  port     = ${q(g.port)}
+${attrs(2, [['name', q(`${o.prefix}-${g.protocol}-${g.port}`)], ['description', q(descr(o, `Azure Local ${g.protocol.toUpperCase()}/${g.port}`))], ['protocol', q(g.protocol === 'udp' ? '17' : '6')], ['port', q(g.port)]])}
 }
 `);
     const refs = hosts.map((h) => {
       const id = `${o.prefix}_${slug(h)}`;
       if (!out.some((c) => c.includes(`"fmc_fqdn" "${id}"`))) {
         out.push(`resource "fmc_fqdn" "${id}" {
-  name = ${q(`${o.prefix}-${h}`.slice(0, 63))}
-  fqdn = ${q(h)}
+${attrs(2, [['name', q(`${o.prefix}-${h}`.slice(0, 63))], ['description', q(descr(o, 'Azure Local endpoint'))], ['fqdn', q(h)]])}
 }
 `);
       }
