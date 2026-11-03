@@ -71,13 +71,16 @@ ghcr.io/erikgraa/azure-local-endpoints:sha-abc1234   the exact commit
 
 ```powershell
 docker run -d --name azure-local-endpoints -p 8080:8080 ghcr.io/erikgraa/azure-local-endpoints:latest
+# or with Podman (same flags)
+podman run -d --name azure-local-endpoints -p 8080:8080 ghcr.io/erikgraa/azure-local-endpoints:latest
 # open http://localhost:8080 (API: /api/v1/index.json, Terraform: /terraform/)
 ```
 
-- **Non-root, no runtime network:** it is `nginx-unprivileged` (uid 101, port 8080). Nothing is fetched at runtime, so it works in air-gapped networks: pull or `docker save`/`docker load` the image once and run it anywhere. The page only links out to Microsoft's documentation.
+- **Non-root, no runtime network:** it is `nginx-unprivileged` (uid 101, port 8080). Nothing is fetched at runtime, so it works in air-gapped networks: pull the image once and move it with `docker save` / `docker load` (or `podman save` / `podman load`, or `skopeo copy`), then run it anywhere. The page only links out to Microsoft's documentation.
+- **Podman:** the image is a standard OCI image with fully qualified base images, so it needs no Docker-only features. It runs rootless: port 8080 is above 1024, there are no volumes, and the container needs no extra capabilities. Use `-p 127.0.0.1:8080:8080` to keep it local, add `--restart=always` or a Quadlet/systemd unit to keep it running, and add `:Z` (SELinux relabelling) only if you bind-mount your own files, for example a custom `nginx.conf` at `/etc/nginx/conf.d/default.conf`. Podman builds the OCI format by default, which drops the `HEALTHCHECK` instruction; use `podman build --format docker` to keep it, or pass `--health-cmd 'wget -q -O /dev/null http://127.0.0.1:8080/healthz'` to `podman run`.
 - **Data freshness:** the UI shows "Data last updated" and "fetched" for the selected scope, and the generated Terraform and JSON carry the same dates. The image labels `org.opencontainers.image.created` (build time), `org.opencontainers.image.revision` (commit) and `dev.graa.azure-local-endpoints.data-updated` (newest data date) show it without starting the container: `docker inspect --format '{{json .Config.Labels}}' <image>`. Pull a newer tag to refresh; running containers never change.
 - **Health and caching:** `GET /healthz` returns `ok` (used by the Docker `HEALTHCHECK`). Files are served with `Cache-Control: no-cache` (clients revalidate with ETag), icons for a day, and CORS is open for the public API and Terraform files.
-- **Build it yourself:** `docker build -t azure-local-endpoints .` (add `--build-arg AZL_OFFLINE=1` to skip the Terraform Registry lookup of provider versions). Pull requests that touch the image run a build and smoke test (`scripts/smoke-test-image.sh`).
+- **Build it yourself:** `docker build -t azure-local-endpoints .` or `podman build --format docker -t azure-local-endpoints .` (add `--build-arg AZL_OFFLINE=1` to skip the Terraform Registry lookup of provider versions). Pull requests that touch the image run a build and smoke test (`scripts/smoke-test-image.sh`, which also works locally with `CONTAINER_ENGINE=podman`).
 - **One-time setting:** a new GHCR package is private by default; make it public under the package settings (Package settings → Change visibility) if you want anonymous pulls.
 
 ### Adding a firewall vendor

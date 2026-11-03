@@ -5,7 +5,7 @@
 
 # The site is plain static files, so the build stage always runs on the build host's platform
 # (no emulation when the final image is built for several architectures).
-FROM --platform=$BUILDPLATFORM node:22-alpine AS build
+FROM --platform=$BUILDPLATFORM docker.io/library/node:22-alpine AS build
 WORKDIR /app
 COPY package.json ./
 COPY json ./json
@@ -17,7 +17,7 @@ ARG AZL_OFFLINE=0
 ENV AZL_OFFLINE=${AZL_OFFLINE}
 RUN node src/build-site.js
 
-FROM nginxinc/nginx-unprivileged:stable-alpine
+FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine
 
 ARG BUILD_DATE=""
 ARG VCS_REF=""
