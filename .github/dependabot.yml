@@ -21,3 +21,15 @@ updates:
         patterns: ["*"]
     commit-message:
       prefix: "deps"
+
+  # Keeps the base images of the Dockerfile current. Both are pinned by version tag and digest in the Dockerfile
+  # (nginx-unprivileged and node), which is what lets Dependabot propose updates.
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      docker:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"

@@ -63,3 +63,76 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  # Bakes the freshly exported data into a self-contained image. It runs after the export/commit job, on main only
+  # (the scheduled run, manual runs and merges), so the image always contains the newest committed data.
+  image:
+    needs: update
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    concurrency:
+      group: container-image
+      cancel-in-progress: false
+    env:
+      IMAGE: ghcr.io/erikgraa/azure-local-endpoints
+    steps:
+      # Check out the branch tip rather than the triggering commit: the update job may have pushed a data commit.
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Work out tags and labels
+        id: meta
+        run: |
+          echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+          echo "created=$(date -u +%FT%TZ)" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "short=$(git rev-parse --short=7 HEAD)" >> "$GITHUB_OUTPUT"
+          echo "data=$(node --input-type=module -e "import { loadScopes } from './src/endpoints.js'; console.log(loadScopes().map((s) => s.updated).filter(Boolean).sort().at(-1) ?? '')")" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build and smoke test (amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: azl-endpoints:test
+          build-args: |
+            BUILD_DATE=${{ steps.meta.outputs.created }}
+            VCS_REF=${{ steps.meta.outputs.sha }}
+            DATA_UPDATED=${{ steps.meta.outputs.data }}
+
+      - name: Smoke test
+        run: bash scripts/smoke-test-image.sh azl-endpoints:test
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push (amd64 + arm64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.date }}
+            ${{ env.IMAGE }}:sha-${{ steps.meta.outputs.short }}
+          build-args: |
+            BUILD_DATE=${{ steps.meta.outputs.created }}
+            VCS_REF=${{ steps.meta.outputs.sha }}
+            DATA_UPDATED=${{ steps.meta.outputs.data }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
