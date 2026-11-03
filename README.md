@@ -57,7 +57,7 @@ At build time the newest stable release of each Terraform provider is looked up 
 
 **Palo Alto supports both provider lines.** The `panos` provider 2.x renamed its resources (`panos_address`, `panos_service`, `panos_security_policy_rules`) and added a `location` attribute, so the generator produces two variants: 2.x (default, with a `location` variable that works for a firewall vsys, a Panorama device group or `shared`; requires Terraform 1.8+) and 1.x (legacy, `terraform/paloalto-v1/`). The web UI has a "Provider version" dropdown, and the CLI takes `--provider-major 1|2`. A generator declares such variants with a `variants` array (the first, flagged `default`, keeps the plain `terraform/<vendor>/` path).
 
-Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions, npm and the Docker base images.
+Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions, npm and the Docker base images (the Dockerfile pins `node` and `nginx-unprivileged` by version tag and digest, so updates show up as reviewable PRs and the image build is reproducible).
 
 ### Container image (self-contained, air-gapped friendly)
 

@@ -3,9 +3,11 @@
 # Self-contained image: the static site (UI, api/ JSON, generated Terraform) is baked in at build time,
 # so the container needs no network access at runtime.
 
+# Base images are pinned by version tag and digest (multi-arch index) so builds are reproducible and Dependabot
+# (docker ecosystem, see .github/dependabot.yml) can propose updates for both.
 # The site is plain static files, so the build stage always runs on the build host's platform
 # (no emulation when the final image is built for several architectures).
-FROM --platform=$BUILDPLATFORM docker.io/library/node:22-alpine AS build
+FROM --platform=$BUILDPLATFORM docker.io/library/node:22.23.4-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914 AS build
 WORKDIR /app
 COPY package.json ./
 COPY json ./json
@@ -17,7 +19,7 @@ ARG AZL_OFFLINE=0
 ENV AZL_OFFLINE=${AZL_OFFLINE}
 RUN node src/build-site.js
 
-FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine
+FROM docker.io/nginxinc/nginx-unprivileged:1.30.6-alpine@sha256:f5116ed4606f3eb015dd4a8e28cb9b351476dc0ad4bc6e9f93b19cec130cdf03
 
 ARG BUILD_DATE=""
 ARG VCS_REF=""
