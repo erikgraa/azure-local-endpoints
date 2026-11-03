@@ -21,3 +21,14 @@ updates:
         patterns: ["*"]
     commit-message:
       prefix: "deps"
+
+  # Keeps the base images of the Dockerfile current (nginx-unprivileged, node).
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      docker:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"

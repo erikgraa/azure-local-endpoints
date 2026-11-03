@@ -1,0 +1,40 @@
+name: Container image check
+
+# Builds the image and smoke tests it on pull requests (nothing is pushed). Publishing happens in update.yml.
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - docker/**
+      - site/**
+      - src/**
+      - json/**
+      - scripts/smoke-test-image.sh
+      - .github/workflows/docker-build.yml
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: azl-endpoints:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test
+        run: bash scripts/smoke-test-image.sh azl-endpoints:test
+
+      - name: Image labels
+        run: docker inspect --format '{{json .Config.Labels}}' azl-endpoints:test

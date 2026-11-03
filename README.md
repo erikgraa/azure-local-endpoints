@@ -57,7 +57,28 @@ At build time the newest stable release of each Terraform provider is looked up 
 
 **Palo Alto supports both provider lines.** The `panos` provider 2.x renamed its resources (`panos_address`, `panos_service`, `panos_security_policy_rules`) and added a `location` attribute, so the generator produces two variants: 2.x (default, with a `location` variable that works for a firewall vsys, a Panorama device group or `shared`; requires Terraform 1.8+) and 1.x (legacy, `terraform/paloalto-v1/`). The web UI has a "Provider version" dropdown, and the CLI takes `--provider-major 1|2`. A generator declares such variants with a `variants` array (the first, flagged `default`, keeps the plain `terraform/<vendor>/` path).
 
-Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions and npm.
+Dependabot (`.github/dependabot.yml`) opens weekly grouped update PRs for GitHub Actions, npm and the Docker base images.
+
+### Container image (self-contained, air-gapped friendly)
+
+Every successful nightly run on `main` (after the export step has committed any new data) builds a small image with the whole site baked in: the UI, `api/v1/*.json`, the generated Terraform for every vendor and the export code. It is published to GHCR for `linux/amd64` and `linux/arm64`:
+
+```text
+ghcr.io/erikgraa/azure-local-endpoints:latest        newest build
+ghcr.io/erikgraa/azure-local-endpoints:2026-11-03    the nightly build of that day (UTC)
+ghcr.io/erikgraa/azure-local-endpoints:sha-abc1234   the exact commit
+```
+
+```powershell
+docker run -d --name azure-local-endpoints -p 8080:8080 ghcr.io/erikgraa/azure-local-endpoints:latest
+# open http://localhost:8080 (API: /api/v1/index.json, Terraform: /terraform/)
+```
+
+- **Non-root, no runtime network:** it is `nginx-unprivileged` (uid 101, port 8080). Nothing is fetched at runtime, so it works in air-gapped networks: pull or `docker save`/`docker load` the image once and run it anywhere. The page only links out to Microsoft's documentation.
+- **Data freshness:** the UI shows "Data last updated" and "fetched" for the selected scope, and the generated Terraform and JSON carry the same dates. The image labels `org.opencontainers.image.created` (build time), `org.opencontainers.image.revision` (commit) and `dev.graa.azure-local-endpoints.data-updated` (newest data date) show it without starting the container: `docker inspect --format '{{json .Config.Labels}}' <image>`. Pull a newer tag to refresh; running containers never change.
+- **Health and caching:** `GET /healthz` returns `ok` (used by the Docker `HEALTHCHECK`). Files are served with `Cache-Control: no-cache` (clients revalidate with ETag), icons for a day, and CORS is open for the public API and Terraform files.
+- **Build it yourself:** `docker build -t azure-local-endpoints .` (add `--build-arg AZL_OFFLINE=1` to skip the Terraform Registry lookup of provider versions). Pull requests that touch the image run a build and smoke test (`scripts/smoke-test-image.sh`).
+- **One-time setting:** a new GHCR package is private by default; make it public under the package settings (Package settings → Change visibility) if you want anonymous pulls.
 
 ### Adding a firewall vendor
 
@@ -116,11 +137,16 @@ The repository structure is as follows. Each region gets its own folder.
 │   LICENSE
 │   README.md
 │   package.json
+│   Dockerfile                    self-contained image (static site on nginx-unprivileged)
 │
 ├───.github
+│   ├───dependabot.yml
 │   └───workflows
-│           update.yml            nightly: export JSON, test, build, deploy to Pages
+│           update.yml            nightly: export JSON, test, build, deploy to Pages, publish image
+│           docker-build.yml      PR check: build + smoke test the image
 │
+├───docker
+│       nginx.conf                server config baked into the image
 ├───json                          source data (written by the PowerShell script)
 │   │   azure-local-endpoints.json 🍏
 │   │
@@ -136,6 +162,7 @@ The repository structure is as follows. Each region gets its own folder.
 │
 ├───scripts
 │       Export-AzureLocalEndpoints.ps1
+│       smoke-test-image.sh       checks a built image serves the site
 │
 ├───site
 │       index.html                static web UI
