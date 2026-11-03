@@ -5,9 +5,9 @@
   </picture>
 </p>
 
-# Azure Local Endpoints Codified as JSON
+# Azure Local Endpoints
 
-This PowerShell tool enumerates the list of required firewall endpoints/URLs for Azure Local - for regions and OEM hardware vendors - and codifies it as JSON.
+Browse the firewall endpoints/URLs that Azure Local requires - per region and OEM hardware vendor - in a searchable web UI, and generate Terraform for your firewall from your selection. The data is also available as JSON, a static API, a CLI and a container image.
 
 > [!IMPORTANT]  
 > This tool covers required firewall endpoints as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/concepts/firewall-requirements). There may be other requirements, such as for additional Azure services  
@@ -20,9 +20,9 @@ This PowerShell tool enumerates the list of required firewall endpoints/URLs for
 
 ## 🚀 Features
 
-- **Web UI** at https://endpoints.azl.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV.
+- **Web UI** at https://endpoints.azl.graa.dev (demo site): search, filter and select Azure Local endpoints per region or OEM vendor, export CSV or JSON, share a link to your selection.
 - **Terraform generation** for Palo Alto (PAN-OS), Cisco (Secure Firewall/FMC), VMware NSX, Fortinet (FortiGate) and Check Point, in the browser, via the CLI, or as pre-generated files.
-- **Static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`.
+- **JSON data and a static anonymous API** (plain JSON on GitHub Pages, no server): `api/v1/index.json`, `api/v1/<region|oem>/<name>.json`. A PowerShell script (`scripts/Export-AzureLocalEndpoints.ps1`) codifies Microsoft's endpoint tables as JSON.
 - **Pluggable generators**: one small file per firewall vendor.
 - Rebuilt and deployed nightly by GitHub Actions; the evergreen `json/azure-local-endpoints.json` is still maintained.
 
