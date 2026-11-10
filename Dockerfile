@@ -7,7 +7,7 @@
 # (docker ecosystem, see .github/dependabot.yml) can propose updates for both.
 # The site is plain static files, so the build stage always runs on the build host's platform
 # (no emulation when the final image is built for several architectures).
-FROM --platform=$BUILDPLATFORM docker.io/library/node:26.13.0-alpine@sha256:c6ad9e9c1d80f6eb607c26b4b0a132ff7a2344fad1c78ea3baa2a7d4c8de6d94 AS build
+FROM --platform=$BUILDPLATFORM docker.io/library/node:26.13.0-alpine@sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216 AS build
 WORKDIR /app
 COPY package.json ./
 COPY json ./json
